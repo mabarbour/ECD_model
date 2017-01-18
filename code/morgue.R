@@ -1,3 +1,330 @@
+## How does community context and coevolution affect species exclusion? ----
+
+# exclusion virtually only happens in 4 species scenario (43% of the time)
+with(ECD.df, table(feas.C1.3sp.end, feas.C2.3sp.end, feas.4sp.end))
+with(ECD.df, prop.table(table(feas.C1.3sp.end, feas.C2.3sp.end, feas.4sp.end)))
+
+## How do community context and coevolution affect stability? ----
+# restrict to feasible models
+f.ECD.df <- ECD.df %>% filter(feas.4sp.end == 1, feas.C1.3sp.end == 1, feas.C2.3sp.end == 1) 
+
+## Qualitative stability ----
+# a 4 species system became unstable 27% of the time. 
+# 20% of this was due to a 4 species system being qualitatively less stable than either 3 species system.
+with(f.ECD.df, table(stab.C1.3, stab.C2.3, stab.4)) 
+with(f.ECD.df, prop.table(table(stab.C1.3, stab.C2.3, stab.4))) 
+
+## Quantitative stability ----
+
+
+# 70% of simulations with 4 species were quantitatively less stable than either 3 species system
+with(fs.ECD.df, table(eigen.ECD.C1, eigen.ECD.C2))
+with(fs.ECD.df, prop.table(table(eigen.ECD.C1, eigen.ECD.C2)))
+
+## How does community context and coevolution affect character displacement? ----
+
+
+
+
+#### below may be useful.... ----
+
+# of this 20%, 9% became unstable due to the addition of a 4th species.
+with(f.ECD.df, table(stab.4.C1evo, stab.C1.3, stab.4)) 
+with(f.ECD.df, prop.table(table(stab.4.C1evo, stab.C1.3, stab.4)))
+
+# of this 20%, 12% became unstable as a result of coevolution
+with(f.ECD.df, table(stab.4, stab.4.C1evo, stab.C1.3)) 
+with(f.ECD.df, prop.table(table(stab.4, stab.4.C1evo, stab.C1.3))) 
+
+# of this 43%, 22% is due to the addition of a fourth species
+with(ECD.df, table(feas.4sp.end.C1evo, feas.C1.3sp.end, feas.4sp.end))
+with(ECD.df, prop.table(table(feas.4sp.end.C1evo, feas.C1.3sp.end, feas.4sp.end)))
+
+# of this 43%, 22% is due to coevolution
+with(ECD.df, table(feas.4sp.end, feas.4sp.end.C1evo, feas.C1.3sp.end)) 
+with(ECD.df, prop.table(table(feas.4sp.end, feas.4sp.end.C1evo, feas.C1.3sp.end)))
+
+
+# filter to only feasible solutions
+feas.ECD.df <- ECD.df %>% filter(feas.4sp.end == 1, feas.C1.3sp.end == 1, feas.C2.3sp.end == 1)
+
+# trait changes
+with(feas.ECD.df, table(C1.3, C1.4)) # most common: specialize in 4, generalize in 3
+with(feas.ECD.df, table(C2.3, C2.4)) # most common: specialize in 4, generalize in 3
+
+with(feas.ECD.df, table(C1.4, C2.4)) # most common: both specializing
+with(feas.ECD.df, table(C1.3, C2.3)) # most common: both generalizing
+
+# all together, still see that the most common is for a consumer to specialize in 4, but generalize in 3.
+with(feas.ECD.df, table(C1.3, C1.4, C2.3, C2.4))
+
+## Destabilization is only slight more common in 4 species scenario
+with(feas.ECD.df, table(eigen.4))
+with(feas.ECD.df, table(eigen.C1.3))
+with(feas.ECD.df, table(eigen.C2.3))
+
+with(feas.ECD.df, hist(eigen.diff.C1.3))
+plot(eigen.end.4 ~ eigen.end.C1.3, feas.ECD.df)
+
+with(feas.ECD.df, table(eigen.4, eigen.C1.3))
+with(feas.ECD.df, table(eigen.C1.3, eigen.C2.3))
+
+## qualitative instability is about twice as common in 4 species scenario
+with(feas.ECD.df, table(stab.4))
+with(feas.ECD.df, table(stab.C1.3))
+with(feas.ECD.df, table(stab.C2.3))
+
+# filter some situations to see how common they are
+feas.ECD.df %>% 
+  filter(eigen.4 == "destabilize", eigen.C1.3 == "stabilize", eigen.C2.3 == "stabilize") %>% 
+  select(C1.3, C1.4, C2.3, C2.4) %>%
+  table()
+
+feas.ECD.df %>% filter(C1.4 == "spec", C2.4 == "spec", C1.3 == "gen", C2.3 == "gen")  %>% 
+  with(comm.ECD.df, table(stab.4))
+with(comm.ECD.df, table(eigen.4))
+
+with(comm.ECD.df, table(stab.C1.3))
+with(comm.ECD.df, table(eigen.C1.3))
+
+uncomm.ECD.df <- feas.ECD.df %>% filter(C1.4 == "gen", C2.4 == "spec", C1.3 == "gen", C2.3 == "gen") 
+with(uncomm.ECD.df, table(stab.4))
+with(uncomm.ECD.df, table(eigen.4))
+
+with(uncomm.ECD.df, table(stab.C1.3))
+with(uncomm.ECD.df, table(eigen.C1.3))
+
+##### below may be useful ----
+# majority of feasible and stable solutions result in character divergence
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C1.end == 1, 
+         stability.4 == "stable", stability.C1.3 == "stable") %>%
+  select(ECD.C1, ECD.Stable.C1) %>%
+  table()
+
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C2.end == 1, 
+         stability.4 == "stable", stability.C2.3 == "stable") %>%
+  select(ECD.C2, ECD.Stable.C2) %>%
+  table()
+
+# stability always decreased in 4 species communities and resulted in an unstable system about 23% of the time
+# stability tended to decrease in 3 species communities, but increased in stability about 25% of the time
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C1.end == 1) %>%
+  select(stability.4, stability.C1.3) %>%
+  table() # so there are some situations where the 3 species system can become unstable whereas a 4 species system remains stable...
+
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C2.end == 1) %>%
+  select(stability.4, stability.C2.3) %>%
+  table() # same qualitative pattern
+
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C1.end == 1) %>%
+  select(eigen.diff.4, eigen.diff.C1.3) %>%
+  table()
+
+ECD.df %>% 
+  filter(feas.4sp.end == 1, feas.3sp.C1.end == 1) %>%
+  select(eigen.diff.4, eigen.diff.C2.3) %>%
+  table()
+
+### below is old, ideas may be useful... ----
+## Do we observe ecological character displacement?
+hist(filter(ECD.df, steady.4sp.end == 1, steady.C1.3sp.end == 1)$C1.diff, breaks = 20)
+hist(filter(ECD.df, steady.4sp.end == 1, steady.C2.3sp.end == 1)$C2.diff, breaks = 20)
+
+## Does community context qualitative affect how evolution influences ecological stability?
+table(with(ECD.df, steady.4sp.end - steady.C1.3sp.end), useNA = "always")
+15/(15+23) # in 40% of the trials, evolution in 4 species systems decreases stability
+
+table(with(ECD.df, steady.4sp.end - steady.C2.3sp.end), useNA = "always")
+13/(13+25+1) # in 33% of the trials, evolution in 4 species systems decreases stability
+
+## In the 4 species system, if it remained stable, did evolution decrease stability
+hist(filter(ECD.df, steady.4sp.end == 1)$diff.eigen, breaks = 20)
+hist(ECD.df$diff.eigen, breaks = 20)
+
+plot(I(C1.4sp.end + C2.4sp.end) ~ steady.4sp.end, ECD.df) # tendency for qualitative stability when specialization is high...
+
+table(ECD.df$steady.4sp.end, useNA = "always")
+table(ECD.df$steady.C1.3sp.end, useNA = "always")
+table(ECD.df$steady.C2.3sp.end, useNA = "always")
+
+plot(C2.4sp.end ~ steady.4sp.end, ECD.df)
+
+## Explore representative simulations ----
+head(ECD.df)
+
+## choose dataset
+explore.df <- filter(evol.sim.df.C1, sim.number == 2)
+explore.df.mat <- as.matrix(explore.df)
+seq.num <- 27
+
+## look at the important data
+explore.df.mat[1:30,c("a11","a12","R1","R2","C1","C1.max.eigen","steady.3sp")]
+
+## Check to make sure values matchup
+runsteady(y = explore.df.mat[seq.num, 13:15], func = ECD_model.C1.3sp, parms = explore.df.mat[seq.num, 1:12], stol = 1e-4)
+matplot.deSolve(ode(y = explore.df.mat[seq.num, 13:15], func = ECD_model.C1.3sp, parms = explore.df.mat[seq.num, 1:12], times = 1:1000))
+eq.jac <- jacobian.full(y = explore.df.mat[seq.num, 13:15], func = ECD_model.C1.3sp, parms = explore.df.mat[seq.num, 1:12])
+max(Re(eigen(eq.jac)$values))
+
+##################### >Maybe useful below...
+
+## only feasible solutions examining
+#filter(ECD.df, stability.4sp == "exclusion", stability.C2.3sp == "stable", stability.C1.3sp == "stable") # no clear explanation yet. Maybe there is substantial difference in resource ratio?
+
+filter(ECD.df, stability.4sp == "stable", stability.C1.3sp == "stable", stability.C2.3sp == "stable") # net divergence #stability.C2.3sp == "stable", 
+filter(ECD.df, stability.4sp == "unstable", stability.C1.3sp == "stable") # net divergence #stability.C2.3sp == "stable", 
+
+filter(ECD.df, stability.4sp == "exclusion", stability.C2.3sp == "exclusion", stability.C1.3sp == "exclusion") # interesting, at least 1 species is converging more in 4 species system.
+filter(ECD.df, stability.4sp == "exclusion", stability.C2.3sp == "exclusion", stability.C1.3sp == "stable") # interesting, stable species always diverges in 4 species system.
+filter(ECD.df, stability.4sp == "exclusion", stability.C2.3sp == "stable", stability.C1.3sp == "exclusion") # hmmmm, stable species isn't always diverging in 4 species system.
+
+# interesting, evolution in a 4 species system can promote coexistence compared to evolution in 3 species system. Also, divergent ECD has occurred in the 4 species system in all of these cases.
+filter(ECD.df, stability.4sp == "stable", stability.C2.3sp == "exclusion", stability.C1.3sp == "exclusion") 
+filter(ECD.df, stability.4sp == "stable", stability.C2.3sp == "stable", stability.C1.3sp == "exclusion")
+filter(ECD.df, stability.4sp == "stable", stability.C2.3sp == "exclusion", stability.C1.3sp == "stable")
+filter(ECD.df, stability.4sp == "stable", stability.C2.3sp == "stable", stability.C1.3sp == "stable") # net divergence
+
+
+## POSITIVE STABILITY, MIGHT ONLY BE WHEN AT LEAST ONE OF THE CONSUMERS HAS REALLY LOW INTERACTION STRENGTH (I.E. IN NON-EXCITABLE REGION OF PARAMETER SPACE!!!!)
+
+## POTENTIALLY IMPORTANT QUESTION: WHICH REGIONS OF PARAMETER SPACE RESULT IN TRAJECTORIES TOWARD INSTABILITY VS. STABILITY?
+# DO ALL OF THE ONES THAT TREND TOWARD INSTABILITY ULTIMATELY RESULT IN AN UNSTABLE SYSTEM?
+
+output <- list()
+for(i in 1:max(evol.sim.df.4$sim.number)){
+  
+  temp.df <- filter(evol.sim.df.4, sim.number == i)
+  
+  steps.to.exclude <- which(temp.df$steady == 0.5)[1]
+  steps.to.cycle <- which(temp.df$max.eigen > 0)[1]
+  
+  # determine whether only one or both species successfully mutated
+  mut.opp <- ifelse(length(with(filter(temp.df, mut.suc == 1), table(sp))) == 1, "one", "multiple") #ifelse(length(table(temp.df$sp)) == 1, "one", "multiple")
+  
+  # mutation constraint
+  mut.const <- ifelse(any(temp.df$p.try == -1, na.rm = TRUE) == TRUE, "constraint", "none")
+  
+  # calculate increase/decrease in effective attack rates of both species
+  diff.eff.C1 <- temp.df$effective.C1[dim(temp.df)[1]] - temp.df$effective.C1[1]
+  diff.eff.C2 <- temp.df$effective.C2[dim(temp.df)[1]] - temp.df$effective.C2[1]
+  max.eff.C1 <- temp.df$effective.C1[dim(temp.df)[1]]
+  max.eff.C2 <- temp.df$effective.C2[dim(temp.df)[1]]
+  
+  # calculate increase/decrease in specialization of both species. 
+  # Note that choice of following R1 or R2 doesn't matter since special.C1R1 + special.C1R2 = 1. In other words, we know special.C1R2 by knowing special.C1R1
+  start.C1 <- abs(temp.df$special.C1R1[1] - 0.5)
+  end.C1 <- abs(temp.df$special.C1R1[dim(temp.df)[1]] - 0.5)
+  diff.C1 <- end.C1 - start.C1
+  
+  start.C2 <- abs(temp.df$special.C2R1[1] - 0.5)
+  end.C2 <- abs(temp.df$special.C2R1[dim(temp.df)[1]] - 0.5)
+  diff.C2 <- end.C2 - start.C2
+  
+  net.diff <- diff.C1 + diff.C2
+  net.diff.qual <- ifelse(net.diff > 0, "net divergence", "net convergence")
+  
+  # calculate type of character displacement
+  displacement.type <- ifelse(diff.C1 > 0 & diff.C2 > 0, "diverge",
+                              ifelse(diff.C1 < 0 & diff.C2 < 0, "converge",
+                                     ifelse(diff.C1 > 0 & diff.C2 < 0, "parallel",
+                                            ifelse(diff.C1 < 0 & diff.C2 > 0, "parallel",
+                                                   "other"))))
+  
+  
+  # determine whether evolution results in unstable system or competitive exclusion
+  # if qualitatively stable, calculate stability based on eigenvalue
+  #if(any(temp.df$max.eigen > 0) == TRUE){
+  # stability <- "unstable"
+  #} 
+  if(any(temp.df$steady == 0.5) == TRUE){
+    stability <- "exclusion"
+  }
+  if(any(temp.df$steady < 1) == FALSE){
+    stability <- "stable"
+  }
+  
+  stable.region <- filter(temp.df, steady == 1)
+  
+  diff.stability <- -1*temp.df[dim(stable.region)[1], "max.eigen"] - # end.stability -
+    -1*stable.region[1, "max.eigen"] # start.stability
+  names(diff.stability) <- "diff.stability"
+  
+  stability.trend <- as.character(ifelse(diff.stability < 0, "destabilizing", ifelse(diff.stability > 0, "stabilizing", "NA")))
+  
+  # output
+  output[[i]] <- data.frame(sim.number = i, steps.to.exclude = steps.to.exclude, steps.to.cycle = steps.to.cycle, diff.eff.C1 = diff.eff.C1, diff.eff.C2 = diff.eff.C2, max.eff.C1 = max.eff.C1, max.eff.C2 = max.eff.C2, diff.C1, diff.C2, net.diff, net.diff.qual, displacement.type = displacement.type, mut.opp = mut.opp, mut.const = mut.const, stability = stability, diff.stability = diff.stability, stability.trend = stability.trend)
+}
+output.df <- ldply(output)
+
+filter(output.df, stability == "stable", stability.trend == "stabilizing")
+filter(output.df, stability == "stable", stability.trend == "destabilizing", steps.to.cycle > 0)
+
+#output.diff <- list()
+#for(i in 1:max(evol.sim.df.4$sim.number)){
+
+# temp.df <- filter(evol.sim.df.4, sim.number == i)
+
+#output.diff.temp <- list()
+#for(j in 2:dim(temp.df)[1]){
+# diff.C1 <- abs(temp.df$special.C1R1[j-1] - 0.5) - abs(temp.df$special.C1R1[j] - 0.5)
+#diff.C2 <- abs(temp.df$special.C2R1[j-1] - 0.5) - abs(temp.df$special.C2R1[j] - 0.5)
+
+#diff.stability <- -1*temp.df$max.eigen[j-1] - (-1*temp.df$max.eigen[j]) 
+
+#diff.C <- max(c(diff.C1, diff.C2))
+
+#output.diff.temp[[j]] <- c(diff.C = diff.C, diff.stability = diff.stability)
+#}
+#output.diff[[i]] <- ldply(output.diff.temp)
+#}
+#output.diff.df <- ldply(output.diff)
+#head(output.diff.df)
+#plot(diff.stability ~ diff.C, filter(output.diff.df, diff.C > 0))
+
+filter(output.df, net.diff.qual == "net convergence")
+
+with(filter(output.df, mut.opp == "multiple"), table(displacement.type, stability.trend, mut.const))
+
+## Does competitor coevolution result in divergence, convergence, or parallel displacement in foraging traits?
+table(output.df$displacement.type)
+table(output.df$net.diff.qual)
+
+with(output.df, table(net.diff.qual, mut.opp))
+with(output.df, table(net.diff.qual, mut.const))
+with(output.df, table(mut.opp, stability))
+
+## Does competitor coevolution result in qualitative changes in stability?
+table(output.df$stability)
+
+## Are different displacement types associated with differences in stability?
+with(output.df, table(stability, displacement.type))
+with(output.df, table(stability, net.diff.qual, mut.const))
+
+with(output.df, table(stability.trend, displacement.type))
+
+## Is the "other" displacement type always associated with no mutational opportunity?
+with(output.df, table(displacement.type, mut.opp))
+
+## For stable systems, does coevolution quantitatively affect stability?
+table(output.df$stability.trend)
+
+which(output.df$stability == "exclusion")
+which(output.df$stability.trend == "stabilizing")
+which(output.df$stability.trend == "destabilizing" & output.df$displacement.type == "parallel")
+
+as.matrix(filter(evol.sim.df.4, sim.number == 1))[1:10, ] # positive stability scenario occurs with a consumer that has very low attack rates to begin with. Need to confirm whether this scenario was because the eigenvalue was not complex at that time.
+
+plot(diff.stability ~ net.diff, output.df)
+output.df$net.diff
+output.df$diff.stability
+which(output.df$diff.stability > 0)
+
+
 # stode() identifies the steady-state of the model. It appears to be a lot of faster, and actually more accurate than runsteady...
 safe.stode <- failwith(default = c(R1 = NA, R2 = NA, C1 = NA, C2 = NA, steady = 0), stode)
 
