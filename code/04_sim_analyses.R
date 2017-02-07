@@ -102,7 +102,7 @@ for(i in 1:max(evol.sim.df.C2$sim.number)){
 
 ## join data sets together and compute some more output ----
 ECD.df <- ldply(summary.4) %>% 
-  left_join(., ldply(summary.4.C1evo)) %>%
+  #left_join(., ldply(summary.4.C1evo)) %>%
   left_join(., ldply(summary.C1.3)) %>% 
   left_join(., ldply(summary.C2.3)) %>% 
   mutate(ECD.C1 = ifelse((special.C1.end.4 - special.C1.end.3) > 0, "div", "con"), 
