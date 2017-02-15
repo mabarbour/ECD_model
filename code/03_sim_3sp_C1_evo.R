@@ -1,4 +1,6 @@
 
+## NEED TO RERUN SIMULATION WITH MUT.SIZE! CHECK OTHER SIMS!
+
 #### Description: 3 species model with C1 evolution simulation
 
 ## source required functions ----
