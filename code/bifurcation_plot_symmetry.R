@@ -87,6 +87,8 @@ ggplot(sim.df, aes(x = rep, y = value*2, color = species)) +
   geom_point(size = 2) + 
   geom_hline(yintercept = ESS.R1+ESS.R2, color = "#56B4E9", alpha = 0.5) +
   geom_hline(yintercept = ESS.C1, color = "#E69F00", alpha = 0.5) +
+  scale_x_continuous(limits = c(0,75)) +
+  scale_y_continuous(limits = c(0,max(sim.df$value)*2)) +
   scale_color_manual(values = c("#E69F00", "#56B4E9"), guide = "none") +
   labs(y = "Population density (max and min)",
        x = "Evolutionary time steps") +
@@ -102,12 +104,11 @@ for(i in 1:length(aii_seq)){
   # generate plot
   bifur <- ggplot(filter(sim.df, rep %in% 1:i), 
                   aes(x = rep, y = value*2, color = species)) +
-    geom_line(data = sub.C1.ESS.df, aes(x = rep, y = value, color = species), size = 1, inherit.aes = FALSE) +
     geom_point(size = 2) + 
     geom_hline(yintercept = ESS.R1+ESS.R2, color = "#56B4E9", alpha = 0.5) +
     geom_hline(yintercept = ESS.C1, color = "#E69F00", alpha = 0.5) +
     scale_x_continuous(limits = c(0,75)) +
-    scale_y_continuous(limits = c(0,K1)) +
+    scale_y_continuous(limits = c(0,max(sim.df$value)*2)) +
     scale_color_manual(values = c("#E69F00", "#56B4E9","black"), guide = "none") +
     labs(y = "Population density (max and min)",
          x = "Evolutionary time steps") +
