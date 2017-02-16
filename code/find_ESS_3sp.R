@@ -13,9 +13,12 @@ C1.init.df <- data.frame(r1 = 1, r2 = 1, K1 = 3.25, K2 = 3.25,
 
 set.temp <- as.matrix(C1.init.df[1, ])
 
-C1.eq.jac <- jacobian.full(y = set.temp[1,c("R1","R2","C1")], 
+set.steady <- safe.runsteady(set.temp[1,c("R1","R2","C1")], func = ECD_model.C1.3sp, parms = set.temp[1,1:12])
+
+C1.eq.jac <- jacobian.full(y = set.steady$y, 
                            func = ECD_model.C1.3sp, parms = set.temp[1,1:12])
 
+C1.init.df[ ,c("R1","R2","C1")] <- set.steady$y
 C1.init.df$C1.max.eigen <- max(Re(eigen(C1.eq.jac)$values))
 
 ## setup and run simulation ----

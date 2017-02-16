@@ -78,13 +78,89 @@ sim.df <- ldply(sim.list) %>%
 colnames(sim.df) <- c("rep","aECD","temp","value")
 sim.df <- separate(sim.df, temp, into = c("species","max_min"))
 
+ESS.R1 <- C1.ESS.df$R1[dim(C1.ESS.df)[1]]
+ESS.R2 <- C1.ESS.df$R2[dim(C1.ESS.df)[1]]
+ESS.C1 <- C1.ESS.df$C1[dim(C1.ESS.df)[1]]
+
 ## Plot results from the simulation
-bifur <- ggplot(sim.df, aes(x = rep, y = value, color = species)) +
-  geom_point(size = 1) + 
+ggplot(sim.df, aes(x = rep, y = value*2, color = species)) +
+  geom_point(size = 2) + 
+  geom_hline(yintercept = ESS.R1+ESS.R2, color = "#56B4E9", alpha = 0.5) +
+  geom_hline(yintercept = ESS.C1, color = "#E69F00", alpha = 0.5) +
   scale_color_manual(values = c("#E69F00", "#56B4E9"), guide = "none") +
   labs(y = "Population density (max and min)",
        x = "Evolutionary time steps") +
   theme_cowplot(font_size = 18)
 
-#save_plot("amnat_bifur_plot.pdf", bifur, base_height = 8.5, base_width = 11)
+## Code for gif 4 species
+for(i in 1:length(aii_seq)){
+  # creating a name for each plot file with leading zeros
+  if (i < 10) {name = paste('figures/gif/','000',i,'plot.png',sep='')}
+  if (i < 100 && i >= 10) {name = paste('figures/gif/','00',i,'plot.png', sep='')}
+  if (i >= 100) {name = paste('figures/gif/','0', i,'plot.png', sep='')}
+  
+  # generate plot
+  bifur <- ggplot(filter(sim.df, rep %in% 1:i), 
+                  aes(x = rep, y = value*2, color = species)) +
+    geom_line(data = sub.C1.ESS.df, aes(x = rep, y = value, color = species), size = 1, inherit.aes = FALSE) +
+    geom_point(size = 2) + 
+    geom_hline(yintercept = ESS.R1+ESS.R2, color = "#56B4E9", alpha = 0.5) +
+    geom_hline(yintercept = ESS.C1, color = "#E69F00", alpha = 0.5) +
+    scale_x_continuous(limits = c(0,75)) +
+    scale_y_continuous(limits = c(0,K1)) +
+    scale_color_manual(values = c("#E69F00", "#56B4E9","black"), guide = "none") +
+    labs(y = "Population density (max and min)",
+         x = "Evolutionary time steps") +
+    theme_cowplot(font_size = 18)
 
+  # save plot
+  save_plot(name, bifur, base_height = 8.5, base_width = 11)
+}
+
+## not planning on using for now... ----
+
+## for 3 species. Note that there is virtually no change in total population densities
+sub.C1.ESS.df <- C1.ESS.df %>%
+  filter(mut.suc %in% c(NA,1)) %>%
+  mutate(total.R = R1 + R2, seq = 1:dim(.)[1]) %>%
+  select(seq, total.R, C1) 
+
+dup.df <- data.frame(seq = dim(sub.C1.ESS.df)[1]:length(aii_seq), 
+                     total.R = rep(sub.C1.ESS.df[dim(sub.C1.ESS.df)[1],"total.R"], 
+                                   length(seq)),
+                     C1 = rep(sub.C1.ESS.df[dim(sub.C1.ESS.df)[1],"C1"], 
+                              length(seq)))
+
+sub.C1.ESS.df <- bind_rows(sub.C1.ESS.df, dup.df) %>%
+  gather(seq)
+
+colnames(sub.C1.ESS.df) <- c("rep","species","value")
+
+ggplot(sub.C1.ESS.df, aes(x = rep, y = value, color = species)) +
+  geom_line(size = 2) + 
+  scale_color_manual(values = c("#E69F00", "#56B4E9"), guide = "none") +
+  labs(y = "Population density (max and min)",
+       x = "Evolutionary time steps") +
+  theme_cowplot(font_size = 18)
+
+## Code for gif 3 species
+for(i in 1:length(aii_seq)){
+  # creating a name for each plot file with leading zeros
+  if (i < 10) {name = paste('figures/gif/','000',i,'ESS.3sp.png',sep='')}
+  if (i < 100 && i >= 10) {name = paste('figures/gif/','00',i,'ESS.3sp.png', sep='')}
+  if (i >= 100) {name = paste('figures/gif/','0', i,'ESS.3sp.png', sep='')}
+  
+  # generate plot
+  ESS <- ggplot(filter(sub.C1.ESS.df, rep %in% 1:i), 
+                aes(x = rep, y = value, color = species)) +
+    geom_point(size = 1) +
+    scale_x_continuous(limits = c(0,75)) +
+    scale_y_continuous(limits = c(0,K1)) +
+    scale_color_manual(values = c("#E69F00", "#56B4E9"), guide = "none") +
+    labs(y = "Population density (max and min)",
+         x = "Evolutionary time steps") +
+    theme_cowplot(font_size = 18)
+  
+  # save plot
+  save_plot(name, ESS, base_height = 8.5, base_width = 11)
+}
