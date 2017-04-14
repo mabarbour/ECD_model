@@ -71,4 +71,34 @@ legend("topleft", c("R-isocline","C-isocline"), lty=1:2, bty="n", cex=0.8, col=1
 points(i.state.2C_2R[1],i.state.2C_2R[3]) # starting point of experiment
 arrows(x0 = init[-Time,2], y0 = init[-Time,4], x1 = init[-1,2], y1 = init[-1,4], length=0.1, lty=1) # trace stability across different time steps. Don't know why there are so many warnings
 
+## Second set of parameters
+param.2 <- c(r1 = r1, r2 = r2, K1 = K1, K2 = K2,
+             e11 = e11, e12 = e12, e21 = e21, e22 = e22,
+             h11 = h11, h12 = h12, h21 = h21, h22 = h22,
+             a11 = aii_seq[75], a12 = aij_seq[75], a21 = aij_seq[75], a22 = aii_seq[75],
+             m1 = m1, m2 = m2, w11 = w11, w22 = w22)
+
+# Run the experiment.
+init.2 <- ode(i.state.2C_2R, 1:Time, ECD_model, param.2)
+
+## effective attack rate. A key component in this model
+aEFF <- aii_seq[75]*w11 + aij_seq[75]*(1 - w11)
+
+## Resource isocline
+Rx <- seq(0.1,K1,0.1) # manipulating different Resource densities to solve R isocline.
+Riso <- expression((r1*(K1-Rx)*(1 + h11*Rx*aEFF))/(K1*aEFF)) # set R1 = 0 and solved algebraically. Note R1 = R2.
+RisoStable <- eval(Riso)
+
+## Consumer isocline
+Ciso <- expression(m1 / ((e11 - h11*m1)*aEFF)) # set C1 = 0, and solved algebraically. Note C1 = C2.
+CisoStable <- eval(Ciso)
+
+## Plot stability around consumer and resource isoclines
+plot(Rx,RisoStable, type = "l", ylim = c(0,2), ylab = "Consumer density", xlab = "Resource density")
+abline(v=CisoStable, lty = 2, col =2) 
+legend("topleft", c("R-isocline","C-isocline"), lty=1:2, bty="n", cex=0.8, col=1:2)
+points(i.state.2C_2R[1],i.state.2C_2R[3]) # starting point of experiment
+arrows(x0 = init.2[-Time,2], y0 = init.2[-Time,4], x1 = init.2[-1,2], y1 = init.2[-1,4], length=0.1, lty=1) # trace stability across different time steps. Don't know why there are so many warnings
+
+
 
