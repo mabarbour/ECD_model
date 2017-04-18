@@ -1,3 +1,72 @@
+## Chracter displacement figure
+
+seq.num <- 500#dim(evo.3)[1]
+
+plot(0:1, 0:1, type = "n", 
+     xlab = "Attack Rate \nSpecialization on R1", 
+     ylab = "Attack Rate \nSpecialization on R2")
+arrows(evo.3$special.C1R1[evo.3$sequence], 
+       evo.3$special.C1R2[evo.3$sequence],
+       evo.3$special.C1R1[evo.3$sequence+1], 
+       evo.3$special.C1R2[evo.3$sequence+1], 
+       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
+points(x = evo.3$special.C1R1[1], 
+       y = evo.3$special.C1R2[1], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+points(x = evo.3$special.C1R1[seq.num], 
+       y = evo.3$special.C1R2[seq.num], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+text(x = evo.3$special.C1R1[1], 
+     y = evo.3$special.C1R2[1], 
+     labels = "C1")
+text(x = evo.3$special.C1R1[seq.num], 
+     y = evo.3$special.C1R2[seq.num],
+     labels = "C1*")
+
+
+## Create a plot of how mutations proceed over time 
+# Using shaded arrows to draw the eye into the direction of mutations offer time.
+# consider turning into ggplot
+seq.num <- dim(evo.4)[1]
+
+plot(0:1, 0:1, type = "n", 
+     xlab = "Attack Rate \nSpecialization on R1", 
+     ylab = "Attack Rate \nSpecialization on R2")
+arrows(evo.4$special.C1R1[evo.4$sequence], 
+       evo.4$special.C1R2[evo.4$sequence],
+       evo.4$special.C1R1[evo.4$sequence+1], 
+       evo.4$special.C1R2[evo.4$sequence+1], 
+       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
+arrows(evo.4$special.C2R1[evo.4$sequence], 
+       evo.4$special.C2R2[evo.4$sequence],
+       evo.4$special.C2R1[evo.4$sequence+1], 
+       evo.4$special.C2R2[evo.4$sequence+1], 
+       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
+points(x = evo.4$special.C1R1[1], 
+       y = evo.4$special.C1R2[1], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+points(x = evo.4$special.C1R1[seq.num], 
+       y = evo.4$special.C1R2[seq.num], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+points(x = evo.4$special.C2R1[1], 
+       y = evo.4$special.C2R2[1], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+points(x = evo.4$special.C2R1[seq.num], 
+       y = evo.4$special.C2R2[seq.num], 
+       col = "black", bg = "white", pch = 21, cex = 5)
+text(x = evo.4$special.C1R1[1], 
+     y = evo.4$special.C1R2[1], 
+     labels = "C1")
+text(x = evo.4$special.C1R1[seq.num], 
+     y = evo.4$special.C1R2[seq.num],
+     labels = "C1*")
+text(x = evo.4$special.C2R1[1], 
+     y = evo.4$special.C2R2[1], 
+     labels = "C2")
+text(x = evo.4$special.C2R1[seq.num], 
+     y = evo.4$special.C2R2[seq.num], 
+     labels = "C2*")
+
 ## How does community context and coevolution affect species exclusion? ----
 
 # exclusion virtually only happens in 4 species scenario (43% of the time)
