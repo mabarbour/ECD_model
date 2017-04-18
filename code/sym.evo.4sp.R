@@ -374,8 +374,8 @@ spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,500))) +
 
 ## How does the effective attack rate of a consumer evolve over time?
 eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6]) + # C1
-  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3]) + # C2
+  geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], show.legend = FALSE) + # C1
+  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], show.legend = FALSE) + # C2
   scale_x_continuous(limits = c(0,500)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
@@ -384,8 +384,9 @@ eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.typ
 ## How does consumer and resource densities change over evolutionary time? 
 tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
 
-dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
-  geom_line(aes(y = density)) +
+# only resource densities
+res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = sequence, linetype = sim.type, color = species)) +
+  geom_line(aes(y = density), show.legend = FALSE) +
   scale_x_continuous(limits = c(0,500)) +
   scale_y_continuous(limits = c(0,2.5)) +
   scale_linetype_manual(values = c("dashed","solid")) +
@@ -418,7 +419,7 @@ ggplot(evo.sym.df %>%
 
 ## How does the stability of the system evolve over time?
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = -1*max.Re.eigen)) + 
+  geom_line(aes(y = -1*max.Re.eigen), show.legend = FALSE) + 
   scale_x_continuous(limits = c(0,500)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   geom_hline(yintercept = 0, linetype = "dotted") +
@@ -426,4 +427,6 @@ stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.ty
   xlab("Evolutionary time")
 
 ## Integrate into figure
-plot_grid(spec, eff, dens, stab)
+fig_theory <- plot_grid(spec, eff, res.dens, stab, align = "hv")
+
+save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
