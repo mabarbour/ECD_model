@@ -5,6 +5,7 @@ library(rootSolve) # for runsteady integration function
 library(pse) # for latin hypercube
 library(plyr) # for ldply
 library(dplyr) # for manipulating data
+library(cowplot) # for better base, ggplot graphics
 
 ## Abundance threshold for feasible equilibriums
 abund.thres <- 1e-2 
