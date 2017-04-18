@@ -334,7 +334,6 @@ evo.3 <- evol.symmetry.df.C1 %>% #filter(evol.symmetry.df.C1, mut.suc != 0) %>%
   mutate(sim.type = "3_sp",
          special.C1R1 = a11*w11/(a11*w11+a12*(1-w11)),
          special.C1R2 = a12*(1-w11)/(a11*w11+a12*(1-w11)))
-#evo.3.suc$mut.suc.steps <- seq(1:dim(evo.3.suc)[1])
 
 evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
   select(sequence, a11, a12, a21, a22, w11, w22,
@@ -346,130 +345,65 @@ evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
          special.C2R1 = a21*(1-w22)/(a21*(1-w22)+a22*w22),
          special.C2R2 = a22*w22/(a21*(1-w22)+a22*w22))
 
-evo.sym.df <- bind_rows(evo.4, evo.3)
+evo.sym.df <- bind_rows(evo.4, evo.3) %>% mutate(sim.type = as.factor(sim.type))
 
-#evo.4suc$evo.time <- 1:dim(evo.suc)[1]
+## How does consumer specialization evolve over time?
+C1.x <- 0.7317073
+C1.y <- 0.268292683
+C2.x <- C1.y
+C2.y <- C1.x
+C1.lab <- paste("italic(C[1])")
+C2.lab <- paste("italic(C[2])")
 
-
-# How does the effective attack rate of a consumer evolve over time?
-# consider boosting up the evolutionary time to 500 for both to see that both reach an ESS
-ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = a11*w11 + a12*(1-w11))) + # C1
-  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = "steel blue") + # C2
-  ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
-  xlab("Evolutionary time") # number of mutation attempts.
-
-
-# How does the stability of the system evolve over time?
-ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = -1*max.Re.eigen)) + 
-  scale_x_continuous(limits = c(0,500)) +
-  geom_hline(yintercept = 0) +
-  ylab(expression(Stability~(-1*lambda))) +
-  xlab("Evolutionary time")
-
-#plot(max.Re.eigen ~ evo.time, evo.suc, type = "p")
-#plot(-1*max.Re.eigen ~ evo.time, evo.suc, ylab = "Stability", xlab = "Evolutionary Time")
-
-
-## Create a plot of how mutations proceed over time 
-# Using shaded arrows to draw the eye into the direction of mutations offer time.
-# consider turning into ggplot
-ggplot(evo.sym.df %>% filter(sequence %in% c(1,500))) +
+spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,500))) +
   geom_segment(aes(x = special.C1R1[1], xend = special.C1R1[2], y = special.C1R2[1], yend = special.C1R2[2]), 
-            arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open")) + 
+               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = cbbPalette[6]) + 
   geom_segment(aes(x = special.C2R1[1], xend = special.C2R1[2], y = special.C2R2[1], yend = special.C2R2[2]), 
-            arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open")) +
+               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = cbbPalette[3]) +
   geom_segment(aes(x = special.C1R1[3], xend = special.C1R1[4], y = special.C1R2[3], yend = special.C1R2[4]), 
-               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = "red") + 
-  geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 3, fill = "white") +
-  geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 3, fill = "white") +
-  annotate("text", label = C1, x = 0.7317073, y = 0.268292683) +
+               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), linetype = "dotted", color = cbbPalette[6]) + 
+  geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[6]) +
+  geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[3]) +
+  annotate("text", label = C1.lab, x = C1.x, y = C1.y, parse = TRUE) +
+  annotate("text", label = C2.lab, x = C2.x, y = C2.y, parse = TRUE) +
   #geom_text(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 3, fill = "white") +
   scale_x_continuous(limits = c(0,1)) +
   scale_y_continuous(limits = c(0,1)) +
-  xlab(expression(Specialization~on~italic(R[1]))) +
-  ylab(expression(Specialization~on~italic(R[2])))
+  xlab(expression(Adaptation~to~italic(R[1]))) +
+  ylab(expression(Adaptation~to~italic(R[2])))
 
+## How does the effective attack rate of a consumer evolve over time?
+eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
+  geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6]) + # C1
+  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3]) + # C2
+  scale_x_continuous(limits = c(0,500)) +
+  scale_linetype_manual(values = c("dashed","solid")) +
+  ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
+  xlab("Evolutionary time") # number of mutation attempts.
 
-seq.num <- 500#dim(evo.3)[1]
-
-plot(0:1, 0:1, type = "n", 
-     xlab = "Attack Rate \nSpecialization on R1", 
-     ylab = "Attack Rate \nSpecialization on R2")
-arrows(evo.3$special.C1R1[evo.3$sequence], 
-       evo.3$special.C1R2[evo.3$sequence],
-       evo.3$special.C1R1[evo.3$sequence+1], 
-       evo.3$special.C1R2[evo.3$sequence+1], 
-       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
-points(x = evo.3$special.C1R1[1], 
-       y = evo.3$special.C1R2[1], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-points(x = evo.3$special.C1R1[seq.num], 
-       y = evo.3$special.C1R2[seq.num], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-text(x = evo.3$special.C1R1[1], 
-     y = evo.3$special.C1R2[1], 
-     labels = "C1")
-text(x = evo.3$special.C1R1[seq.num], 
-     y = evo.3$special.C1R2[seq.num],
-     labels = "C1*")
-
-
-## Create a plot of how mutations proceed over time 
-# Using shaded arrows to draw the eye into the direction of mutations offer time.
-# consider turning into ggplot
-seq.num <- dim(evo.4)[1]
-
-plot(0:1, 0:1, type = "n", 
-     xlab = "Attack Rate \nSpecialization on R1", 
-     ylab = "Attack Rate \nSpecialization on R2")
-arrows(evo.4$special.C1R1[evo.4$sequence], 
-       evo.4$special.C1R2[evo.4$sequence],
-       evo.4$special.C1R1[evo.4$sequence+1], 
-       evo.4$special.C1R2[evo.4$sequence+1], 
-       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
-arrows(evo.4$special.C2R1[evo.4$sequence], 
-       evo.4$special.C2R2[evo.4$sequence],
-       evo.4$special.C2R1[evo.4$sequence+1], 
-       evo.4$special.C2R2[evo.4$sequence+1], 
-       col = gray.colors(seq.num, start = 0.9, end = 0.1), length = 0.1, lwd = 5)
-points(x = evo.4$special.C1R1[1], 
-       y = evo.4$special.C1R2[1], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-points(x = evo.4$special.C1R1[seq.num], 
-       y = evo.4$special.C1R2[seq.num], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-points(x = evo.4$special.C2R1[1], 
-       y = evo.4$special.C2R2[1], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-points(x = evo.4$special.C2R1[seq.num], 
-       y = evo.4$special.C2R2[seq.num], 
-       col = "black", bg = "white", pch = 21, cex = 5)
-text(x = evo.4$special.C1R1[1], 
-     y = evo.4$special.C1R2[1], 
-     labels = "C1")
-text(x = evo.4$special.C1R1[seq.num], 
-     y = evo.4$special.C1R2[seq.num],
-     labels = "C1*")
-text(x = evo.4$special.C2R1[1], 
-     y = evo.4$special.C2R2[1], 
-     labels = "C2")
-text(x = evo.4$special.C2R1[seq.num], 
-     y = evo.4$special.C2R2[seq.num], 
-     labels = "C2*")
-
-## Change in Resource densities over time
+## How does consumer and resource densities change over evolutionary time? 
 tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
 
-ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
-  geom_point(aes(y = density), size = 2, shape = 1) +
+dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
+  geom_line(aes(y = density)) +
   scale_x_continuous(limits = c(0,500)) +
   scale_y_continuous(limits = c(0,2.5)) +
-  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2]))
+  scale_linetype_manual(values = c("dashed","solid")) +
+  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
 
+# both consumers and resources
+ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
+  geom_line(aes(y = density)) +
+  scale_x_continuous(limits = c(0,500)) +
+  scale_y_continuous(limits = c(0,2.5)) +
+  scale_linetype_manual(values = c("dashed","solid")) +
+  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
+  ylab("Density at equilibrium") +
+  xlab("Evolutionary time") # number of mutation attempts.
+
+# total consumers and total resources
 ggplot(evo.sym.df %>% 
          mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), totR = R1 + R2) %>% 
          gather(key = species, value = total_density, totC, totR), 
@@ -477,6 +411,19 @@ ggplot(evo.sym.df %>%
   geom_line(aes(y = total_density)) +
   scale_x_continuous(limits = c(0,500)) +
   scale_y_continuous(limits = c(0,4)) +
+  scale_linetype_manual(values = c("dashed","solid")) +
+  scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
 
+## How does the stability of the system evolve over time?
+stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
+  geom_line(aes(y = -1*max.Re.eigen)) + 
+  scale_x_continuous(limits = c(0,500)) +
+  scale_linetype_manual(values = c("dashed","solid")) +
+  geom_hline(yintercept = 0, linetype = "dotted") +
+  ylab(expression(Stability~(-1*lambda))) +
+  xlab("Evolutionary time")
+
+## Integrate into figure
+plot_grid(spec, eff, dens, stab)
