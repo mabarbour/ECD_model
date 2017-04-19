@@ -17,7 +17,7 @@ K <- 4
 e <- 0.8
 h <- 0.4
 aii <- 2
-aij <- 1.1
+aij <- 1.2
 #a <- 2
 w <- 0.6
 m <- 1
@@ -345,17 +345,18 @@ evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
          special.C2R1 = a21*(1-w22)/(a21*(1-w22)+a22*w22),
          special.C2R2 = a22*w22/(a21*(1-w22)+a22*w22))
 
+sim.dur <- dim(evo.4)[1]
 evo.sym.df <- bind_rows(evo.4, evo.3) %>% mutate(sim.type = as.factor(sim.type))
 
 ## How does consumer specialization evolve over time?
-C1.x <- 0.7317073
-C1.y <- 0.268292683
+C1.x <- evo.4$special.C1R1[1] 
+C1.y <- evo.4$special.C1R2[1] 
 C2.x <- C1.y
 C2.y <- C1.x
 C1.lab <- paste("italic(C[1])")
 C2.lab <- paste("italic(C[2])")
 
-spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,500))) +
+spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,sim.dur))) +
   geom_segment(aes(x = special.C1R1[1], xend = special.C1R1[2], y = special.C1R2[1], yend = special.C1R2[2]), 
                arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = cbbPalette[6]) + 
   geom_segment(aes(x = special.C2R1[1], xend = special.C2R1[2], y = special.C2R2[1], yend = special.C2R2[2]), 
@@ -376,7 +377,7 @@ spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,500))) +
 eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
   geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], show.legend = FALSE) + # C1
   geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], show.legend = FALSE) + # C2
-  scale_x_continuous(limits = c(0,500)) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -387,7 +388,7 @@ tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
 # only resource densities
 res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = sequence, linetype = sim.type, color = species)) +
   geom_line(aes(y = density), show.legend = FALSE) +
-  scale_x_continuous(limits = c(0,500)) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
@@ -397,7 +398,7 @@ res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = se
 # both consumers and resources
 ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
   geom_line(aes(y = density)) +
-  scale_x_continuous(limits = c(0,500)) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
@@ -405,28 +406,41 @@ ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
   xlab("Evolutionary time") # number of mutation attempts.
 
 # total consumers and total resources
-ggplot(evo.sym.df %>% 
-         mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), totR = R1 + R2) %>% 
+tot.res.dens <- ggplot(evo.sym.df %>% 
+         mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), 
+                totR = R1 + R2) %>% 
          gather(key = species, value = total_density, totC, totR), 
        aes(x = sequence, color = species, linetype = sim.type)) +
   geom_line(aes(y = total_density)) +
-  scale_x_continuous(limits = c(0,500)) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,4)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
 
+# total resources only
+tot.res.dens <- ggplot(evo.sym.df %>% 
+                         mutate(totR = R1 + R2), 
+                       aes(x = sequence, linetype = sim.type)) +
+  geom_line(aes(y = totR), show.legend = FALSE) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
+  scale_y_continuous(limits = c(0,3.5)) +
+  scale_linetype_manual(values = c("dashed","solid")) +
+  scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
+  ylab("Total resource density (at equilibrium)") +
+  xlab("Evolutionary time") # number of mutation attempts.
+
 ## How does the stability of the system evolve over time?
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
   geom_line(aes(y = -1*max.Re.eigen), show.legend = FALSE) + 
-  scale_x_continuous(limits = c(0,500)) +
+  scale_x_continuous(limits = c(0,sim.dur)) +
   scale_linetype_manual(values = c("dashed","solid")) +
   geom_hline(yintercept = 0, linetype = "dotted") +
   ylab(expression(Stability~(-1*lambda))) +
   xlab("Evolutionary time")
 
 ## Integrate into figure
-fig_theory <- plot_grid(spec, eff, res.dens, stab, align = "hv")
+fig_theory <- plot_grid(spec, eff, tot.res.dens, stab, align = "hv", labels = "AUTO")
 
 save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
