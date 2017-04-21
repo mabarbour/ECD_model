@@ -181,6 +181,161 @@ evol.sim.df.4 <- sim.list.4 %>% ldply()
 
 write.csv(x = evol.sim.df.4, file = 'data/evol.symmetry.df.4sp.csv')
 
+## Only C1 evolving, 4 species simulation ----
+
+## create initial data
+sym4.init.df <- data.frame(r1 = r, r2 = r, K1 = K, K2 = K,
+                           e11 = e, e12 = e, e21 = e, e22 = e,
+                           h11 = h, h12 = h, h21 = h, h22 = h,
+                           a11 = aii, a12 = aij, a21 = aij, a22 = aii,
+                           w11 = w, w22 = w, m1 = m, m2 = m,
+                           R1 = R, R2 = R, C1 = C, C2 = C)
+
+set.temp <- as.matrix(sym4.init.df[1, ])
+
+set.steady <- safe.runsteady(set.temp[1,c("R1","R2","C1","C2")], func = ECD_model, parms = set.temp[1,1:20])
+
+sym4.eq.jac <- jacobian.full(y = set.steady$y, 
+                             func = ECD_model, parms = set.temp[1,1:20])
+
+## update with new steady state and eigenvalues after the initial run
+sym4.init.df[ ,c("R1","R2","C1","C2")] <- set.steady$y
+sym4.init.df$max.Re.eigen <- max(Re(eigen(sym4.eq.jac)$values))
+sym4.init.df$max.Im.eigen <- max(Im(eigen(sym4.eq.jac)$values))
+
+
+## setup and run simulation
+df <- sym4.init.df
+sim.list.4 <- list()
+for(i in 1:dim(df)[1]){
+  
+  # choose parameter set to examine and calculate the maximum real eigenvalue
+  set <- as.matrix(df[i, ])
+  
+  ## setup and run sub-simulations
+  sub.sim.list.4 <- list()
+  
+  # input first data vector
+  sub.sim.list.4[[1]] <- c(set[1, ], feas.4sp = 1, steady.4sp = 1, 
+                           species = NA, mut.suc = NA, p.try = NA, 
+                           sim.number = i, sequence = 1) 
+  
+  # simulation
+  for(j in 2:mut.reps){
+    
+    test <- sub.sim.list.4 %>% ldply()
+    
+    # if the prior simulation results in the exclusion of a species, stop the simulation
+    if(sub.sim.list.4[[j-1]]["feas.4sp"] == 0) break 
+    
+    # if the prior simulation results in an unstable system, stop the simulation
+    if(sub.sim.list.4[[j-1]]["max.Re.eigen"] > 0) break  
+    
+    # if we are no longer observing substantial trait change after 100 mutations step, stop the simulation
+    if(j < j.step){
+      delta.a11 <- 1 # arbitrary number greater than threshold value
+      delta.a22 <- 1 # arbitrary number greater than threshold value
+    }
+    if(j > j.step){
+      delta.a11 <- mean(diff(test[(j-j.step):(j-1),"a11"]))
+      delta.a22 <- mean(diff(test[(j-j.step):(j-1),"a22"]))
+    } 
+    if(delta.a11 < trait.thres & delta.a22 < trait.thres) break 
+    
+    # if the prior simulation is at a feasible and steady state, proceed with simulation
+    if(sub.sim.list.4[[j-1]]["feas.4sp"] == 1 & 
+       sub.sim.list.4[[j-1]]["max.Re.eigen"] < 0){
+      
+      # extract parameters and state variables
+      parameters <- sub.sim.list.4[[j-1]][1:20]
+      state <- sub.sim.list.4[[j-1]][c("R1","R2","C1","C2")]
+      
+      # randomly assign mutation in attack rate to one of the species
+      sp <- 1 # restrict to C1 # rbinom(1,1,0.5) + 1
+      mut <- ifelse(rbinom(1,1,0.5) == 0, -mut.size, mut.size)
+      
+      # determine whether mutant can invade or not by calculating whether it has positive growth rate (i.e. positive eigen value)
+      new.ps <- parameters
+      
+      if(sp == 1){
+        new.ps["a11m"] <- new.ps["a11"] + mut
+        new.ps["a12m"] <- new.ps["a12"] - mut
+        
+        jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mutC1_ECD_model, parms = new.ps)
+        eigen.mut <- max(Re(eigen(jac.mut)$values)) 
+      }
+      #if(sp == 2){
+      #  new.ps["a22m"] <- new.ps["a22"] + mut
+      #  new.ps["a21m"] <- new.ps["a21"] - mut
+        
+      #  jac.mut <- jacobian.full(y = c(state, mC2 = 0), func = mutC2_ECD_model, parms = new.ps)
+      #  eigen.mut <- max(Re(eigen(jac.mut)$values)) # jac.mut[6,6] # 
+      #}
+      
+      # if the mutant can invade and attack rates are positive, update attack rates and find the new equilibrium abundances
+      if(eigen.mut > 0 & all(new.ps >= 0) == TRUE){
+        if(sp == 1){
+          parameters["a11"] <- new.ps["a11m"]
+          parameters["a12"] <- new.ps["a12m"]
+        }
+        #if(sp == 2){
+        #  parameters["a21"] <- new.ps["a21m"]
+        #  parameters["a22"] <- new.ps["a22m"]
+        #}
+        
+        # run simulation with new parameters
+        out <- safe.runsteady(y = state, func = ECD_model, parms = parameters)
+        
+        # return steady states and maximum real eigenvalues
+        if(any(out$y < abund.thres) == FALSE){
+          
+          eq.jac <- jacobian.full(y = out$y, func = ECD_model, parms = parameters) 
+          
+          sub.sim.list.4[[j]] <- c(parameters, out$y,  
+                                   max.Re.eigen = max(Re(eigen(eq.jac)$values)), 
+                                   max.Im.eigen = max(Im(eigen(eq.jac)$values)),
+                                   feas.4sp = 1,
+                                   steady.4sp = attr(out, "steady"),
+                                   species = sp, mut.suc = 1, p.try = 1,
+                                   sim.number = i, sequence = j)
+        }
+        if(any(out$y < abund.thres) == TRUE){
+          
+          # set eigenvalues and steady-state to NA because I'm not interested in these values when a species has been excluded.
+          sub.sim.list.4[[j]] <- c(parameters, out$y, 
+                                   max.Re.eigen = NA,
+                                   max.Im.eigen = NA,
+                                   feas.4sp = 0, 
+                                   steady.4sp = NA,
+                                   species = sp, mut.suc = 1, p.try = 1,
+                                   sim.number = i, sequence = j)
+        }
+      }
+      
+      # if the mutant can't invade or the evolved attack rates are negative, keep attack rates the same and print the same equilibrium values with maximum real eigenvalue
+      if(eigen.mut < 0 & all(new.ps >= 0) == TRUE){
+        
+        sub.sim.list.4[[j]] <- c(sub.sim.list.4[[j-1]][1:28], 
+                                 species = sp, mut.suc = 0, p.try = 1, 
+                                 sim.number = i, sequence = j)
+      }
+      if(all(new.ps >= 0) == FALSE){
+        
+        sub.sim.list.4[[j]] <- c(sub.sim.list.4[[j-1]][1:28], 
+                                 species = sp, mut.suc = NA, p.try = -1, 
+                                 sim.number = i, sequence = j)
+      }
+    }
+  }
+  # turn sub-simulation into data frame and output to simulation list.
+  sim.list.4[[i]] <- sub.sim.list.4 %>% ldply()
+}
+
+
+## convert list into data frame then write the data to a new file 
+C1evol.sim.df.4 <- sim.list.4 %>% ldply() 
+
+write.csv(x = C1evol.sim.df.4, file = 'data/C1evol.symmetry.df.4sp.csv')
 
 
 ## 3 species simulation ----
@@ -335,6 +490,16 @@ evo.3 <- evol.symmetry.df.C1 %>% #filter(evol.symmetry.df.C1, mut.suc != 0) %>%
          special.C1R1 = a11*w11/(a11*w11+a12*(1-w11)),
          special.C1R2 = a12*(1-w11)/(a11*w11+a12*(1-w11)))
 
+C1evo.4 <- C1evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
+  select(sequence, a11, a12, a21, a22, w11, w22,
+         R1, R2, C1, C2, 
+         max.Re.eigen) %>%
+  mutate(sim.type = "C1_4_sp",
+         special.C1R1 = a11*w11/(a11*w11+a12*(1-w11)),
+         special.C1R2 = a12*(1-w11)/(a11*w11+a12*(1-w11)),
+         special.C2R1 = a21*(1-w22)/(a21*(1-w22)+a22*w22),
+         special.C2R2 = a22*w22/(a21*(1-w22)+a22*w22))
+
 evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
   select(sequence, a11, a12, a21, a22, w11, w22,
          R1, R2, C1, C2, 
@@ -346,7 +511,7 @@ evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
          special.C2R2 = a22*w22/(a21*(1-w22)+a22*w22))
 
 sim.dur <- dim(evo.4)[1]
-evo.sym.df <- bind_rows(evo.4, evo.3) %>% mutate(sim.type = as.factor(sim.type))
+evo.sym.df <- bind_rows(evo.4, C1evo.4, evo.3) %>% mutate(sim.type = as.factor(sim.type))
 
 ## How does consumer specialization evolve over time?
 C1.x <- evo.4$special.C1R1[1] 
@@ -378,7 +543,7 @@ eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.typ
   geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], show.legend = FALSE) + # C1
   geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], show.legend = FALSE) + # C2
   scale_x_continuous(limits = c(0,sim.dur)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dashed","solid")) +
   ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
   xlab("Evolutionary time") # number of mutation attempts.
 
@@ -390,7 +555,7 @@ res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = se
   geom_line(aes(y = density), show.legend = FALSE) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -400,7 +565,7 @@ ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
   geom_line(aes(y = density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -414,7 +579,7 @@ tot.res.dens <- ggplot(evo.sym.df %>%
   geom_line(aes(y = total_density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,4)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dashed","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -435,7 +600,7 @@ tot.res.dens <- ggplot(evo.sym.df %>%
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
   geom_line(aes(y = -1*max.Re.eigen), show.legend = FALSE) + 
   scale_x_continuous(limits = c(0,sim.dur)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dashed","solid")) +
   geom_hline(yintercept = 0, linetype = "dotted") +
   ylab(expression(Stability~(-1*lambda))) +
   xlab("Evolutionary time")
