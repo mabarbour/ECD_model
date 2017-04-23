@@ -16,7 +16,7 @@ r <- 1
 K <- 4
 e <- 0.8
 h <- 0.4
-aii <- 2
+aii <- 1.93#2
 aij <- 1.2
 #a <- 2
 w <- 0.6
@@ -511,7 +511,8 @@ evo.4 <- evol.sim.df.4 %>% #filter(evol.sim.df.4, mut.suc != 0)
          special.C2R2 = a22*w22/(a21*(1-w22)+a22*w22))
 
 sim.dur <- dim(evo.4)[1]
-evo.sym.df <- bind_rows(evo.4, C1evo.4, evo.3) %>% mutate(sim.type = as.factor(sim.type))
+evo.sym.df <- bind_rows(evo.4, evo.3) %>% # bind_rows(evo.4, C1evo.4, evo.3) 
+  mutate(sim.type = as.factor(sim.type))
 
 ## How does consumer specialization evolve over time?
 C1.x <- evo.4$special.C1R1[1] 
@@ -523,27 +524,28 @@ C2.lab <- paste("italic(C[2])")
 
 spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,sim.dur))) +
   geom_segment(aes(x = special.C1R1[1], xend = special.C1R1[2], y = special.C1R2[1], yend = special.C1R2[2]), 
-               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = cbbPalette[6]) + 
+               arrow = arrow(length=unit(0.4,"cm"), ends="last", type = "open"), color = cbbPalette[6], size = 1.1) + 
   geom_segment(aes(x = special.C2R1[1], xend = special.C2R1[2], y = special.C2R2[1], yend = special.C2R2[2]), 
-               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), color = cbbPalette[3]) +
+               arrow = arrow(length=unit(0.4,"cm"), ends="last", type = "open"), color = cbbPalette[3], size = 1.1) +
   geom_segment(aes(x = special.C1R1[3], xend = special.C1R1[4], y = special.C1R2[3], yend = special.C1R2[4]), 
-               arrow = arrow(length=unit(0.30,"cm"), ends="last", type = "open"), linetype = "dotted", color = cbbPalette[6]) + 
-  geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[6]) +
-  geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[3]) +
-  annotate("text", label = C1.lab, x = C1.x, y = C1.y, parse = TRUE) +
-  annotate("text", label = C2.lab, x = C2.x, y = C2.y, parse = TRUE) +
+               arrow = arrow(length=unit(0.4,"cm"), ends="last", type = "open"), linetype = "dotted", color = cbbPalette[6], size = 1.1) + 
+  geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 5, fill = cbbPalette[6], color = cbbPalette[1]) +
+  geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 5, fill = cbbPalette[3], color = cbbPalette[1]) +
+  #annotate("text", label = C1.lab, x = C1.x, y = C1.y, parse = TRUE) +
+  #annotate("text", label = C2.lab, x = C2.x, y = C2.y, parse = TRUE) +
   #geom_text(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 3, fill = "white") +
   scale_x_continuous(limits = c(0,1)) +
   scale_y_continuous(limits = c(0,1)) +
-  xlab(expression(Adaptation~to~italic(R[1]))) +
-  ylab(expression(Adaptation~to~italic(R[2])))
+  xlab(expression(Specialization~on~italic(R[1]))) +
+  ylab(expression(Specialization~on~italic(R[2])))
+spec
 
 ## How does the effective attack rate of a consumer evolve over time?
 eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], show.legend = FALSE) + # C1
-  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], show.legend = FALSE) + # C2
+  geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], size = 1.2) + # C1
+  geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], size = 1.2) + # C2
   scale_x_continuous(limits = c(0,sim.dur)) +
-  #scale_linetype_manual(values = c("dashed","solid")) +
+  scale_linetype_manual(values = c("dotted","solid")) +
   ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
   xlab("Evolutionary time") # number of mutation attempts.
 
@@ -552,21 +554,32 @@ tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
 
 # only resource densities
 res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = sequence, linetype = sim.type, color = species)) +
-  geom_line(aes(y = density), show.legend = FALSE) +
+  geom_line(aes(y = density), size = 1.2)+
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
-  #scale_linetype_manual(values = c("dashed","solid")) +
-  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
+  #geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[6]) +
+  #geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[3]) +
+  scale_linetype_manual(values = c("dotted","solid")) +
+  scale_color_manual(values = c(cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
 
 # both consumers and resources
-ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
+res.cons.dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
   geom_line(aes(y = density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
-  #scale_linetype_manual(values = c("dashed","solid")) +
-  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2])) +
+  scale_linetype_manual(values = c("dotted","solid"),
+                        name = "Competition?",
+                        breaks = c("3_sp","4_sp"),
+                        labels = c("No","Yes")) +
+  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2]), 
+                     name = "Species",
+                     breaks = c("C1","C2","R1","R2"),
+                     labels = c(expression(italic(C[1])),
+                                expression(italic(C[2])),
+                                expression(italic(R[1])),
+                                expression(italic(R[2])))) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
 
@@ -579,7 +592,7 @@ tot.res.dens <- ggplot(evo.sym.df %>%
   geom_line(aes(y = total_density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,4)) +
-  #scale_linetype_manual(values = c("dashed","solid")) +
+  #scale_linetype_manual(values = c("dotted","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -588,24 +601,30 @@ tot.res.dens <- ggplot(evo.sym.df %>%
 tot.res.dens <- ggplot(evo.sym.df %>% 
                          mutate(totR = R1 + R2), 
                        aes(x = sequence, linetype = sim.type)) +
-  geom_line(aes(y = totR), show.legend = FALSE) +
+  geom_line(aes(y = totR)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,3.5)) +
-  scale_linetype_manual(values = c("dashed","solid")) +
+  scale_linetype_manual(values = c("dotted","solid")) +
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Total resource density (at equilibrium)") +
   xlab("Evolutionary time") # number of mutation attempts.
 
 ## How does the stability of the system evolve over time?
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
-  geom_line(aes(y = -1*max.Re.eigen), show.legend = FALSE) + 
+  geom_line(aes(y = -1*max.Re.eigen), size = 1.2) + 
   scale_x_continuous(limits = c(0,sim.dur)) +
-  #scale_linetype_manual(values = c("dashed","solid")) +
-  geom_hline(yintercept = 0, linetype = "dotted") +
-  ylab(expression(Stability~(-1*lambda))) +
+  scale_linetype_manual(values = c("dotted","solid")) +
+  geom_hline(yintercept = 0, linetype = "solid", color = "grey") +
+  ylab(expression(Stability~(-1%*%Re(lambda[max])))) +
   xlab("Evolutionary time")
 
 ## Integrate into figure
-fig_theory <- plot_grid(spec, eff, tot.res.dens, stab, align = "hv", labels = "AUTO")
+leg <- get_legend(res.cons.dens)
+p.square <- plot_grid(spec + theme(legend.position = "none"), 
+                  eff + theme(legend.position = "none"),
+                  res.dens + theme(legend.position = "none"),
+                  stab + theme(legend.position = "none"),
+                  align = "hv", labels = "AUTO")
+fig_theory <- ggdraw(plot_grid(p.square, leg, rel_widths = c(1,0.2)))
 
-save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
+save_plot("figures/fig_theory.pdf", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
