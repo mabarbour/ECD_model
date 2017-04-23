@@ -538,14 +538,21 @@ spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,sim.dur))) +
   scale_y_continuous(limits = c(0,1)) +
   xlab(expression(Specialization~on~italic(R[1]))) +
   ylab(expression(Specialization~on~italic(R[2])))
+<<<<<<< HEAD
 spec
+=======
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
 
 ## How does the effective attack rate of a consumer evolve over time?
 eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
   geom_line(aes(y = a11*w11 + a12*(1-w11)), color = cbbPalette[6], size = 1.2) + # C1
   geom_line(aes(y = a22*w22 + a21*(1-w22)), color = cbbPalette[3], size = 1.2) + # C2
   scale_x_continuous(limits = c(0,sim.dur)) +
+<<<<<<< HEAD
   scale_linetype_manual(values = c("dotted","solid")) +
+=======
+  scale_linetype_manual(values = c("dashed","solid")) +
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
   ylab(expression(Effective~attack~rate~(italic(a[ii]*w[ii]~+~a[ij]*(1-w[ii]))))) +
   xlab("Evolutionary time") # number of mutation attempts.
 
@@ -554,12 +561,20 @@ tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
 
 # only resource densities
 res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = sequence, linetype = sim.type, color = species)) +
+<<<<<<< HEAD
   geom_line(aes(y = density), size = 1.2)+
+=======
+  geom_line(aes(y = density))+#, show.legend = FALSE) +
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,2.5)) +
   #geom_point(aes(x = special.C1R1[1], y = special.C1R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[6]) +
   #geom_point(aes(x = special.C2R1[1], y = special.C2R2[1]), shape = 21, size = 10, fill = "white", color = cbbPalette[3]) +
+<<<<<<< HEAD
   scale_linetype_manual(values = c("dotted","solid")) +
+=======
+  scale_linetype_manual(values = c("dashed","solid")) +
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
   scale_color_manual(values = c(cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
@@ -613,12 +628,18 @@ tot.res.dens <- ggplot(evo.sym.df %>%
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
   geom_line(aes(y = -1*max.Re.eigen), size = 1.2) + 
   scale_x_continuous(limits = c(0,sim.dur)) +
+<<<<<<< HEAD
   scale_linetype_manual(values = c("dotted","solid")) +
   geom_hline(yintercept = 0, linetype = "solid", color = "grey") +
+=======
+  scale_linetype_manual(values = c("dashed","solid")) +
+  geom_hline(yintercept = 0, linetype = "dotted") +
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
   ylab(expression(Stability~(-1%*%Re(lambda[max])))) +
   xlab("Evolutionary time")
 
 ## Integrate into figure
+<<<<<<< HEAD
 leg <- get_legend(res.cons.dens)
 p.square <- plot_grid(spec + theme(legend.position = "none"), 
                   eff + theme(legend.position = "none"),
@@ -628,3 +649,8 @@ p.square <- plot_grid(spec + theme(legend.position = "none"),
 fig_theory <- ggdraw(plot_grid(p.square, leg, rel_widths = c(1,0.2)))
 
 save_plot("figures/fig_theory.pdf", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
+=======
+fig_theory <- plot_grid(spec, eff, res.dens, stab, align = "hv", labels = "AUTO")
+
+save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
+>>>>>>> 7c35aa8d82fb8fea3af0bfd6bbb2af1c3ca48586
