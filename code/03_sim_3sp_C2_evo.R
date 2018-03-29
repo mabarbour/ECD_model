@@ -1,3 +1,5 @@
+### NEED TO RERUN WITH MUT.SIZE!!! 
+
 #### Description: 3 species model with C2 evolution simulation
 
 ## source required functions ----
