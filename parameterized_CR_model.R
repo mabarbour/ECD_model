@@ -3,6 +3,8 @@
 source('code/00_general_parameters.R')
 source('code/00_numerical_fxns.R')
 
+library(rfishbase)
+
 mass_scaling <- function(W, intercept, exponent) {
   log_rate <- intercept + exponent * log(W)
   return(exp(log_rate))
