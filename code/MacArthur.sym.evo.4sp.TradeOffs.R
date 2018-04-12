@@ -8,6 +8,7 @@
 source('code/00_general_parameters.R')
 source('code/00_numerical_fxns.R')
 source('code/00_MacArthur_fxns.R')
+source('attack_rate_trade_off_function.R')
 
 trait.thres <- 1e-10
 j.step <- 1000 # 100 for other simulations
@@ -16,11 +17,10 @@ j.step <- 1000 # 100 for other simulations
 r <- 1
 K <- 4
 e <- 0.8
-#h <- 0.4
-aii <- 1.4 #1.93
-aij <- 1.2
-#a <- 2
-#w <- 0.6
+A <- 2.5
+n <- 0.75 # shape of trade-off
+aii <- 1.8#1.25
+aij <- a_ij_tradeoff(A = A, a_ii = aii, n = n)
 m <- 1
 R <- 2
 C <- 1
@@ -104,14 +104,14 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mutC1_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) 
       }
       if(sp == 2){
         new.ps["a22m"] <- new.ps["a22"] + mut
-        new.ps["a21m"] <- new.ps["a21"] - mut
+        new.ps["a21m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a22m"], n = n) #new.ps["a21"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC2 = 0), func = mutC2_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) # jac.mut[6,6] # 
@@ -260,7 +260,7 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mutC1_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) 
@@ -312,7 +312,7 @@ for(i in 1:dim(df)[1]){
                                    sim.number = i, sequence = j)
         }
       }
-
+      
       # if the mutant can't invade or the evolved attack rates are negative, keep attack rates the same and print the same equilibrium values with maximum real eigenvalue
       if(eigen.mut < 0 & all(new.ps >= 0) == TRUE){
         
@@ -410,7 +410,7 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mut_ECD_model.C1.3sp_Mac, parms = new.ps) 
         eigen.mut <- max(Re(eigen(jac.mut)$values))
@@ -449,7 +449,7 @@ for(i in 1:dim(df)[1]){
                                    sim.number = i, sequence = j)
         }
       }
-
+      
       # if the mutant can't invade or the evolved attack rates are negative, keep attack rates the same and print the same equilibrium values with maximum real eigenvalue
       if(eigen.mut < 0 & all(new.ps >= 0) == TRUE){
         
@@ -524,6 +524,7 @@ C2.y <- C1.x
 C1.lab <- paste("italic(C[1])")
 C2.lab <- paste("italic(C[2])")
 
+evo.sym.df %>% filter(sequence %in% c(1,sim.dur))
 spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,sim.dur))) +
   geom_segment(aes(x = special.C1R1[1], xend = special.C1R1[2], y = special.C1R2[1], yend = special.C1R2[2]), 
                arrow = arrow(length=unit(0.4,"cm"), ends="last", type = "open"), color = cbbPalette[6], size = 1.1) + 
@@ -540,6 +541,7 @@ spec <- ggplot(evo.sym.df %>% filter(sequence %in% c(1,sim.dur))) +
   scale_y_continuous(limits = c(0,1)) +
   xlab(expression(Specialization~on~italic(R[1]))) +
   ylab(expression(Specialization~on~italic(R[2])))
+spec
 
 
 ## How does the effective attack rate of a consumer evolve over time?
@@ -550,6 +552,7 @@ eff <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.typ
   scale_linetype_manual(values = c("dotted","solid")) +
   ylab(expression(Effective~attack~rate~(italic(a[ii]~+~a[ij])))) +
   xlab("Evolutionary time") # number of mutation attempts.
+eff + facet_wrap(~sim.type)
 
 ## How does consumer and resource densities change over evolutionary time? 
 tidy.evo.df <- evo.sym.df %>% gather(key = species, value = density, R1:C2)
@@ -565,6 +568,7 @@ res.dens <- ggplot(tidy.evo.df %>% filter(species %in% c("R1","R2")), aes(x = se
   scale_color_manual(values = c(cbbPalette[4], cbbPalette[2])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
+res.dens + scale_y_continuous(limits = c(0,K)) + facet_grid(species~sim.type)
 
 # both consumers and resources
 res.cons.dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, color = species)) +
@@ -584,32 +588,14 @@ res.cons.dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, colo
                                 expression(italic(R[2])))) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
+res.cons.dens + scale_y_continuous(limits = c(0,K)) + facet_grid(species~sim.type)
 
-ggplot(tidy.evo.df, aes(x = sequence, color = species)) +
-  geom_line(aes(y = density)) +
-  scale_x_continuous(limits = c(0,sim.dur)) +
-  #scale_y_continuous(limits = c(0,2.5)) +
-  scale_linetype_manual(values = c("dotted","solid"),
-                        name = "Competition?",
-                        breaks = c("3_sp","4_sp"),
-                        labels = c("No","Yes")) +
-  scale_color_manual(values = c(cbbPalette[6], cbbPalette[3], cbbPalette[4], cbbPalette[2]), 
-                     name = "Species",
-                     breaks = c("C1","C2","R1","R2"),
-                     labels = c(expression(italic(C[1])),
-                                expression(italic(C[2])),
-                                expression(italic(R[1])),
-                                expression(italic(R[2])))) +
-  ylab("Density at equilibrium") +
-  xlab("Evolutionary time") + # number of mutation attempts.
-  facet_grid(species~sim.type)
 
 # total consumers and total resources
-tot.res.dens <- ggplot(evo.sym.df %>% 
-                         mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), 
-                                totR = R1 + R2) %>% 
-                         gather(key = species, value = total_density, totC, totR), 
-                       aes(x = sequence, color = species, linetype = sim.type)) +
+tot.res.cons.dens <- evo.sym.df %>% 
+  mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), totR = R1 + R2) %>% 
+  gather(key = species, value = total_density, totC, totR) %>%
+  ggplot(.,aes(x = sequence, color = species, linetype = sim.type)) +
   geom_line(aes(y = total_density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,4)) +
@@ -617,11 +603,12 @@ tot.res.dens <- ggplot(evo.sym.df %>%
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Density at equilibrium") +
   xlab("Evolutionary time") # number of mutation attempts.
+tot.res.cons.dens + facet_grid(species~sim.type)
 
 # total resources only
-tot.res.dens <- ggplot(evo.sym.df %>% 
-                         mutate(totR = R1 + R2), 
-                       aes(x = sequence, linetype = sim.type)) +
+tot.res.dens <- evo.sym.df %>% 
+  mutate(totR = R1 + R2) %>% 
+  ggplot(., aes(x = sequence, linetype = sim.type)) +
   geom_line(aes(y = totR)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,3.5)) +
@@ -629,6 +616,7 @@ tot.res.dens <- ggplot(evo.sym.df %>%
   scale_color_manual(values = c(cbbPalette[6], cbbPalette[4])) +
   ylab("Total resource density (at equilibrium)") +
   xlab("Evolutionary time") # number of mutation attempts.
+tot.res.dens + facet_wrap(~sim.type)
 
 ## How does the stability of the system evolve over time?
 stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.type)) +
@@ -640,6 +628,7 @@ stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.ty
   #geom_hline(yintercept = 0, linetype = "dotted") +
   ylab(expression(Stability~(-1%*%Re(lambda[max])))) +
   xlab("Evolutionary time")
+stab + facet_wrap(~sim.type)
 
 ## Integrate into figure
 leg <- get_legend(res.cons.dens)

@@ -87,7 +87,7 @@ m_benthic_estimate <- mass_scaling(W = g_benthic, intercept =  m_intercept, expo
 #### HANDLING TIME (h) ---
 
 # from Mittelbach 1981, Table 3: Minimum handling time for Daphnia vs. Chironomus. Units = seconds per individual
-min_h_Chironomus <- 9.63
+min_h_Chironomus <- 9.63  # this can be much higher because stickleback than sunfish
 min_h_Daphnia <- 1.02
 benthos_relative_handling_time <- min_h_Chironomus/min_h_Daphnia 
 
