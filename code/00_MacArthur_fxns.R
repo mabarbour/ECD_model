@@ -13,33 +13,15 @@
 # function is in the necessary format "function(Time,State,Pars)" for solving used the ode() function in the R package "deSolve"
 
 ## 4 species model: 2 consumers, 2 resources
-ECD_model <- function(Time,State,Pars,MacArthur=FALSE) {
+ECD_model_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-      W21 <- 1
-      W22 <- 1
-    }
-    
-    
     # consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C1R1fxn <- a11 * R1 # (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 # (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C2R1fxn <- a21 * R1 # (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 # (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # dynamical equations
     dR1.dt <- r1 * R1 * (1 - R1 / K1) - C1 * C1R1fxn - C2 * C2R1fxn
@@ -52,29 +34,14 @@ ECD_model <- function(Time,State,Pars,MacArthur=FALSE) {
 }
 
 ## 3 species model: C1, R1, R2
-ECD_model.C1.3sp <- function(Time,State,Pars,MacArthur=FALSE) {
+ECD_model.C1.3sp_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      #w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      #W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      #W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-    }
-    
     
     # consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R1fxn <- a11 * R1 #(W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 #(W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
     #C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     #C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
@@ -89,31 +56,16 @@ ECD_model.C1.3sp <- function(Time,State,Pars,MacArthur=FALSE) {
 }
 
 ## 3 species model: C2, R1, R2
-ECD_model.C2.3sp <- function(Time,State,Pars,MacArthur=FALSE) {
+ECD_model.C2.3sp_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
-    
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      #w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      #W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      #W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W21 <- 1
-      W22 <- 1
-    }
     
     
     # consumer functional responses
     #C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
     #C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R1fxn <- a21 * R1 #(W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 #(W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # dynamical equations
     dR1.dt <- r1 * R1 * (1 - R1 / K1) - C2 * C2R1fxn #- C1 * C1R1fxn
@@ -130,39 +82,21 @@ ECD_model.C2.3sp <- function(Time,State,Pars,MacArthur=FALSE) {
 # same assumptions as for ECD_model
 
 ## 4 species model with possible C1 and C2 mutants
-mut_ECD_model <- function(Time,State,Pars, MacArthur=FALSE) {
+mut_ECD_model_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-      W21 <- 1
-      W22 <- 1
-    }
-    
-    
     # normal consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C1R1fxn <- a11 * R1 #(W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 #(W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C2R1fxn <- a21 * R1 #(W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 #(W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # mutant consumer functional responses
-    mC1R1fxn <- (W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC1R2fxn <- (W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC2R1fxn <- (W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
-    mC2R2fxn <- (W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC1R1fxn <- a11m * R1 #(W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC1R2fxn <- a12m * R2 #(W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC2R1fxn <- a21m * R1 #(W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC2R2fxn <- a22m * R2 #(W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     
     # dynamical equations
     dR1.dt <- r1 * R1 * (1 - R1 / K1) - C1 * C1R1fxn - C2 * C2R1fxn - mC1 * mC1R1fxn - mC2 * mC2R1fxn
@@ -177,37 +111,19 @@ mut_ECD_model <- function(Time,State,Pars, MacArthur=FALSE) {
 }
 
 ## 4 species model with only C1 mutant
-mutC1_ECD_model <- function(Time,State,Pars, MacArthur=FALSE) {
+mutC1_ECD_model_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-      W21 <- 1
-      W22 <- 1
-    }
-    
-    
     # normal consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C1R1fxn <- a11 * R1 #(W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 #(W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C2R1fxn <- a21 * R1 #(W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 #(W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # mutant consumer functional responses
-    mC1R1fxn <- (W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC1R2fxn <- (W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC1R1fxn <- a11m * R1 #(W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC1R2fxn <- a12m * R2 #(W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
     #mC2R1fxn <- (W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     #mC2R2fxn <- (W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     
@@ -224,39 +140,21 @@ mutC1_ECD_model <- function(Time,State,Pars, MacArthur=FALSE) {
 }
 
 ## 4 species model with only C2 mutant
-mutC2_ECD_model <- function(Time,State,Pars,MacArthur=FALSE) {
+mutC2_ECD_model_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-      W21 <- 1
-      W22 <- 1
-    }
-    
-    
     # normal consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C1R1fxn <- a11 * R1 #(W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 #(W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C2R1fxn <- a21 * R1 #(W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 #(W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # mutant consumer functional responses
     #mC1R1fxn <- (W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
     #mC1R2fxn <- (W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC2R1fxn <- (W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
-    mC2R2fxn <- (W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC2R1fxn <- a21m * R1 #(W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC2R2fxn <- a22m * R2 #(W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     
     # dynamical equations
     dR1.dt <- r1 * R1 * (1 - R1 / K1) - C1 * C1R1fxn - C2 * C2R1fxn - mC2 * mC2R1fxn # - mC1 * mC1R1fxn 
@@ -271,35 +169,20 @@ mutC2_ECD_model <- function(Time,State,Pars,MacArthur=FALSE) {
 }
 
 ## 3 species model with only C1 mutant
-mut_ECD_model.C1.3sp <- function(Time,State,Pars, MacArthur=FALSE) {
+mut_ECD_model.C1.3sp_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
     
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      w12 <- (1 - w11)
-      #w21 <- (1 - w22)
-      
-      # consumer preference functions
-      W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      #W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      #W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W11 <- 1
-      W12 <- 1
-    }
-    
     
     # normal consumer functional responses
-    C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R1fxn <- a11 * R1 #(W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
+    C1R2fxn <- a12 * R2 #(W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
     #C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     #C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # mutant consumer functional responses
-    mC1R1fxn <- (W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC1R2fxn <- (W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC1R1fxn <- a11m * R1 #(W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
+    mC1R2fxn <- a12m * R2 #(W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
     #mC2R1fxn <- (W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     #mC2R2fxn <- (W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     
@@ -316,37 +199,22 @@ mut_ECD_model.C1.3sp <- function(Time,State,Pars, MacArthur=FALSE) {
 }
 
 ## 3 species model with only C2 mutant
-mut_ECD_model.C2.3sp <- function(Time,State,Pars, MacArthur=FALSE) {
+mut_ECD_model.C2.3sp_Mac <- function(Time,State,Pars) {
   # t,y,p is the necessary format for solving using the ode() function in R
   with(as.list(c(State,Pars)), {
-    
-    if(MacArthur==FALSE){
-      # constraints on consumer preference
-      #w12 <- (1 - w11)
-      w21 <- (1 - w22)
-      
-      # consumer preference functions
-      #W11 <- (w11 * R1)/(w11 * R1 + w12 * R2)
-      #W12 <- (w12 * R2)/(w11 * R1 + w12 * R2)
-      W21 <- (w21 * R1)/(w21 * R1 + w22 * R2)
-      W22 <- (w22 * R2)/(w21 * R1 + w22 * R2)
-    } else {
-      W21 <- 1
-      W22 <- 1
-    }
     
     
     # normal consumer functional responses
     #C1R1fxn <- (W11 * a11 * R1)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
     #C1R2fxn <- (W12 * a12 * R2)/(1 + W11 * a11 * h11 * R1 + W12 * a12 * h12 * R2)
-    C2R1fxn <- (W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
-    C2R2fxn <- (W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R1fxn <- a21 * R1 #(W21 * a21 * R1)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
+    C2R2fxn <- a22 * R2 #(W22 * a22 * R2)/(1 + W21 * a21 * h21 * R1 + W22 * a22 * h22 * R2)
     
     # mutant consumer functional responses
     #mC1R1fxn <- (W11 * a11m * R1)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
     #mC1R2fxn <- (W12 * a12m * R2)/(1 + W11 * a11m * h11 * R1 + W12 * a12m * h12 * R2)
-    mC2R1fxn <- (W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
-    mC2R2fxn <- (W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC2R1fxn <- a21m * R1 #(W21 * a21m * R1)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
+    mC2R2fxn <- a22m * R2 #(W22 * a22m * R2)/(1 + W21 * a21m * h21 * R1 + W22 * a22m * h22 * R2)
     
     # dynamical equations
     dR1.dt <- r1 * R1 * (1 - R1 / K1) - C2 * C2R1fxn - mC2 * mC2R1fxn # - C1 * C1R1fxn - mC1 * mC1R1fxn

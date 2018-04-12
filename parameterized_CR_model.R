@@ -3,7 +3,8 @@
 source('code/00_general_parameters.R')
 source('code/00_numerical_fxns.R')
 
-library(rfishbase)
+library(rfishbase) # for estimate of stickleback mortality
+library(tidyverse)
 
 mass_scaling <- function(W, intercept, exponent) {
   log_rate <- intercept + exponent * log(W)
@@ -35,10 +36,12 @@ r_benthos_estimate <- mass_scaling(W = g_Chironomid, intercept = -1.6391, expone
 
 #### CARRYING CAPACITY (K) ----
 # proportional to M^(-3/4) from Rip and McCann 2011 (they cite Enquist et al. 1998 and Brown et al. 2004)
+K_exponent <- -0.77 # from Brown et al. 2004
 
-K_intercept <- -14.29 # from Brown et al. 2004, Fig. 6
-K_zoops_estimate <- mass_scaling(W = g_Daphnia_pulex, intercept = K_intercept, exponent = -0.77); K_zoops_estimate
-K_benthos_estimate <- mass_scaling(W = g_Chironomid, intercept = K_intercept, exponent = -0.77); K_benthos_estimate
+K_zoops_estimate <- 5.23 * 1e6 # g per 500 L * individuals per gram assuming average zooplankton size of 1 microgram (based on figure in ms)
+K_intercept <- log(K_zoops_estimate) - K_exponent * log(g_Daphnia_pulex)
+
+K_benthos_estimate <- mass_scaling(W = g_Chironomid, intercept = K_intercept, exponent = K_exponent); K_benthos_estimate
 
 
 #### CONVERSION EFFICIENCY (e) ----
@@ -55,33 +58,32 @@ w_benthics_in_benthos <- 0.75
 w_solitary <- 0.5
 
 #### MORTALITY RATE (m) ----
-# temperature-corrected mortality rate, ln(Ze^E/kT) measured per year  and body mass, ln(M) measured in grams
-E <- 0.63 # units = eV
-k <- 8.617 * 10e-5 # eV/K
-Celsius_to_Kelvin <- function(C) C + 273.15
--E/k*Celsius_to_Kelvin(19)
-exp(1)^(E/k*Celsius_to_Kelvin(19))
+# m = individual deaths per unit time
+# proportional to M^(-1/4) from Brown et al. 2004
+m_exponent <- -0.25
 
-temp_adj_mortality <- function(W){
-  y <- -0.24*log(W) + 26.25
-  return(exp(y))
-}
-temp_adj_mortality(g_limnetic)/365
+# get annual mortality data from fishbase
+threespine_stickleback_data <- popgrowth(species_list = "Gasterosteus aculeatus") %>% filter(M != "NA")
 
-m_intercept <- 0.4 # arbitrarily chosen
-m_limnetic_estimate <- mass_scaling(W = g_limnetic, intercept = m_intercept, exponent = -0.25); m_limnetic_estimate
-m_benthic_estimate <- mass_scaling(W = g_benthic, intercept =  m_intercept, exponent = -0.25); m_benthic_estimate
+# covert to per-day basis
+m_solitary_estimate <- threespine_stickleback_data$M/365 #mass_scaling(W = g_solitary, intercept = m_intercept, exponent = -0.25); m_solitary_estimate
 
-m_solitary_estimate <- mass_scaling(W = g_solitary, intercept = m_intercept, exponent = -0.25); m_solitary_estimate
+# derive intercept for scaling mortality for ecotypes based on body mass
+m_intercept <- log(m_solitary_estimate) - m_exponent * log(g_solitary)
+
+m_limnetic_estimate <- mass_scaling(W = g_limnetic, intercept = m_intercept, exponent = m_exponent); m_limnetic_estimate
+m_benthic_estimate <- mass_scaling(W = g_benthic, intercept =  m_intercept, exponent = m_exponent); m_benthic_estimate
 
 
 #### HANDLING TIME (h) ---
-# from Mittelbach 1981, Table 3: Minimum handling time for Daphnia vs. Chironomus
-min_h_Chironomus <- 9.63 # seconds
-min_h_Daphnia <- 1.02    # seconds
-benthos_relative_handling_time <- min_h_Chironomus/min_h_Daphnia 
+seconds_foraging_per_day <- 60 * 60 * 4 # assuming 4 h of foraging per day
 
-h_scale <- 0.01
+# from Mittelbach 1981, Table 3: Minimum handling time for Daphnia vs. Chironomus. Units = seconds per individual
+min_h_Chironomus <- 9.63/seconds_foraging_per_day
+min_h_Daphnia <- 1.02/seconds_foraging_per_day
+#benthos_relative_handling_time <- min_h_Chironomus/min_h_Daphnia 
+
+#h_scale <- 0.01
 
 
 #### ATTACK RATE (a) ----
@@ -105,7 +107,7 @@ benthic_capture_success_benthos <- 0.73
 solitary_capture_success_open_water <- 0.181
 solitary_capture_success_benthos <- 0.34
 
-a_scale <- 2 # 100
+a_scale <- 1 #2 # 100
 
 #### DEFINE INITIAL STATE VARIABLES & PARAMETERS ----
 
@@ -119,10 +121,10 @@ species_pair.parms <- data.frame(r1 = r_zoops_estimate,
                                 e12 = e, 
                                 e21 = e, 
                                 e22 = e,
-                                h11 = h_scale, 
-                                h12 = h_scale*benthos_relative_handling_time, 
-                                h21 = h_scale, 
-                                h22 = h_scale*benthos_relative_handling_time,
+                                h11 = min_h_Daphnia,                               # h_scale, 
+                                h12 = min_h_Chironomus,                            # h_scale*benthos_relative_handling_time, 
+                                h21 = min_h_Daphnia,                               # h_scale, 
+                                h22 = min_h_Chironomus,                            # h_scale*benthos_relative_handling_time,
                                 a11 = a_scale*limnetic_capture_success_open_water, 
                                 a12 = a_scale*limnetic_capture_success_benthos, 
                                 a21 = a_scale*benthic_capture_success_open_water, 
@@ -132,7 +134,7 @@ species_pair.parms <- data.frame(r1 = r_zoops_estimate,
                                 m1 = m_limnetic_estimate, 
                                 m2 = m_benthic_estimate)
 
-species_pair_dynamics <- safe.runsteady(y = stickleback.init.states, func = ECD_model, parms = stickleback.parms, stol = 1e-5)
+species_pair_dynamics <- safe.runsteady(y = species_pair.init.states, func = ECD_model, parms = species_pair.parms, stol = 1e-5)
 species_pair_dynamics$y # equilibrium densities
 
 # estimates at first glance seem reasonable. Biomass of consumers is less than their prey, which is what we would
@@ -178,3 +180,22 @@ species_pair_total_R <- species_pair_dynamics$y["R1"] + species_pair_dynamics$y[
 species_pair_total_R/solitary_total_R - 1 # total resource abundances are lower in species pair lakes
 
 species_pair_dynamics$y["R1"]/solitary_dynamics$y["R1"] - 1 # zooplankton densities are lower in species pair lakes
+
+
+## old ----
+# temperature-corrected mortality rate, ln(Ze^E/kT) measured per year  and body mass, ln(M) measured in grams
+E <- 0.63 # units = eV
+k <- 8.617 * 10e-5 # eV/K
+Celsius_to_Kelvin <- function(C) C + 273.15
+-E/k*Celsius_to_Kelvin(19)
+exp(1)^(E/k*Celsius_to_Kelvin(19))
+
+temp_adj_mortality <- function(W){
+  y <- -0.24*log(W) + 26.25
+  return(exp(y))
+}
+temp_adj_mortality(g_limnetic)/365
+
+#K_intercept <- -14.29 # from Brown et al. 2004, Fig. 6
+
+# 5.23 g/500L. in dry weight. wet weight is ~3x greater.  #mass_scaling(W = g_Daphnia_pulex, intercept = K_intercept, exponent = -0.77); K_zoops_estimate

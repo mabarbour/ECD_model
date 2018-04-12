@@ -15,11 +15,11 @@ j.step <- 1000 # 100 for other simulations
 r <- 1
 K <- 4
 e <- 0.8
-h <- 0.4
+h <- 0#0.4
 aii <- 1.93#2
 aij <- 1.2
 #a <- 2
-w <- 0.6
+w <- 0#0.6
 m <- 1
 R <- 2
 C <- 1
@@ -29,18 +29,18 @@ C <- 1
 
 ## create initial data
 sym4.init.df <- data.frame(r1 = r, r2 = r, K1 = K, K2 = K,
-                         e11 = e, e12 = e, e21 = e, e22 = e,
-                         h11 = h, h12 = h, h21 = h, h22 = h,
-                         a11 = aii, a12 = aij, a21 = aij, a22 = aii,
-                         w11 = w, w22 = w, m1 = m, m2 = m,
-                         R1 = R, R2 = R, C1 = C, C2 = C)
+                           e11 = e, e12 = e, e21 = e, e22 = e,
+                           h11 = h, h12 = h, h21 = h, h22 = h,
+                           a11 = aii, a12 = aij, a21 = aij, a22 = aii,
+                           w11 = w, w22 = w, m1 = m, m2 = m,
+                           R1 = R, R2 = R, C1 = C, C2 = C)
 
 set.temp <- as.matrix(sym4.init.df[1, ])
 
 set.steady <- safe.runsteady(set.temp[1,c("R1","R2","C1","C2")], func = ECD_model, parms = set.temp[1,1:20])
 
 sym4.eq.jac <- jacobian.full(y = set.steady$y, 
-                           func = ECD_model, parms = set.temp[1,1:20])
+                             func = ECD_model, parms = set.temp[1,1:20])
 
 ## update with new steady state and eigenvalues after the initial run
 sym4.init.df[ ,c("R1","R2","C1","C2")] <- set.steady$y
@@ -267,7 +267,7 @@ for(i in 1:dim(df)[1]){
       #if(sp == 2){
       #  new.ps["a22m"] <- new.ps["a22"] + mut
       #  new.ps["a21m"] <- new.ps["a21"] - mut
-        
+      
       #  jac.mut <- jacobian.full(y = c(state, mC2 = 0), func = mutC2_ECD_model, parms = new.ps)
       #  eigen.mut <- max(Re(eigen(jac.mut)$values)) # jac.mut[6,6] # 
       #}
@@ -335,7 +335,7 @@ for(i in 1:dim(df)[1]){
 ## convert list into data frame then write the data to a new file 
 C1evol.sim.df.4 <- sim.list.4 %>% ldply() 
 
-write.csv(x = C1evol.sim.df.4, file = 'data/C1evol.symmetry.df.4sp.csv')
+#write.csv(x = C1evol.sim.df.4, file = 'data/C1evol.symmetry.df.4sp.csv')
 
 
 ## 3 species simulation ----
@@ -471,7 +471,7 @@ for(i in 1:dim(df)[1]){
 ## convert list into data frame, then write data to a new file 
 evol.symmetry.df.C1 <- sim.list.C1 %>% ldply()
 
-write.csv(x = evol.symmetry.df.C1, file = 'data/evol.symmetry.df.C1.3sp.csv')
+#write.csv(x = evol.symmetry.df.C1, file = 'data/evol.symmetry.df.C1.3sp.csv')
 
 
 
@@ -585,10 +585,10 @@ res.cons.dens <- ggplot(tidy.evo.df, aes(x = sequence, linetype = sim.type, colo
 
 # total consumers and total resources
 tot.res.dens <- ggplot(evo.sym.df %>% 
-         mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), 
-                totR = R1 + R2) %>% 
-         gather(key = species, value = total_density, totC, totR), 
-       aes(x = sequence, color = species, linetype = sim.type)) +
+                         mutate(totC = rowSums(cbind(C1, C2), na.rm = TRUE), 
+                                totR = R1 + R2) %>% 
+                         gather(key = species, value = total_density, totC, totR), 
+                       aes(x = sequence, color = species, linetype = sim.type)) +
   geom_line(aes(y = total_density)) +
   scale_x_continuous(limits = c(0,sim.dur)) +
   scale_y_continuous(limits = c(0,4)) +
@@ -623,14 +623,14 @@ stab <- ggplot(evo.sym.df, aes(x = sequence, group = sim.type, linetype = sim.ty
 ## Integrate into figure
 leg <- get_legend(res.cons.dens)
 p.square <- plot_grid(spec + theme(legend.position = "none"), 
-                  eff + theme(legend.position = "none"),
-                  res.dens + theme(legend.position = "none"),
-                  stab + theme(legend.position = "none"),
-                  align = "hv", labels = "AUTO")
+                      eff + theme(legend.position = "none"),
+                      res.dens + theme(legend.position = "none"),
+                      stab + theme(legend.position = "none"),
+                      align = "hv", labels = "AUTO")
 fig_theory <- ggdraw(plot_grid(p.square, leg, rel_widths = c(1,0.2)))
 
-save_plot("figures/fig_theory.pdf", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
+#save_plot("figures/fig_theory.pdf", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
 fig_theory <- plot_grid(spec, eff, res.dens, stab, align = "hv", labels = "AUTO")
 
-save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
+#save_plot("figures/fig_theory.png", fig_theory, base_height = 8.5, base_width = 8.5, base_aspect_ratio = 1)
 
