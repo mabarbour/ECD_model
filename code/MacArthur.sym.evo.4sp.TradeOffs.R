@@ -13,14 +13,33 @@ source('attack_rate_trade_off_function.R')
 trait.thres <- 1e-10
 j.step <- 1000 # 100 for other simulations
 
+## Trade-Off ----
+A_invest <- 2.5
+a11_seq <- seq(0,A_invest,0.01)
+
+linear <- 1
+concave <- 0.95
+convex <- 1.05
+
+a_trade_offs <- data.frame(a11 = a11_seq, a12 = a_ij_tradeoff(A=A_invest, a_ii=a11_seq, n=linear),  n_shape = linear) %>%
+  bind_rows(., data.frame(a11 = a11_seq, a12 = a_ij_tradeoff(A=A_invest, a_ii=a11_seq, n=concave), n_shape = concave)) %>%
+  bind_rows(., data.frame(a11 = a11_seq, a12 = a_ij_tradeoff(A=A_invest, a_ii=a11_seq, n=convex), n_shape = convex)) %>%
+  mutate(aT = a11 + a12)
+
+# visualize the trade-off between a11 and a12
+ggplot(a_trade_offs, aes(x=a11, y=a12, color=factor(n_shape))) +
+  geom_line()
+
+ggplot(a_trade_offs, aes(x=a11, y=aT, color=factor(n_shape))) +
+  geom_line()
+
 ## general parameters for simulations
+n_shape <- convex
 r <- 1
 K <- 4
 e <- 0.8
-A <- 2.5
-n <- 0.75 # shape of trade-off
-aii <- 1.8#1.25
-aij <- a_ij_tradeoff(A = A, a_ii = aii, n = n)
+aii <- A_invest*0.6#0.51
+aij <- a_ij_tradeoff(A = A_invest, a_ii = aii, n = n_shape)
 m <- 1
 R <- 2
 C <- 1
@@ -104,14 +123,14 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A_invest, a_ii = new.ps["a11m"], n = n_shape) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mutC1_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) 
       }
       if(sp == 2){
         new.ps["a22m"] <- new.ps["a22"] + mut
-        new.ps["a21m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a22m"], n = n) #new.ps["a21"] - mut
+        new.ps["a21m"] <- a_ij_tradeoff(A = A_invest, a_ii = new.ps["a22m"], n = n_shape) #new.ps["a21"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC2 = 0), func = mutC2_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) # jac.mut[6,6] # 
@@ -260,7 +279,7 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A_invest, a_ii = new.ps["a11m"], n = n_shape) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mutC1_ECD_model_Mac, parms = new.ps)
         eigen.mut <- max(Re(eigen(jac.mut)$values)) 
@@ -410,7 +429,7 @@ for(i in 1:dim(df)[1]){
       
       if(sp == 1){
         new.ps["a11m"] <- new.ps["a11"] + mut
-        new.ps["a12m"] <- a_ij_tradeoff(A = A, a_ii = new.ps["a11m"], n = n) #new.ps["a12"] - mut
+        new.ps["a12m"] <- a_ij_tradeoff(A = A_invest, a_ii = new.ps["a11m"], n = n_shape) #new.ps["a12"] - mut
         
         jac.mut <- jacobian.full(y = c(state, mC1 = 0), func = mut_ECD_model.C1.3sp_Mac, parms = new.ps) 
         eigen.mut <- max(Re(eigen(jac.mut)$values))
