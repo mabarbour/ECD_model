@@ -6,6 +6,7 @@ source('code/00_general_parameters.R')
 source('code/00_numerical_fxns.R')
 source('eco_evo_sim_function.R')
 source('Consumer_Resource_Functions.R')
+source('CR_dynamics.R')
 
 #### GENERAL PARAMETERS AND STATE VARIABLES #### 
 
