@@ -1,36 +1,29 @@
 ---
-title: "ECD_Supp_Mat"
+title: "How does character divergence affect resource dynamics?"
 output: html_document
 author: Matt Barbour
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-	message = TRUE,
-	warning = TRUE,
+	message = FALSE,
+	warning = FALSE,
 	include = FALSE
 )
 source('eco_evo_simulations.R')
 ```
 
-```{r}
-# Numerous mathematical models have been developed to examine how resource competition influences the evolution of consumer foraging traits (reviewed in Taper and Case 1985). The general result emerging from these models is that competition for shared (substitutable) resources results in the evolution of consumers that specialize on different resources relative to the generalists that evolve in the absence of competition. The only scenarios in which character divergence will not occur is when density dependence in intra- or interspecific interactions due to other factors are sufficiently strong (Abrams 1986), although there remains little empirical evidence of this to date (Schluter 2000). Despite the many models that have been developed to examine the ecological scenarios resulting in character displacement, scant attention has been paid to the ecological consequences of such character divergence on resource abundances and food-web stability (but see Lawlor and Smith 1976 for an assessment of stability). 
+### Model of resource competition
 
-# In terms of resources, perhaps the intuitive expectation is that character divergence would suppress resource abundances. The rationale being that character divergence will result in specialized consumers that are more effective at attacking a particular resource. Below, we demonstrate that this is not necessarily true. In fact, the effect of character displacement on resource abundances depends on both the foraging scenario and tradeoff in consumer feeding rates.
-```
-
-
-## How does character displacement affect resource abundances?
-
-To examine this, we used a continuous-time model of consumer-resource dynamics for two consumers ($C_1,C_2$) competing for two shared resources ($R_1,R_2$): 
+We analyzed a continuous-time model of consumer-resource dynamics for two consumers ($C_1,C_2$) competing for two shared resources ($R_1,R_2$): 
 
 $$\frac{dR_1}{dt}=r_1K_1(1-\frac{R_1}{K_1})-F_{11}(R_1)C_1-F_{21}(R_1)C_2$$
 $$\frac{dR_2}{dt}=r_2K_2(1-\frac{R_2}{K_2})-F_{12}(R_2)C_1-F_{22}(R_2)C_2$$
 $$\frac{dC_1}{dt}=e_{11}F_{11}(R_1)C_1+e_{12}F_{12}(R_2)C_1-m_1C_1$$
 $$\frac{dC_2}{dt}=e_{21}F_{21}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2$$
-where $r_i$ represents intrinsic growth rates, $K_i$ represents carrying capacity, $e_{ij}$ represents the conversion efficiency of resources into new consumers, and $m_i$ represents the mortality rate of consumers. $F_{ij}(R_j)$ represents the consumer's feeding rate (or functional response) on a specific resource (in this case, $C_i$ on $R_j$). This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size; Taper and Case 1985). In the scenario where consumer feeding rates increase linearly with resource density as a function of their attack rate, such that $F_{ij}(R_j)=a_{ij}R_j$, then our model encapsulates MacArthur's model of resource competition (MacArthur 1972). The evolution of consumer attack rates in this model, and several extensions, have been analyzed in detail (Lawlor and Smith 1976; Abrams 1986). The general result of these analyses is that consumer divergence is an inevitable outcome of competition. Here, we examine the effects of this inevitable divergence on resource dynamics and food-web stability. We show that the effects of character displacement are not intuitive, and depend critically on the foraging scenario and tradeoff in consumer attack rates.
+where $r_i$ represents intrinsic growth rates, $K_i$ represents carrying capacity, $e_{ij}$ represents the conversion efficiency of resources into new consumers, and $m_i$ represents the mortality rate of consumers. $F_{ij}(R_j)$ represents the consumer's feeding rate (or functional response) on a specific resource (in this case, $C_i$ on $R_j$). This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size; Taper and Case 1985). In the scenario where consumer feeding rates increase linearly with resource density as a function of their attack rate, such that $F_{ij}(R_j)=a_{ij}R_j$, then our model becomes MacArthur's model of resource competition (MacArthur 1972). The evolution of consumer attack rates in this model, and several extensions, have been analyzed in detail (Lawlor and Smith 1976; Abrams 1986). The general result of these analyses is that consumer divergence is an inevitable outcome of competition. Here, we examine the effects of this inevitable divergence on resource dynamics and food-web stability. We show that the ecological consequences of character displacement are not intuitive and depend critically on the foraging scenario and tradeoff in consumer attack rates.
 
-## Consumers forage for resources simultaneously
+### Consumers forage for resources simultaneously
 
 The first foragine scenario we explore is already assumed in MacArthur's model of resource competition, namely that consumers can forage for both resources simultaneously. This also implies that both resources occur within the same microhabitat. To gain analytical insight to this scenario, we assume that resources are equivalent ($r=r_i$ and $K=K_i$) as well as consumers ($e=e_{ii}=e_{ij}$; $m=m_i$), except that consumer attack rates are mirror images of each other ($a_{ii}=a_{11}=a_{22}$; $a_{ij}=a_{12}=a_{21}$). While this scenario is simple, it isolates the effects of character displacement, rather than any inherent differences in consumers or resources. In the appendix, we show that when both consumers and resources are present that the abundance of resources at equilibrium are equivalent ($R_i=R_1=R_2$) and are determined by the following equation:
 
@@ -45,8 +38,15 @@ where $A$ is the total investment in attack rates and $n$ describes the shape of
 
 ```{r Tradeoff function, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 bind_rows(convex_df, linear_df, concave_df) %>%
-  ggplot(., aes(x=aii, y=aij, color = factor(n))) + geom_line() + ggtitle("Tradeoffs in attack rates")
+  ggplot(., aes(x=aii, y=aij, linetype = factor(n))) + 
+  geom_line() + 
+  xlab(expression(a[ii])) +
+  ylab(expression(a[ij])) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") 
 ```
+
+DESCRIBE THE SIMULATIONS THAT ARE USED IN ALL OF THE FOLLOWING ANALYSES.
+
 
 We know from past work that consumers still undergo character divergence regardless of the shape of the tradeoff (Lawlor and Smith 1976; Abrams 1986). However, the shape of the tradeoff qualitatively affects the relationship between character divergence and resource abundance. For example, if consumer's are constrained by a linear tradeoff ($n=1$), such that a unit increase in $a_{ii}$ results in a unit decrease in $a_{ij}$, then character divergence has no effect on resource abundances. If the tradeoff is concave down ($n>1$), then resource abundances can actually increase under character displacement! This is because the total attack rate of consumers is maximized at intermediate values ($a_{ii}=a_{aij}$) and decreases as consumers diverge. Note though that detecting this effect in nature will likely be difficult, since a concave down tradeoff results in relatively small displacement relative to other tradeoff forms (Lawlor and Smith 1976). When the tradeoff is concave up ($n<1$), however, we see that character divergence suppresses resource densities. Although this equilibrium equation for resource abundances was derived for the scenario where both consumers and both resources are present, it predicts well the abundance of resources when there is only one consumer as well (white circle). This is because a consumer, in the absence of competition, evolves to be a generalist that has equal attack rates on each resource, resulting in equivalent resource abundances. 
 
@@ -54,19 +54,32 @@ We know from past work that consumers still undergo character divergence regardl
 ```{r Same resource habitat, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 Mac_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, linetype = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(MacArthur_displacements, Time=="End"), aes(x = a11/(a11+a12), y=a11+a12, fill=Competitor), shape=21, size=10, inherit.aes = FALSE) +
+  geom_point(data = filter(MacArthur_displacements, Time=="End"), aes(x = a11/(a11+a12), y=a11+a12, fill=Competitor), shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(a[ii]+a[ij])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") +
   scale_fill_manual(values=c("white","black"))
 
 Mac_resources <- cbind.data.frame(tradeoff_df, MacArthur_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=R1+R2, linetype = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(MacArthur_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=Competitor), shape=21, size=10, inherit.aes = FALSE) +
+  geom_point(data = filter(MacArthur_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=Competitor), shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(R[i]+R[j])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") +
   scale_fill_manual(values=c("white","black"))
 
-plot_grid(Mac_attack, Mac_resources, ncol=2)
+Mac_plots <- plot_grid(Mac_attack + theme(legend.position = "none"), Mac_resources + theme(legend.position = "none"), nrow=1)
+
+Mac_legend <- get_legend(Mac_attack)
+
+Mac_plot_legend <- plot_grid(Mac_plots, Mac_legend, ncol=2, rel_widths = c(3,0.3), align='hv')
+
+Mac_title <- ggdraw() + draw_label("Resources in same habitat", fontface='bold')
+plot_grid(Mac_title, Mac_plot_legend, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
 ```
 
-## Consumers cannot forage for resources simultaneously
+### Consumers cannot forage for resources simultaneously
 
 Most models of character displacement have assumed a scenario where consumers can forage for both resources simultaneously (Taper and Case 1985; Abrams 1986). This assumption may be valid for some foraging scenarios, such as Darwin's finches foraging for seeds. However, in many situations, consumers forage for resources that occur in distinct habitats, and thus cannot forage for both simultaneosly (McCann et al. 2005). The only chracter displacement model that we are aware of that modeled resources in distinct habitats was one examined by Lawlor and Smith (1976). This model takes the same form as the previous model, except now the consumer's functional response takes the form:
 
@@ -74,26 +87,45 @@ $$F_{ij}(R_j)=w_{ij}a_{ij}R_j$$
 
 where $w_{ij}$ represents the proportion of time a consumer ($C_i$) spends foraging in a habitat where a particular resource ($R_j$) is found. Note that since $w_ij$ is a proportion that $w_{ii}=1-w_{ij}$.
 
-Lawlor and Smith (1976) analyzed character divergence in models where consumers could and could not forage for resources simultaneously, and they found that consumers still underwent character divergence regardless of the foraging scenario. Interestingly, we find that the foraging scenario qualitatively affects the relationship between character divergence and resource abundances. To demonstrate this, note that now resource abundances at equilibrium are determined by the following equation (see derivation in Appendix):
+Lawlor and Smith (1976) found that consumers still underwent character divergence regardless of whether consumers could or could not forage for resources simultaneously. Interestingly, we find that the foraging scenario qualitatively affects the relationship between character divergence and resource abundances. To demonstrate this, note that now resource abundances at equilibrium (both consumers and resources present) are determined by the following equation (see derivation in Appendix):
 
 $$\hat{R_i}=\frac{1}{w_{ii}a_{ii}+(1-w_{ii})a_{ij}}\cdot\frac{m}{e}$$
 
-This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w_{ii}>0.5$ and $a_{ii}>a_{ij}$), then resource abundances will always decrease, regardless of the tradeoff. Thus, character divergence always results in resource suppression if consumers are competing for resources that occur in distinct habitats. Note that the shape of the tradeoff can dampen or amplify the effect of character divergence on resource supression. This is because the shape of the tradeoff influences the magnitude of character displacement. For example, a concave-down tradeoff results in less displacement and less of an effect on resource abundances; whereas a concave-up tradeoff results in the largest displacement and the largest effect on resource abundances. 
+This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w_{ii}>0.5$ and $a_{ii}>a_{ij}$), then resource abundances will always decrease, regardless of the tradeoff. Thus, character divergence always results in resource suppression if consumers are competing for resources that occur in distinct habitats. 
+
+ACTUALLY, THE SHAPE OF THE TRADE-OFF DOES DAMPEN OR AMPLIFY BUT NOT BECAUSE OF THE MAGNITUDE OF DISPLACEMENT. ITS BECAUSE CONCAVE TRADEOFFS HAVE THE LOWEST ATTACK RATE AT INTERMEDIATE VALUES, BUT HIGHEST AT EXTREME VALUES, RESULTING IN THE LARGEST CHANGE IN RESOURCE ABUNDANCES WITH CHARACTER DIVERGENCE. ESSENTIALLY, THERE IS MORE 'ROOM' TO EVOLVE DIFFERENCES. SO, THE MAGNITUDE OF DISPLACEMENT IS ONLY A USEFUL PREDICTOR OF AN EFFECT ON RESOURCE ABUNDANCES WHEN COMPARED WITHIN SPECIES, IT CAN'T BE USED TO PREDICT ACROSS SPECIES, WHERE THE NATURE OF THE TRADE-OFFS COULD BE DIFFERENT.
+
+DISCUSS ALSO THE DEVIATIONS FROM THE 2C-2R PREDICTIONS WHEN A COMPETITOR IS ABSENT. THESE DEVIATIONS INCREASE AS WE INCREASE MODEL COMPLEXITY.
+
+Note that the shape of the tradeoff can dampen or amplify the effect of character divergence on resource supression. This is because the shape of the tradeoff influences the magnitude of character displacement. For example, a concave-down tradeoff results in less displacement and less of an effect on resource abundances; whereas a concave-up tradeoff results in the largest displacement and the largest effect on resource abundances. 
 
 ```{r Distinct resource habitats, echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 LS_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=Competitor), shape=21, size=10, inherit.aes = FALSE) +
+  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=Competitor), shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(w[ii]*a[ii]+(1-w[ii])*a[ij])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") +
   scale_fill_manual(values=c("white","black"))
 
 LS_resources <- cbind.data.frame(tradeoff_df, LawlorSmith_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=R1+R2, linetype = factor(n))) + 
   geom_line() +
   geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=Competitor),
-             shape=21, size=10, inherit.aes = FALSE) +
+             shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(R[i]+R[j])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") +
   scale_fill_manual(values=c("white","black"))
 
-plot_grid(LS_attack, LS_resources, ncol=2)
+LS_plots <- plot_grid(LS_attack + theme(legend.position = "none"), LS_resources + theme(legend.position = "none"), nrow=1)
+
+LS_legend <- get_legend(LS_attack)
+
+LS_plot_legend <- plot_grid(LS_plots, LS_legend, nrow=1, rel_widths = c(3,0.3))
+
+LS_title <- ggdraw() + draw_label("Resources in different habitats", fontface='bold')
+plot_grid(LS_title, LS_plot_legend, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
 ```
 
 This effect of the foraging scenario on the relationship between character divergence and resource abundances appears to be quite general. For example, even if we consider a more realistic consumer functional response (derived by McCann et al. 2005):
@@ -111,25 +143,37 @@ $$\hat{R_i}=\frac{1}{w_{ii}a_{ii}+(1-w_{ii})a_{ij}}\cdot\frac{m}{e-hm}$$
 ```{r}
 McCann_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=Competitor), shape=21, size=10, inherit.aes = FALSE) +
+  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=Competitor), shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(w[ii]*a[ii]+(1-w[ii])*a[ij])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_linetype_manual(values=1:3, name="Tradeoff (n)") +
   scale_fill_manual(values=c("white","black"))
 
 McCann_resources <- cbind.data.frame(tradeoff_df, McCann_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=R1+R2, linetype = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=Competitor), shape=21, size=10, inherit.aes = FALSE) +
+  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=Competitor), shape=21, size=5, inherit.aes = FALSE) +
+  ylab(expression(R[i]+R[j])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
   scale_fill_manual(values=c("white","black"))
 
-plot_grid(McCann_attack, McCann_resources, ncol=2)
+McCann_plots <- plot_grid(McCann_attack + theme(legend.position = "none"), McCann_resources + theme(legend.position = "none"), nrow=1)
+
+McCann_legend <- get_legend(McCann_attack)
+
+McCann_plot_legend <- plot_grid(McCann_plots, McCann_legend, nrow=1, rel_widths = c(3,0.3))
+
+McCann_title <- ggdraw() + draw_label("Resources in different habitats & realistic functional response", fontface='bold')
+plot_grid(McCann_title, McCann_plot_legend, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
 ```
 
 
-## Predictions for threespine stickleback
+### Predictions for threespine stickleback
 
 The scenario where the relationship between character divergence and resource suppression is the strongest is when the tradeoff in attack rates is concave-up and consumers are competing for resources that occur in distinct habitats. Prior work in threespine stickleback suggests that the evolution of stickleback attack rates are constrained by a concave-up tradeoff (Schluter 1993; Arnegard et al. 2014) and that stickleback ecotypes are competing for resources that occur in distinct habitats (benthic vs. limnetic). Thus, we predict that character divergence in sticklebacks would supress resource densities. 
 
 
-## Effect of character divergence on food-web stability
+### Effect of character divergence on food-web stability
 
 This relationship between character divergence and resource abundances begs the question: how does character divergence affect food-web stability? This question has been addressed empirically by Pimentel as well as with a conceptual model. Lawlor and Smith though did a detailed theoretical analysis of how character divergence affects three different aspects of stability. They looked at stability through the lens of competition. The first aspect was whether character divergence resulted in mutual invasibility of consumers, a common metric of "stable coexistence" in competition models. Another very interesting aspect they looked at was a global metric that examined the persistence of the system to perturbations in resources. Here, they conclude the divergence increases community stability, because it expands the range of resource perturbations that a system can withstand before a consumer going extinct. Note though, that they overlooked that there conclusions do not actually quantify the effects of ecological character displacement on stability because they do not compare scenarios where a consumer is in allopatry and one where consumers are in sympatry. Finally, they also look at the Lyapunov exponent (local stability), and while they find a negative effect of divergence, they suggest that it would likely be overshadowed by the stabilizing effects of divergence on mutual invasibility and global stability.
 

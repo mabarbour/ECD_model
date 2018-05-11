@@ -66,18 +66,18 @@ states_1C_2R <- data.frame(R1 = R1, R2 = R2, C1 = C1)
 a12_tradeoff <- expression(A*(1-(a11m/A)^n)^(1/n)) 
 a21_tradeoff <- expression(A*(1-(a22m/A)^n)^(1/n)) 
 
-n_convex <- 1.15
+n_concaveDN <- 1.15
 n_linear <- 1
-n_concave <- 0.85
+n_concaveUP <- 0.85
 
-convex_df <- data.frame(n = n_convex, aii = seq(0,A,0.01)) %>% mutate(aij = A*(1-(aii/A)^n_convex)^(1/n_convex))
+concaveDN_df <- data.frame(n = n_concaveDN, aii = seq(0,A,0.01)) %>% mutate(aij = A*(1-(aii/A)^n_concaveDN)^(1/n_concaveDN))
 linear_df <- data.frame(n = n_linear, aii = seq(0,A,0.01)) %>% mutate(aij = A*(1-(aii/A)^n_linear)^(1/n_linear))
-concave_df <- data.frame(n = n_concave, aii = seq(0,A,0.01)) %>% mutate(aij = A*(1-(aii/A)^n_concave)^(1/n_concave))
+concaveUP_df <- data.frame(n = n_concaveUP, aii = seq(0,A,0.01)) %>% mutate(aij = A*(1-(aii/A)^n_concaveUP)^(1/n_concaveUP))
 
-bind_rows(convex_df, linear_df, concave_df) %>%
+bind_rows(concaveDN_df, linear_df, concaveUP_df) %>%
   ggplot(., aes(x=aii, y=aij, color = factor(n))) + geom_line() + ggtitle("Attack rate trade-offs")
 
-bind_rows(convex_df, linear_df, concave_df) %>%
+bind_rows(concaveDN_df, linear_df, concaveUP_df) %>%
   ggplot(., aes(x=aii/(aii+aij), y=aii+aij, color = factor(n))) + geom_line() + ggtitle("Relationship between specialization and total attack rate")
 
 ######################################### MACARTHUR MODEL #######################################################
@@ -97,17 +97,17 @@ params_2C_2R_MacArthur_linear <- data.frame(general_parameters,
 params_1C_2R_MacArthur_linear <- params_2C_2R_MacArthur_linear[c("r1","r2","K1","K2","e11","e12","a11","a12","m1")]
 
 
-## Convex
-params_2C_2R_MacArthur_convex <- params_2C_2R_MacArthur_linear
-params_2C_2R_MacArthur_convex["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_convex))
-params_2C_2R_MacArthur_convex["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_convex))
-params_1C_2R_MacArthur_convex <- params_2C_2R_MacArthur_convex[c("r1","r2","K1","K2","e11","e12","a11","a12","m1")]
+## concaveDN
+params_2C_2R_MacArthur_concaveDN <- params_2C_2R_MacArthur_linear
+params_2C_2R_MacArthur_concaveDN["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveDN))
+params_2C_2R_MacArthur_concaveDN["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveDN))
+params_1C_2R_MacArthur_concaveDN <- params_2C_2R_MacArthur_concaveDN[c("r1","r2","K1","K2","e11","e12","a11","a12","m1")]
 
-## Concave
-params_2C_2R_MacArthur_concave <- params_2C_2R_MacArthur_linear
-params_2C_2R_MacArthur_concave["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concave))
-params_2C_2R_MacArthur_concave["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concave))
-params_1C_2R_MacArthur_concave <- params_2C_2R_MacArthur_concave[c("r1","r2","K1","K2","e11","e12","a11","a12","m1")]
+## concaveUP
+params_2C_2R_MacArthur_concaveUP <- params_2C_2R_MacArthur_linear
+params_2C_2R_MacArthur_concaveUP["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveUP))
+params_2C_2R_MacArthur_concaveUP["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveUP))
+params_1C_2R_MacArthur_concaveUP <- params_2C_2R_MacArthur_concaveUP[c("r1","r2","K1","K2","e11","e12","a11","a12","m1")]
 
 #### SIMULATIONS ####
 
@@ -135,8 +135,8 @@ sim_1C_2R_MacArthur_linear <- eco_evo_CR(init_parameters = params_1C_2R_MacArthu
                                 tradeoff_functions = c(a12_tradeoff),
                                 extra_tradeoff_params = c(A=A, n=n_linear))
 
-## Convex
-sim_2C_2R_MacArthur_convex <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_convex, 
+## concaveDN
+sim_2C_2R_MacArthur_concaveDN <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveDN, 
                                 init_states = states_2C_2R, 
                                 eco_CR_model = MacArthur_2C_2R, 
                                 AD_CR_models = c(mC1_MacArthur, mC2_MacArthur),
@@ -146,8 +146,8 @@ sim_2C_2R_MacArthur_convex <- eco_evo_CR(init_parameters = params_2C_2R_MacArthu
                                 evo_param_names = c("a11m","a22m"),  
                                 evo_tradeoff_names = c("a12m","a21m"), 
                                 tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                extra_tradeoff_params = c(A=A, n=n_convex))
-sim_1C_2R_MacArthur_convex <- eco_evo_CR(init_parameters = params_1C_2R_MacArthur_convex, 
+                                extra_tradeoff_params = c(A=A, n=n_concaveDN))
+sim_1C_2R_MacArthur_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_MacArthur_concaveDN, 
                                 init_states = states_1C_2R, 
                                 eco_CR_model = MacArthur_1C_2R, 
                                 AD_CR_models = c(mC1_MacArthur),
@@ -157,9 +157,9 @@ sim_1C_2R_MacArthur_convex <- eco_evo_CR(init_parameters = params_1C_2R_MacArthu
                                 evo_param_names = c("a11m"),  
                                 evo_tradeoff_names = c("a12m"), 
                                 tradeoff_functions = c(a12_tradeoff),
-                                extra_tradeoff_params = c(A=A, n=n_convex))
-## Concave
-sim_2C_2R_MacArthur_concave <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concave, 
+                                extra_tradeoff_params = c(A=A, n=n_concaveDN))
+## concaveUP
+sim_2C_2R_MacArthur_concaveUP <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveUP, 
                                        init_states = states_2C_2R, 
                                        eco_CR_model = MacArthur_2C_2R, 
                                        AD_CR_models = c(mC1_MacArthur, mC2_MacArthur),
@@ -169,8 +169,8 @@ sim_2C_2R_MacArthur_concave <- eco_evo_CR(init_parameters = params_2C_2R_MacArth
                                        evo_param_names = c("a11m","a22m"),  
                                        evo_tradeoff_names = c("a12m","a21m"), 
                                        tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                       extra_tradeoff_params = c(A=A, n=n_concave))
-sim_1C_2R_MacArthur_concave <- eco_evo_CR(init_parameters = params_1C_2R_MacArthur_concave, 
+                                       extra_tradeoff_params = c(A=A, n=n_concaveUP))
+sim_1C_2R_MacArthur_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_MacArthur_concaveUP, 
                                        init_states = states_1C_2R, 
                                        eco_CR_model = MacArthur_1C_2R, 
                                        AD_CR_models = c(mC1_MacArthur),
@@ -180,7 +180,7 @@ sim_1C_2R_MacArthur_concave <- eco_evo_CR(init_parameters = params_1C_2R_MacArth
                                        evo_param_names = c("a11m"),  
                                        evo_tradeoff_names = c("a12m"), 
                                        tradeoff_functions = c(a12_tradeoff),
-                                       extra_tradeoff_params = c(A=A, n=n_concave))
+                                       extra_tradeoff_params = c(A=A, n=n_concaveUP))
 
 ######################################### LAWLOR SMITH COARSE-GRAIN MODEL #######################################################
 
@@ -204,17 +204,17 @@ params_2C_2R_LawlorSmith_linear <- data.frame(general_parameters,
 params_1C_2R_LawlorSmith_linear <- params_2C_2R_LawlorSmith_linear[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22")]
 
 
-## Convex
-params_2C_2R_LawlorSmith_convex <- params_2C_2R_LawlorSmith_linear
-params_2C_2R_LawlorSmith_convex["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_convex))
-params_2C_2R_LawlorSmith_convex["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_convex))
-params_1C_2R_LawlorSmith_convex <- params_2C_2R_LawlorSmith_convex[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22")]
+## concaveDN
+params_2C_2R_LawlorSmith_concaveDN <- params_2C_2R_LawlorSmith_linear
+params_2C_2R_LawlorSmith_concaveDN["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveDN))
+params_2C_2R_LawlorSmith_concaveDN["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveDN))
+params_1C_2R_LawlorSmith_concaveDN <- params_2C_2R_LawlorSmith_concaveDN[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22")]
 
-## Concave
-params_2C_2R_LawlorSmith_concave <- params_2C_2R_LawlorSmith_linear
-params_2C_2R_LawlorSmith_concave["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concave))
-params_2C_2R_LawlorSmith_concave["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concave))
-params_1C_2R_LawlorSmith_concave <- params_2C_2R_LawlorSmith_concave[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22")]
+## concaveUP
+params_2C_2R_LawlorSmith_concaveUP <- params_2C_2R_LawlorSmith_linear
+params_2C_2R_LawlorSmith_concaveUP["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveUP))
+params_2C_2R_LawlorSmith_concaveUP["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveUP))
+params_1C_2R_LawlorSmith_concaveUP <- params_2C_2R_LawlorSmith_concaveUP[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22")]
 
 #### SIMULATIONS ####
 
@@ -242,8 +242,9 @@ sim_1C_2R_LawlorSmith_linear <- eco_evo_CR(init_parameters = params_1C_2R_Lawlor
                                        tradeoff_functions = c(a12_tradeoff),
                                        extra_tradeoff_params = c(A=A, n=n_linear))
 
-## Convex
-sim_2C_2R_LawlorSmith_convex <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_convex, 
+## concaveDN
+# max mut iter reach!
+sim_2C_2R_LawlorSmith_concaveDN <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_concaveDN, 
                                        init_states = states_2C_2R, 
                                        eco_CR_model = LawlorSmith_2C_2R, 
                                        AD_CR_models = c(mC1_LawlorSmith, mC2_LawlorSmith),
@@ -253,8 +254,12 @@ sim_2C_2R_LawlorSmith_convex <- eco_evo_CR(init_parameters = params_2C_2R_Lawlor
                                        evo_param_names = c("a11m","a22m"),  
                                        evo_tradeoff_names = c("a12m","a21m"), 
                                        tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                       extra_tradeoff_params = c(A=A, n=n_convex))
-sim_1C_2R_LawlorSmith_convex <- eco_evo_CR(init_parameters = params_1C_2R_LawlorSmith_convex, 
+                                       extra_tradeoff_params = c(A=A, n=n_concaveDN))
+# note that although the max mutation iterations are reached, the evolving parameters appear to oscillate near high values, i.e. they are effectively at an ESS
+plot(sim_2C_2R_LawlorSmith_concaveDN[,c("a11","a22")]) 
+plot(sim_2C_2R_LawlorSmith_concaveDN[,c("a11","a22")], xlim=c(1.85,1.95)) 
+
+sim_1C_2R_LawlorSmith_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_LawlorSmith_concaveDN, 
                                        init_states = states_1C_2R, 
                                        eco_CR_model = LawlorSmith_1C_2R, 
                                        AD_CR_models = c(mC1_LawlorSmith),
@@ -264,9 +269,9 @@ sim_1C_2R_LawlorSmith_convex <- eco_evo_CR(init_parameters = params_1C_2R_Lawlor
                                        evo_param_names = c("a11m"),  
                                        evo_tradeoff_names = c("a12m"), 
                                        tradeoff_functions = c(a12_tradeoff),
-                                       extra_tradeoff_params = c(A=A, n=n_convex))
-## Concave
-sim_2C_2R_LawlorSmith_concave <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_concave, 
+                                       extra_tradeoff_params = c(A=A, n=n_concaveDN))
+## concaveUP
+sim_2C_2R_LawlorSmith_concaveUP <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_concaveUP, 
                                         init_states = states_2C_2R, 
                                         eco_CR_model = LawlorSmith_2C_2R, 
                                         AD_CR_models = c(mC1_LawlorSmith, mC2_LawlorSmith),
@@ -276,8 +281,8 @@ sim_2C_2R_LawlorSmith_concave <- eco_evo_CR(init_parameters = params_2C_2R_Lawlo
                                         evo_param_names = c("a11m","a22m"),  
                                         evo_tradeoff_names = c("a12m","a21m"), 
                                         tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                        extra_tradeoff_params = c(A=A, n=n_concave))
-sim_1C_2R_LawlorSmith_concave <- eco_evo_CR(init_parameters = params_1C_2R_LawlorSmith_concave, 
+                                        extra_tradeoff_params = c(A=A, n=n_concaveUP))
+sim_1C_2R_LawlorSmith_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_LawlorSmith_concaveUP, 
                                         init_states = states_1C_2R, 
                                         eco_CR_model = LawlorSmith_1C_2R, 
                                         AD_CR_models = c(mC1_LawlorSmith),
@@ -287,7 +292,7 @@ sim_1C_2R_LawlorSmith_concave <- eco_evo_CR(init_parameters = params_1C_2R_Lawlo
                                         evo_param_names = c("a11m"),  
                                         evo_tradeoff_names = c("a12m"), 
                                         tradeoff_functions = c(a12_tradeoff),
-                                        extra_tradeoff_params = c(A=A, n=n_concave))
+                                        extra_tradeoff_params = c(A=A, n=n_concaveUP))
 
 ######################################### MCCANN MODEL #######################################################
 
@@ -317,17 +322,17 @@ params_2C_2R_McCann_linear <- data.frame(general_parameters,
 params_1C_2R_McCann_linear <- params_2C_2R_McCann_linear[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22","h11","h12","h21","h22")]
 
 
-## Convex
-params_2C_2R_McCann_convex <- params_2C_2R_McCann_linear
-params_2C_2R_McCann_convex["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_convex))
-params_2C_2R_McCann_convex["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_convex))
-params_1C_2R_McCann_convex <- params_2C_2R_McCann_convex[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22","h11","h12","h21","h22")]
+## concaveDN
+params_2C_2R_McCann_concaveDN <- params_2C_2R_McCann_linear
+params_2C_2R_McCann_concaveDN["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveDN))
+params_2C_2R_McCann_concaveDN["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveDN))
+params_1C_2R_McCann_concaveDN <- params_2C_2R_McCann_concaveDN[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22","h11","h12","h21","h22")]
 
-## Concave
-params_2C_2R_McCann_concave <- params_2C_2R_McCann_linear
-params_2C_2R_McCann_concave["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concave))
-params_2C_2R_McCann_concave["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concave))
-params_1C_2R_McCann_concave <- params_2C_2R_McCann_concave[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22","h11","h12","h21","h22")]
+## concaveUP
+params_2C_2R_McCann_concaveUP <- params_2C_2R_McCann_linear
+params_2C_2R_McCann_concaveUP["a12"] <- eval(a12_tradeoff, data.frame(A=A, a11m=aii, n=n_concaveUP))
+params_2C_2R_McCann_concaveUP["a21"] <- eval(a21_tradeoff, data.frame(A=A, a22m=aii, n=n_concaveUP))
+params_1C_2R_McCann_concaveUP <- params_2C_2R_McCann_concaveUP[c("r1","r2","K1","K2","e11","e12","a11","a12","m1","w11","w12","w21","w22","h11","h12","h21","h22")]
 
 #### SIMULATIONS ####
 
@@ -355,8 +360,9 @@ sim_1C_2R_McCann_linear <- eco_evo_CR(init_parameters = params_1C_2R_McCann_line
                                          tradeoff_functions = c(a12_tradeoff),
                                          extra_tradeoff_params = c(A=A, n=n_linear))
 
-## Convex
-sim_2C_2R_McCann_convex <- eco_evo_CR(init_parameters = params_2C_2R_McCann_convex, 
+## concaveDN
+# max mut iter
+sim_2C_2R_McCann_concaveDN <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concaveDN, 
                                          init_states = states_2C_2R, 
                                          eco_CR_model = McCann_2C_2R, 
                                          AD_CR_models = c(mC1_McCann, mC2_McCann),
@@ -366,8 +372,12 @@ sim_2C_2R_McCann_convex <- eco_evo_CR(init_parameters = params_2C_2R_McCann_conv
                                          evo_param_names = c("a11m","a22m"),  
                                          evo_tradeoff_names = c("a12m","a21m"), 
                                          tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                         extra_tradeoff_params = c(A=A, n=n_convex))
-sim_1C_2R_McCann_convex <- eco_evo_CR(init_parameters = params_1C_2R_McCann_convex, 
+                                         extra_tradeoff_params = c(A=A, n=n_concaveDN))
+# note that although the max mutation iterations are reached, the evolving parameters appear to oscillate near high values. i.e. they are effectively at an ESS
+plot(sim_2C_2R_McCann_concaveDN[,c("a11","a22")]) 
+plot(sim_2C_2R_McCann_concaveDN[,c("a11","a22")], xlim=c(1.85,1.95)) 
+
+sim_1C_2R_McCann_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_McCann_concaveDN, 
                                          init_states = states_1C_2R, 
                                          eco_CR_model = McCann_1C_2R, 
                                          AD_CR_models = c(mC1_McCann),
@@ -377,9 +387,9 @@ sim_1C_2R_McCann_convex <- eco_evo_CR(init_parameters = params_1C_2R_McCann_conv
                                          evo_param_names = c("a11m"),  
                                          evo_tradeoff_names = c("a12m"), 
                                          tradeoff_functions = c(a12_tradeoff),
-                                         extra_tradeoff_params = c(A=A, n=n_convex))
-## Concave
-sim_2C_2R_McCann_concave <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concave, 
+                                         extra_tradeoff_params = c(A=A, n=n_concaveDN))
+## concaveUP
+sim_2C_2R_McCann_concaveUP <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concaveUP, 
                                           init_states = states_2C_2R, 
                                           eco_CR_model = McCann_2C_2R, 
                                           AD_CR_models = c(mC1_McCann, mC2_McCann),
@@ -389,8 +399,8 @@ sim_2C_2R_McCann_concave <- eco_evo_CR(init_parameters = params_2C_2R_McCann_con
                                           evo_param_names = c("a11m","a22m"),  
                                           evo_tradeoff_names = c("a12m","a21m"), 
                                           tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
-                                          extra_tradeoff_params = c(A=A, n=n_concave))
-sim_1C_2R_McCann_concave <- eco_evo_CR(init_parameters = params_1C_2R_McCann_concave, 
+                                          extra_tradeoff_params = c(A=A, n=n_concaveUP))
+sim_1C_2R_McCann_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_McCann_concaveUP, 
                                           init_states = states_1C_2R, 
                                           eco_CR_model = McCann_1C_2R, 
                                           AD_CR_models = c(mC1_McCann),
@@ -400,7 +410,7 @@ sim_1C_2R_McCann_concave <- eco_evo_CR(init_parameters = params_1C_2R_McCann_con
                                           evo_param_names = c("a11m"),  
                                           evo_tradeoff_names = c("a12m"), 
                                           tradeoff_functions = c(a12_tradeoff),
-                                          extra_tradeoff_params = c(A=A, n=n_concave))
+                                          extra_tradeoff_params = c(A=A, n=n_concaveUP))
 
 
 #### PLOTS ####
@@ -409,22 +419,22 @@ sim_1C_2R_McCann_concave <- eco_evo_CR(init_parameters = params_1C_2R_McCann_con
 sim_data <- bind_rows(
   mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
   mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
-  mutate(sim_2C_2R_MacArthur_convex, Model = "MacArthur", Trade_off = "Convex", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_MacArthur_convex, Model = "MacArthur", Trade_off = "Convex", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
-  mutate(sim_2C_2R_MacArthur_concave, Model = "MacArthur", Trade_off = "Concave", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_MacArthur_concave, Model = "MacArthur", Trade_off = "Concave", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
+  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
+  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
   mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
   mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_LawlorSmith_convex, Model = "LawlorSmith", Trade_off = "Convex", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_LawlorSmith_convex, Model = "LawlorSmith", Trade_off = "Convex", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_LawlorSmith_concave, Model = "LawlorSmith", Trade_off = "Concave", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_LawlorSmith_concave, Model = "LawlorSmith", Trade_off = "Concave", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
   mutate(sim_2C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
   mutate(sim_1C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_McCann_convex, Model = "McCann", Trade_off = "Convex", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_McCann_convex, Model = "McCann", Trade_off = "Convex", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_McCann_concave, Model = "McCann", Trade_off = "Concave", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_McCann_concave, Model = "McCann", Trade_off = "Concave", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1)) 
+  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1)) 
 
 
 ## Trait Divergence
@@ -454,9 +464,9 @@ ggplot(sim_data, aes(x=sequence, y=-1*max.Re.eigen, color=Trade_off, linetype=Co
 
 #### PREDICTING EFFECTS OF CHARACTER DISPLACEMENT ON C-R DYNAMICS ####
 
-tradeoff_df <- bind_rows(mutate(convex_df, Trade_off = "Convex"), 
+tradeoff_df <- bind_rows(mutate(concaveDN_df, Trade_off = "concaveDN"), 
                          mutate(linear_df, Trade_off = "Linear"), 
-                         mutate(concave_df, Trade_off = "Concave")) %>%
+                         mutate(concaveUP_df, Trade_off = "concaveUP")) %>%
   data.frame(., general_parameters) %>%
   mutate(a11 = aii, a12 = aij, a21 = aij, a22 = aii,
          w11 = wii, w12 = wij, w21 = wij, w22 = wii)
@@ -465,10 +475,10 @@ tradeoff_df <- bind_rows(mutate(convex_df, Trade_off = "Convex"),
 MacArthur_displacements <- bind_rows(
   mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_linear)), ], 
   mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_linear)), ],
-  mutate(sim_2C_2R_MacArthur_convex, Model = "MacArthur", Trade_off = "Convex", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_convex)), ], 
-  mutate(sim_1C_2R_MacArthur_convex, Model = "MacArthur", Trade_off = "Convex", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_convex)), ],
-  mutate(sim_2C_2R_MacArthur_concave, Model = "MacArthur", Trade_off = "Concave", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concave)), ], 
-  mutate(sim_1C_2R_MacArthur_concave, Model = "MacArthur", Trade_off = "Concave", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concave)), ]) 
+  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveDN)), ], 
+  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveDN)), ],
+  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveUP)), ], 
+  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveUP)), ]) 
 MacArthur_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, linetype = factor(n))) + 
@@ -508,10 +518,10 @@ cbind.data.frame(tradeoff_df, MacArthur_1C_2R_tradeoff_dynamics) %>%
 LawlorSmith_displacements <- bind_rows(
   mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_linear)), ], 
   mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_linear)), ],
-  mutate(sim_2C_2R_LawlorSmith_convex, Model = "LawlorSmith", Trade_off = "Convex", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_convex)), ], 
-  mutate(sim_1C_2R_LawlorSmith_convex, Model = "LawlorSmith", Trade_off = "Convex", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_convex)), ],
-  mutate(sim_2C_2R_LawlorSmith_concave, Model = "LawlorSmith", Trade_off = "Concave", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concave)), ], 
-  mutate(sim_1C_2R_LawlorSmith_concave, Model = "LawlorSmith", Trade_off = "Concave", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concave)), ]) 
+  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveDN)), ], 
+  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveDN)), ],
+  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveUP)), ], 
+  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveUP)), ]) 
 LawlorSmith_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
@@ -551,10 +561,10 @@ cbind.data.frame(tradeoff_df, LawlorSmith_1C_2R_tradeoff_dynamics) %>%
 McCann_displacements <- bind_rows(
   mutate(sim_2C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_linear)), ], 
   mutate(sim_1C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_linear)), ],
-  mutate(sim_2C_2R_McCann_convex, Model = "McCann", Trade_off = "Convex", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_convex)), ], 
-  mutate(sim_1C_2R_McCann_convex, Model = "McCann", Trade_off = "Convex", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_convex)), ],
-  mutate(sim_2C_2R_McCann_concave, Model = "McCann", Trade_off = "Concave", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concave)), ], 
-  mutate(sim_1C_2R_McCann_concave, Model = "McCann", Trade_off = "Concave", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concave)), ]) 
+  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveDN)), ], 
+  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveDN)), ],
+  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveUP)), ], 
+  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveUP)), ]) 
 McCann_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
