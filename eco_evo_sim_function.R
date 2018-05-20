@@ -16,7 +16,7 @@ eco_evo_CR <- function(init_parameters,              # data frame of initial par
                        mut.suc.thres=1e-4,           # threshold of mutant success rate for identifying ESS.
                        j.step=500,                   # number of evolutionary time steps over which to assess evolutionary change.
                        abund.thres=1e-4,             # abundance threshold for feasible equilibriums
-                       mut.reps=10000) {             # number of mutation iterations to try for simulation. Note that this is the upper limit of the simulation length. Usually the traits will hit their ESS or a constraint on the parameter space before this limit is reached.   
+                       mut.reps=1000) {             # number of mutation iterations to try for simulation. Note that this is the upper limit of the simulation length. Usually the traits will hit their ESS or a constraint on the parameter space before this limit is reached.   
                             
   #### SETUP ####
   

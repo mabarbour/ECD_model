@@ -36,7 +36,7 @@ m2 <- m
 general_parameters <- data.frame(r1 = r1, r2 = r2, K1 = K1, K2 = K2, e11 = e11, e12 = e12, e21 = e21, e22 = e22, m1 = m1, m2 = m2)
 
 ## Attack rate
-A <- 2 
+A <- 2
 aii <- A*0.6
 
 ## Habitat preference (for LawlorSmith and McCann models)
@@ -417,68 +417,68 @@ sim_1C_2R_McCann_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_McCann_c
 
 ## Gather data. Note different formula for effective attack rate of consumer 1 "a_eff_C1". This accounts for the differences between fine- and coarse-grained environments
 sim_data <- bind_rows(
-  mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
-  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
-  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
-  mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
-  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
-  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1)) 
+  mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", n = n_linear, Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", n = n_linear, Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
+  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", n = n_concaveDN, Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", n = n_concaveDN, Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
+  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", n = n_concaveUP, Competitor = "Yes", a_eff_C1 = a11+a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", n = n_concaveUP, Competitor = "No", a_eff_C1 = a11+a12, Ctot = C1),
+  mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", n = n_linear, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", n = n_linear, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", n = n_concaveDN, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", n = n_concaveDN, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", n = n_concaveUP, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", n = n_concaveUP, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_McCann_linear, Model = "McCann", n = n_linear, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_McCann_linear, Model = "McCann", n = n_linear, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", n = n_concaveDN, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", n = n_concaveDN, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1),
+  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", n = n_concaveUP, Competitor = "Yes", a_eff_C1 = w11*a11+w12*a12, Ctot = C1+C2), 
+  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", n = n_concaveUP, Competitor = "No", a_eff_C1 = w11*a11+w12*a12, Ctot = C1)) 
 
 
 ## Trait Divergence
-ggplot(sim_data, aes(x=sequence, y=a11/(a11+a12), color=Trade_off, linetype=Competitor)) + 
-  geom_line() + facet_wrap(~Model) + geom_hline(yintercept=0.5, linetype="dotted") + ggtitle("Trait Divergence")
+#ggplot(sim_data, aes(x=sequence, y=a11/(a11+a12), color=Trade_off, linetype=Competitor)) + 
+#  geom_line() + facet_wrap(~Model) + geom_hline(yintercept=0.5, linetype="dotted") + ggtitle("Trait Divergence")
 
 ## Effective Attack Rate
-ggplot(sim_data, aes(x=sequence, y=a_eff_C1, color=Trade_off, linetype=Competitor)) + 
-  geom_line() + facet_wrap(~Model) + geom_hline(yintercept=0.5, linetype="dotted") + ggtitle("Effective attack rate")
+#ggplot(sim_data, aes(x=sequence, y=a_eff_C1, color=Trade_off, linetype=Competitor)) + 
+#  geom_line() + facet_wrap(~Model) + geom_hline(yintercept=0.5, linetype="dotted") + ggtitle("Effective attack rate")
 
 ## Abundances
-gather_abundance <- sim_data %>%
-  select(sequence, Model, Trade_off, Competitor, R1, R2, C1, C2) %>%
-  gather(Species, Density, R1:C2)
+#gather_abundance <- sim_data %>%
+#  select(sequence, Model, Trade_off, Competitor, R1, R2, C1, C2) %>%
+#  gather(Species, Density, R1:C2)
 
-ggplot(gather_abundance %>% filter(Species %in% "R1"), aes(x=sequence, y=Density, color=Species, linetype=Competitor)) +
-  geom_line() + facet_grid(Trade_off~Model)
+#ggplot(gather_abundance %>% filter(Species %in% "R1"), aes(x=sequence, y=Density, color=Species, linetype=Competitor)) +
+#  geom_line() + facet_grid(Trade_off~Model)
 
-ggplot(gather_abundance %>% filter(Species %in% "R2"), aes(x=sequence, y=Density, color=Species, linetype=Competitor)) +
-  geom_line() + facet_grid(Trade_off~Model)
+#ggplot(gather_abundance %>% filter(Species %in% "R2"), aes(x=sequence, y=Density, color=Species, linetype=Competitor)) +
+#  geom_line() + facet_grid(Trade_off~Model)
 
 
 ## Stability
-ggplot(sim_data, aes(x=sequence, y=-1*max.Re.eigen, color=Trade_off, linetype=Competitor)) + 
-  geom_line() + facet_wrap(~Model) + ggtitle("Stability")
+#ggplot(sim_data, aes(x=sequence, y=-1*max.Re.eigen, color=Trade_off, linetype=Competitor)) + 
+#  geom_line() + facet_wrap(~Model) + ggtitle("Stability")
 
 
 #### PREDICTING EFFECTS OF CHARACTER DISPLACEMENT ON C-R DYNAMICS ####
 
-tradeoff_df <- bind_rows(mutate(concaveDN_df, Trade_off = "concaveDN"), 
-                         mutate(linear_df, Trade_off = "Linear"), 
-                         mutate(concaveUP_df, Trade_off = "concaveUP")) %>%
+tradeoff_df <- bind_rows(mutate(concaveDN_df, n = n_concaveDN), 
+                         mutate(linear_df, n = n_linear), 
+                         mutate(concaveUP_df, n = n_concaveUP)) %>%
   data.frame(., general_parameters) %>%
   mutate(a11 = aii, a12 = aij, a21 = aij, a22 = aii,
          w11 = wii, w12 = wij, w21 = wij, w22 = wii)
 
 ## MacArthur
 MacArthur_displacements <- bind_rows(
-  mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_linear)), ], 
-  mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_linear)), ],
-  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveDN)), ], 
-  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveDN)), ],
-  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveUP)), ], 
-  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveUP)), ]) 
+  mutate(sim_2C_2R_MacArthur_linear, Model = "MacArthur", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_linear)), ], 
+  mutate(sim_1C_2R_MacArthur_linear, Model = "MacArthur", n = n_linear, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_linear)), ],
+  mutate(sim_2C_2R_MacArthur_concaveDN, Model = "MacArthur", n = n_concaveDN, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveDN)), ], 
+  mutate(sim_1C_2R_MacArthur_concaveDN, Model = "MacArthur", n = n_concaveDN, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveDN)), ],
+  mutate(sim_2C_2R_MacArthur_concaveUP, Model = "MacArthur", n = n_concaveUP, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveUP)), ], 
+  mutate(sim_1C_2R_MacArthur_concaveUP, Model = "MacArthur", n = n_concaveUP, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveUP)), ]) 
 MacArthur_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, linetype = factor(n))) + 
@@ -516,12 +516,12 @@ cbind.data.frame(tradeoff_df, MacArthur_1C_2R_tradeoff_dynamics) %>%
 
 ## Lawlor Smith
 LawlorSmith_displacements <- bind_rows(
-  mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_linear)), ], 
-  mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_linear)), ],
-  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveDN)), ], 
-  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveDN)), ],
-  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveUP)), ], 
-  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveUP)), ]) 
+  mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_linear)), ], 
+  mutate(sim_1C_2R_LawlorSmith_linear, Model = "LawlorSmith", n = n_linear, Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_linear)), ],
+  mutate(sim_2C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", n = n_concaveDN, Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveDN)), ], 
+  mutate(sim_1C_2R_LawlorSmith_concaveDN, Model = "LawlorSmith", n = n_concaveDN, Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveDN)), ],
+  mutate(sim_2C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", n = n_concaveUP, Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_concaveUP)), ], 
+  mutate(sim_1C_2R_LawlorSmith_concaveUP, Model = "LawlorSmith", n = n_concaveUP, Competitor = "No")[c(1,nrow(sim_1C_2R_LawlorSmith_concaveUP)), ]) 
 LawlorSmith_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
@@ -559,12 +559,12 @@ cbind.data.frame(tradeoff_df, LawlorSmith_1C_2R_tradeoff_dynamics) %>%
 
 ## McCann
 McCann_displacements <- bind_rows(
-  mutate(sim_2C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_linear)), ], 
-  mutate(sim_1C_2R_McCann_linear, Model = "McCann", Trade_off = "Linear", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_linear)), ],
-  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveDN)), ], 
-  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", Trade_off = "concaveDN", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveDN)), ],
-  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveUP)), ], 
-  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", Trade_off = "concaveUP", Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveUP)), ]) 
+  mutate(sim_2C_2R_McCann_linear, Model = "McCann", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_linear)), ], 
+  mutate(sim_1C_2R_McCann_linear, Model = "McCann", n = n_linear, Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_linear)), ],
+  mutate(sim_2C_2R_McCann_concaveDN, Model = "McCann", n = n_concaveDN, Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveDN)), ], 
+  mutate(sim_1C_2R_McCann_concaveDN, Model = "McCann", n = n_concaveDN, Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveDN)), ],
+  mutate(sim_2C_2R_McCann_concaveUP, Model = "McCann", n = n_concaveUP, Competitor = "Yes")[c(1,nrow(sim_2C_2R_McCann_concaveUP)), ], 
+  mutate(sim_1C_2R_McCann_concaveUP, Model = "McCann", n = n_concaveUP, Competitor = "No")[c(1,nrow(sim_1C_2R_McCann_concaveUP)), ]) 
 McCann_displacements$Time <- rep(c("Begin","End"),6)
 
 ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, linetype = factor(n))) + 
