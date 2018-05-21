@@ -1,0 +1,15 @@
+base
+rmarkdown
+deSolve
+rootSolve
+lattice
+survival
+Formula
+ggplot2
+Hmisc
+pse
+plyr
+dplyr
+tidyr
+cowplot
+bindrcpp
