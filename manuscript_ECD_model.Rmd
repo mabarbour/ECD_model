@@ -944,7 +944,7 @@ Our results suggest that qualitative predictions about the effect of character d
 For all of the tradeoffs and foraging scenarios we examined, competition drives divergence in consumer foraging traits.
 Yet, these different ecological and evolutionary constraints sometimes lead to qualitatively different effects on resources densities and food-web stability. 
 Specifically, the shape of the tradeoff resulted in qualitatively different relationships between character displacement and food-web dynamics in the foraging scenario most frequently examined in past models of the evolution of character displacement. 
-However, whenever consumers were mobile and competed for resources that occured in distinct habitats, character displacement suppressed resource densities and resulted in less stable food webs. 
+However, in a foraging scenario that is likely more common in nature, where mobile consumers compete for resources that occured in distinct habitats, character displacement suppressed resource densities and resulted in less stable food webs. 
 Taken together, our results illustrate how a food-web perspective can give novel insight to an eco-evolutionary process that appears common in nature [@Schluter2000; @Pfennig2010; but see @Stuart2013].
 
 <!-- Influence of tradeoff shape and application to natural systems -->
@@ -968,29 +968,64 @@ Whether this translates into a detectable effect on food-web stability is diffic
 This is because there tends to be less of a stoichiometric mismatch between consumers and their resources in aquatic vs. terrestrial ecosystems. 
 This means that energy transfer is more efficient to upper trophic levels, which creates more top-heavy food webs (cite McCann's work) that are less stable. 
 
-<!-- Influence of foraging scenario and application to natural systems 
-- Divergent character displacement may be quite common in systems with animal consumers (and thus biological resources). This means there are many situations where consumers couple resources in distinct habitats. Draw on sticklebacks as an example.
+<!-- Influence of foraging scenario and application to natural systems -->
+A general result that emerged from our analysis was that when consumers were competing for resources in distinct habitats, character displacement always surpressed resource densities, regardless of the functional form of the consumer's feeding rate or shape of the tradeoff. 
+This is a very common foraging scenario in nature, as consumers tend to be more mobile than their resources, often coupling their dynamics across traditional habitat boundaries [@McCann2005].
+This may be especially so for character displacement, where a disproportionate number of the documented cases come from carnivores [@Schluter2000]. 
+Perhaps the clearest example of this would be the threespine stickleback in coastal lakes of British Columbia. 
+Here, the diet of stickleback is composed of two main resource types, zooplankton and benthic invertebrates. 
+These resource types occur in distinct zones of the lake (pelagic and littoral, respectively), and sticklebacks move between these zones when foraging for resources. 
+I predict that in species-pair lakes, where stickleback have undergone character displacement, that total resource densities will be lower compared to lakes with a single, generalist species.
 
-- Overrepresentation of carnivores (and even including herbivores) in this Schluter 2000.
+These results do lead to an interesting prediction that could be tested either experimentally or with field data. 
+If consumers are competing for resources that occur in different habitats, then greater character displacement corresponds to a greater decrease in resource densities (line trajectories in fig. \ref{fig:LS_Plot}B, \ref{fig:McCann_Plot}B). 
+This prediction likely only applies, however, to comparisons within species where there is likely little difference in the shape of the tradeoff among populations.
 
-- Important point: Criteria 5 in @Schluter1992 does not make sense since character displacement usually alters resource distributions. Think about this more.
--->
+<!-- Consider moving this to the opening of the discussion or the opening of the conclusion section -->
+Our work also points to a potential revision for one of the criteria used to demonstrate character displacement. 
+Specifically, criteria 5 in @Schluter1992 states: "Sites of sympatry and allopatry should not differ greatly in food, ...". 
+Our results demonstrate that character displacement can alter resource distributions in a predictable way, usually resulting in lower resource availability where competition has resulted in character displacement. 
 
-<!-- Food-web stability
-- Our most striking result is that character displacement, under foraging scenarios that capture the biology of many consumers, could result in unstable food webs. This contrasts the notion from coexistence theory that character displacement contributes to species persistence. My results do not contradict these past inferences, as they were based on different measures of stability. However, its clear that stability measures do not always go hand-in-hand and that a pluralistic view of different aspects of stability is needed for understanding the eco-evolutionary effect on food-web dynamics.
-- In line with past theory, we found that food-web stability tended to go hand-in-hand with resource densities. 
-- Drawing on the theory I developed, I can point to situations where we would expect character displacement to results in less stable food webs. 
-    - Consumers foraging in distinct habitats, concave up tradeoff in attack rates, and in aquatic systems. Aquatic systems are more likely because its been shown that attack rates are often much stronger in these systems. This lower baseline, means that it is easier for character displacement to push these systems toward the boundary of local stability.
-    - Interestingly, the study system that remains the hallmark of character displacement, threespine stickleback, meets all of these criteria. Thus, I predict that in the coastal lakes of British Columbia, where stickleback have undergone character displacement, for these food webs to exhibit less stable dynamics and more variable population abundances. 
-    - Although stability is a traditionally thorny issue to measure.
---
+<!-- Food-web stability -->
+Our most stiking result was that character displacement, when examined through the lens of food-web theory, usually resulted in less stable food webs. 
+In fact, under a foraging scenario that incorporates more biological realism, character displacement may even result in an unstable food web. 
+This result aligns well with the general result from food-web theory that food-web stability tends to go hand-in-hand with resource densities [@May1973; @Murdoch2003; @McCann2011]. 
+However, this result contrasts the notion from competition theory that character displacement contributes to species coexistence. 
+My results do not contradict these past inferences, as they were based on a different measure of stability that considers the ability of a consumer with a different phenotype to invade when rare (invasion criteria). 
+However, its clear that stability measures do not always go hand-in-hand and that a pluralistic view of different aspects of stability is needed [@Donohue2016] for understanding eco-evolutionary feedbacks on food-web dynamics.
 
+<!-- Ghost of competition and stability past --->
+A single species of threespine stickleback lives in hundreds of lakes of British Columbia, but the species pairs, where character displacement has happened, are only known from four lakes one of which has undergone reverse speciation [@Rudman2016]. 
+Our results hint at an interesting hypothesis for the apparent rarity, namely founded on ecological stability [@Borrelli2015]. 
+Specifically, the commonness of the lakes with only a single species is due to the higher ecological stability of this food-web structure, compared to the one with a species pair. 
+Testing this hypothesis may be quite difficult, but it could be possible with recent advances in genomics. 
+For example, the species-pair lake that has undergone reverse speciation has a different ecological impact than other generalist lakes in that it is much more like the benthic-ecotype in its morphology. It is unclear whether this is a transient or persistent evolutionary state. 
+But advances in genomics may be able to tease apart whether a currently generalist species had a genomic imprint of being more benthic or limnetic. 
+
+<!-- Predictions for a natural system -->
+Drawing on the theory I developed, I can point to systems where we would expect character displacement to result in less stable food webs. 
+My theory suggests that this may be more likely to occur when character displacement occurs between: (i) consumers foraging in distinct habitats; (ii) exhibit concave-up tradeoff in attack rates; and (iii) in aquatic systems. 
+Aquatic systems are more likely because its been shown that attack rates are often much stronger in these systems [@Rip2011]. 
+This lower baseline, means that it is easier for character displacement to push these systems toward the boundary of local stability. 
+Interestingly, one of the hallmark examples of character displacement, threespine stickleback, meets these criteria. Thus, I predict that in the coastal lakes of British Columbia, where stickleback have undergone character displacement, for these food webs to exhibit less stable dynamics and more variable population abundances. 
+Although stability is a traditionally thorny issue to measure, there are now clear theoretical links between the stability measure we used here ($-\lambda_{\text{max}}$) and the coefficient of variation (CV), which simply measures the variability in a dynamic time series relative to the mean. 
+Also, there are now methods for assessing the dynamics of natural communities that link to these theoretical stability measures [@Ives2003]. Now it just requires the effort to collect this data. 
+Also, in applying this theory to a natural system, an assessment of stability for a specific system requires a realistic model of the population and community dynamics. e.g. stage-structure,...Still, our results point toward a general tendency toward instability. 
+
+It's entirely plausible though that the some aspects of the system, e.g. stage structure could prevent this instability. This could be quite interesting, as this may point to systems where we are more likely to observe character displacement, because it enhances their stability.
 
 <!-- Caveats -->
+Although I used an Adaptive Dynamics approach here, I expect that these theoretical predictions would apply to models that assumed a different genetic architecture of attack rates (e.g. quantitative genetics). 
+I expect this because, time and time again, models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of the genetic architecture of traits (see synthesis by @Taper1985). 
+Since these models are focused primarily on trait evolution, it is not clear that divergence in these models would have different ecological effects.
+In fact, recent work by @McPeek2019 has shown that genetic divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics.
+Finally, my conclusions may only apply to biological resources that are nutritionally substitutable. 
+It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected (@Abrams1987; @Fox2008).
 
-Our model assumes symmetry in displacement which is not uncommon in empirical data [@Schluter2000].
+Throughout, I have also setup a special case scenario where consumers are mirror images of each other. This resulted in symmetric character displacement, which is quite common in empirical data [@Schluter2000]. Again though, I do not expect that adding mild asymmetries (ones that still would permit coexistence) would qualitatively change our results. This is because, again, divergent character displacement is still evident in these models. Also, we conducted simulations to test whether our results were robust to this assumption and they were (ADD SUPPLEMENTARY MATERIAL).
 
-<!-- older cut and pasted -->
+
+<!-- older cut and pasted 
 
 I find that the foraging scenario qualitatively affects the relationship between character displacement and resource densities.
 
@@ -1004,26 +1039,22 @@ Previous work has shown that consumers undergo divergent character displacement 
 
 Important point: Criteria 5 in @Schluter1992 does not make sense since character displacement usually alters resource distributions. Think about this more.
 
-<!-- This more realistic consumer functional response does actually make an interesting evolutionary prediction that differs from the scenario where consumer feeding rate scales linearly with resource density. Specifically, a consumer's ESS in the absence of competition will remain slightly more specialized on the resources that occur in their preferred habitats. This is in contrast to the prediction when feeding rates scale linearly with resource density, where consumers evolve to be slightly more specialized on resources occurring in their non-preferred habitats. An important caveat for these predictions is that my model does not allow habitat preferences to evolve, which would likely alter these predictions. -->
+<!-- This more realistic consumer functional response does actually make an interesting evolutionary prediction that differs from the scenario where consumer feeding rate scales linearly with resource density. Specifically, a consumer's ESS in the absence of competition will remain slightly more specialized on the resources that occur in their preferred habitats. This is in contrast to the prediction when feeding rates scale linearly with resource density, where consumers evolve to be slightly more specialized on resources occurring in their non-preferred habitats. An important caveat for these predictions is that my model does not allow habitat preferences to evolve, which would likely alter these predictions. 
 
 @Lawlor1976 found that consumers still underwent divergent character displacement regardless of whether consumers could or could not forage for resources simultaneously. 
 
-These results do lead to an interesting prediction that could be tested either experimentally or with field data. If consumers are competing for resources that occur in different habitats, then greater character displacement corresponds to a greater decrease in resource densities (line trajectories in Fig. \ref{fig:LS_Resources}B). This prediction likely only applies to comparisons within species where there is likely little difference in the shape of the tradeoff among populations. 
 
 In general, I find that resource supression goes hand-in-hand with local stability, a tendency that has been noted by others (@Murdoch2003; @McCann2011). 
 
-<!-- Looking for this effect in nature -->
+<!-- Looking for this effect in nature 
 
 The scenario where the relationship between character displacement and resource suppression is the strongest is when the tradeoff in attack rates is concave-up and consumers are competing for resources that occur in different habitats (orange points in Fig. \ref{fig:LS_Resources}B and Fig. \ref{fig:McCann_Resources}B). Prior work in threespine stickleback suggests that the evolution of stickleback attack rates are constrained by a concave-up tradeoff (@Schluter1993; @Arnegard2014) and that stickleback ecotypes are competing for resources that occur in different habitats (benthic vs. limnetic, @Schluter1992). Thus, I predict that ecological character displacement in sticklebacks would suppress resource densities and decrease local stability. 
 
-While measuring resource densities is relatively straightforward, measuring stability is notoriously difficult. One of the more easy to acquire empirical metrics of stability is the coefficient of variation ($CV=\frac{\sigma}{\mu}$) as this only requires measurements of resource (or consumer) densities over time. Interestingly, there is a close correspondence between the coefficient of variation and the local stability of a food web (@Gellner2016). <!-- This close correspondence emerges from the fact that stochastic perturbations in resource (or consumer) densities will determine the variability in abundances. And since food webs are constantly buffeted by stochastic processes in the real world, I expect that my predictions using local stability would correspond to the $CV$ of resources (or consumers). -->Thus, I predict that character displacement in threespine stickleback will increase the $CV$ of resource (or consumer) densities.
+While measuring resource densities is relatively straightforward, measuring stability is notoriously difficult. One of the more easy to acquire empirical metrics of stability is the coefficient of variation ($CV=\frac{\sigma}{\mu}$) as this only requires measurements of resource (or consumer) densities over time. Interestingly, there is a close correspondence between the coefficient of variation and the local stability of a food web (@Gellner2016). <!-- This close correspondence emerges from the fact that stochastic perturbations in resource (or consumer) densities will determine the variability in abundances. And since food webs are constantly buffeted by stochastic processes in the real world, I expect that my predictions using local stability would correspond to the $CV$ of resources (or consumers). Thus, I predict that character displacement in threespine stickleback will increase the $CV$ of resource (or consumer) densities.
 
 Consumer and resource densities in these dynamical models can be interpreted from either a population or biomass perspective (@Yodzis1992; @Murdoch2003; @McCann2011). For the stickleback system, you have data on seasonal dynamics of resources in terms of both abundances and biomass. Within a season, I do not expect stickleback abundances to be coupled to the abundances of zooplankton and benthic invertebrates, given that stickleback reproduce annually whereas zooplankton and benthic invertebrates can reproduce many times within a season. Instead, I expect that stickleback biomass will be coupled to the biomass of zooplankton and benthic invertebrates within a season. This is because there will be lots of young stickleback at the beginning of the season, and they will eat a lot of resources and grow in size as the season progresses. If this is true, I also expect to see the largest negative effect of stickleback on resource densities late in the season.   
-
-<!-- Caveats -->
-
-Although I used an Adaptive Dynamics approach here, I expect that these theoretical predictions would apply to models that assumed a different genetic architecture of attack rates (e.g. quantitative genetics). I expect this because, time and time again, models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of the genetic architecture of traits (see synthesis by @Taper1985). Finally, my conclusions only apply to biological resources that are nutritionally substitutable. It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected (@Abrams1987; @Fox2008).
+-->
 
 # Acknowledgements
 
-The content of this paper was greatly enhanced by numerous conversations with Seth Rudman. Sally Otto provided much help in early analyses of the mathematical model and I would not have been able to take the theory as far as I did without her guidance and encouragement. A discussion with Ben Gilbert pushed me to take a comparative approach that looked across different foraging scenarios to examine the generality of my conclusions.
+The content of this paper was greatly enhanced by numerous conversations with Seth Rudman. Sally Otto provided much help in early analyses of the mathematical model and I would not have been able to take the theory as far as I did without her guidance and encouragement. A discussion with Ben Gilbert pushed me to take a comparative approach that looked across different foraging scenarios to examine the generality of my conclusions. Discussions with Dolph Schluter pushed me to also to take a comparative approach that better set my results in the context of past theory on character displacement.
