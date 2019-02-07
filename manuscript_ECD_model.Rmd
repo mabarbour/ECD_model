@@ -12,12 +12,11 @@ output:
     number_sections: false
     df_print: paged
     fig_caption: true
-    #citation_package: natbib # why isn't this working?
-    template: Rmd_AmNat_MS_template.tex
+    citation_package: natbib 
     includes:  
       in_header: Am-Nat-preamble-latex.tex
-bibliography: references.bib
-biblio-style: amnat.bst
+bibliography: references
+biblio-style: amnat
 fontsize: 11pt
 fontfamily: mathpazo
 documentclass: article
@@ -246,6 +245,21 @@ sim_1C_2R_MacArthur_linear <- eco_evo_CR(init_parameters = params_1C_2R_MacArthu
                                 evo_tradeoff_names = c("a12m"), 
                                 tradeoff_functions = c(a12_tradeoff),
                                 extra_tradeoff_params = c(A=A, n=n_linear))
+# asymmetric starting points
+params_2C_2R_MacArthur_linear_asymm <- params_2C_2R_MacArthur_linear
+params_2C_2R_MacArthur_linear_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_linear[nrow(sim_1C_2R_MacArthur_linear), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+# just altering the parameters, everything else stays the same
+sim_2C_2R_MacArthur_linear_asymm <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_linear_asymm,
+                                init_states = states_2C_2R, 
+                                eco_CR_model = MacArthur_2C_2R, 
+                                AD_CR_models = c(mC1_MacArthur, mC2_MacArthur),
+                                species_traits = c(1,2), 
+                                eco_param_names = c("a11","a22"), 
+                                eco_tradeoff_names = c("a12","a21"),  
+                                evo_param_names = c("a11m","a22m"),  
+                                evo_tradeoff_names = c("a12m","a21m"), 
+                                tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
+                                extra_tradeoff_params = c(A=A, n=n_linear))
 
 ## concaveDN
 sim_2C_2R_MacArthur_concaveDN <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveDN, 
@@ -270,6 +284,22 @@ sim_1C_2R_MacArthur_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_MacAr
                                 evo_tradeoff_names = c("a12m"), 
                                 tradeoff_functions = c(a12_tradeoff),
                                 extra_tradeoff_params = c(A=A, n=n_concaveDN))
+# asymmetric starting points
+params_2C_2R_MacArthur_concaveDN_asymm <- params_2C_2R_MacArthur_concaveDN
+params_2C_2R_MacArthur_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveDN[nrow(sim_1C_2R_MacArthur_concaveDN), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+# just altering the parameters, everything else stays the same
+sim_2C_2R_MacArthur_concaveDN_asymm <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveDN_asymm,
+                                init_states = states_2C_2R, 
+                                eco_CR_model = MacArthur_2C_2R, 
+                                AD_CR_models = c(mC1_MacArthur, mC2_MacArthur),
+                                species_traits = c(1,2), 
+                                eco_param_names = c("a11","a22"), 
+                                eco_tradeoff_names = c("a12","a21"),  
+                                evo_param_names = c("a11m","a22m"),  
+                                evo_tradeoff_names = c("a12m","a21m"), 
+                                tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
+                                extra_tradeoff_params = c(A=A, n=n_concaveDN))
+
 ## concaveUP
 sim_2C_2R_MacArthur_concaveUP <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveUP, 
                                        init_states = states_2C_2R, 
@@ -293,6 +323,23 @@ sim_1C_2R_MacArthur_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_MacAr
                                        evo_tradeoff_names = c("a12m"), 
                                        tradeoff_functions = c(a12_tradeoff),
                                        extra_tradeoff_params = c(A=A, n=n_concaveUP))
+# asymmetric starting points
+params_2C_2R_MacArthur_concaveUP_asymm <- params_2C_2R_MacArthur_concaveUP
+params_2C_2R_MacArthur_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveUP[nrow(sim_1C_2R_MacArthur_concaveUP), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+# just altering the parameters, everything else stays the same
+
+# max iterations reached!
+sim_2C_2R_MacArthur_concaveUP_asymm <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveUP_asymm,
+                                init_states = states_2C_2R, 
+                                eco_CR_model = MacArthur_2C_2R, 
+                                AD_CR_models = c(mC1_MacArthur, mC2_MacArthur),
+                                species_traits = c(1,2), 
+                                eco_param_names = c("a11","a22"), 
+                                eco_tradeoff_names = c("a12","a21"),  
+                                evo_param_names = c("a11m","a22m"),  
+                                evo_tradeoff_names = c("a12m","a21m"), 
+                                tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
+                                extra_tradeoff_params = c(A=A, n=n_concaveUP))
 
 ######################################### LAWLOR SMITH COARSE-GRAIN MODEL #######################################################
 
@@ -570,6 +617,19 @@ MacArthur_displacements$Time <- rep(c("Begin","End"),6)
 MacArthur_2C_2R_tradeoff_dynamics <- CR_dynamics(init_parameters = select(tradeoff_df, r1:a22), init_states = states_2C_2R, eco_CR_model = MacArthur_2C_2R)
 MacArthur_1C_2R_tradeoff_dynamics <- CR_dynamics(init_parameters = select(tradeoff_df, r1:a12), init_states = states_1C_2R, eco_CR_model = MacArthur_1C_2R)
 
+## MacArthur asymmetry
+#MacArthur_displacements_asymm <- mutate(sim_2C_2R_MacArthur_linear_asymm, Model = "MacArthur", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_linear_asymm)), ]
+#MacArthur_displacements_asymm$Time <- rep(c("Begin","End"),1)
+
+MacArthur_displacements_asymm <- bind_rows(
+  mutate(sim_2C_2R_MacArthur_linear_asymm, Model = "MacArthur", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_linear_asymm)), ], 
+  #mutate(sim_1C_2R_MacArthur_linear_asymm, Model = "MacArthur", n = n_linear, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_linear_asymm)), ],
+  mutate(sim_2C_2R_MacArthur_concaveDN_asymm, Model = "MacArthur", n = n_concaveDN, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveDN_asymm)), ], 
+  #mutate(sim_1C_2R_MacArthur_concaveDN_asymm, Model = "MacArthur", n = n_concaveDN, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveDN_asymm)), ],
+  mutate(sim_2C_2R_MacArthur_concaveUP_asymm, Model = "MacArthur", n = n_concaveUP, Competitor = "Yes")[c(1,nrow(sim_2C_2R_MacArthur_concaveUP_asymm)), ])#, 
+  #mutate(sim_1C_2R_MacArthur_concaveUP_asymm, Model = "MacArthur", n = n_concaveUP, Competitor = "No")[c(1,nrow(sim_1C_2R_MacArthur_concaveUP_asymm)), ]) 
+MacArthur_displacements_asymm$Time <- rep(c("Begin","End"),3)
+
 ## Lawlor Smith
 LawlorSmith_displacements <- bind_rows(
   mutate(sim_2C_2R_LawlorSmith_linear, Model = "LawlorSmith", n = n_linear, Competitor = "Yes")[c(1,nrow(sim_2C_2R_LawlorSmith_linear)), ], 
@@ -756,6 +816,53 @@ Mac_plots <- plot_grid(Mac_attack + theme(legend.position = "none"), Mac_resourc
 Mac_plots
 ```
 
+```{r MacArthur_asymm}
+# replaced MacArthur_displacements with MacArthur_displacements_asymm
+
+Mac_attack_asymm <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, color = factor(n))) + 
+  geom_line() +
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=a11+a12, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) + size=5,
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=a11+a12, fill=factor(n), shape=Competitor), size=1.5, color="black") +
+  ylab(expression(a[ii]+a[ij])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_shape_manual(values=c(21)) +
+  scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
+  scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  guides(fill = guide_legend(override.aes=list(shape=21)))
+
+Mac_resources_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArthur_2C_2R_tradeoff_dynamics) %>%
+  ggplot(., aes(x=aii/(aii+aij), y=R1+R2, color = factor(n))) + 
+  geom_line() +
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) + size=5,
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=1.5, color="black") +
+  ylab(expression(R[i]+R[j])) +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  scale_shape_manual(values=c(21)) +
+  scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
+  scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  guides(fill = guide_legend(override.aes=list(shape=21)))
+
+Stability_Mac_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArthur_2C_2R_tradeoff_dynamics) %>%
+  ggplot(., aes(x=aii/(aii+aij), y=-1*max.Re.eigen, color = factor(n))) + 
+  geom_line() +
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=3, color="black", show.legend=FALSE) + #size=5,
+  geom_point(data = filter(MacArthur_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=1.5, color="black") +
+  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  ylab(expression("Stability "(-lambda[max]))) + #ylab(expression(-1%*%"Re"(lambda[max]))) +
+  scale_shape_manual(values=c(21))  +
+  scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
+  scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  guides(fill = guide_legend(override.aes=list(shape=21)))
+
+Mac_plots_asymm <- plot_grid(Mac_attack_asymm + theme(legend.position = "none"), 
+                             Mac_resources_asymm + theme(legend.position = "none"), 
+                             Stability_Mac_asymm + theme(legend.position = "none"), 
+                       ncol=2, labels = "AUTO", rel_widths = c(0.65,1))
+Mac_plots_asymm
+```
+
+
 ```{r Stability, include=FALSE, fig.cap="\\label{fig:Stability}Effect of character displacement on local stability when consumers can (A) and cannot (B) forage for both resources simultaneously. Small and large points correspond to initial and evolved strategies, respectively."}
 Stability_Mac <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArthur_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=-1*max.Re.eigen, color = factor(n))) + 
@@ -767,18 +874,20 @@ Stability_Mac <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArthur_2C
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  geom_hline(yintercept=0, linetype="dotted", color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_LS <- cbind.data.frame(select(tradeoff_df, n, aii, aij), LawlorSmith_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=-1*max.Re.eigen, color = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=5, color="black", show.legend=FALSE) +
+  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=3, color="black", show.legend=FALSE) +
   geom_point(data = filter(LawlorSmith_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
   ylab(expression("Stability "(-lambda[max]))) + #ylab(expression(-1%*%"Re"(lambda[max]))) +
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  geom_hline(yintercept=0, linetype="dotted", color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_plots <- plot_grid(Stability_Mac + theme(legend.position = "none"), Stability_LS + theme( axis.title.y = element_blank()),
@@ -824,7 +933,7 @@ As we saw previously, the effect of character displacement on resource densities
 ```{r LS_Resources, include=FALSE, fig.cap="\\label{fig:LS_Resources}Effect of character displacement on effective attack rates (A) and resource densities (B) when consumers cannot forage for resources simultaneously."}
 LS_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=5, color="black") + #, show.legend=FALSE) +
+  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) +
   #geom_point(data = filter(LawlorSmith_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   ylab(expression(w*a[ii]+(1-w)*a[ij])) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
@@ -836,7 +945,7 @@ LS_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color =
 LS_resources <- cbind.data.frame(select(tradeoff_df, n, aii, aij), LawlorSmith_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=R1+R2, color=factor(n))) + 
   geom_line() +
-  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=5, color="black") + #, show.legend=FALSE) +
+  geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) +
   #geom_point(data = filter(LawlorSmith_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   ylab(expression(R[i]+R[j])) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
@@ -891,7 +1000,7 @@ Previously, I showed that character displacement always increases the effective 
 ```{r McCann_Resources, include=FALSE, fig.cap="\\label{fig:McCann_Resources}Effect of character displacement on total attack rates (A) and resource densities (B) when consumers exhibit a more realistic functional response."}
 McCann_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=5, color="black") + #, show.legend=FALSE) +
+  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) +
   #geom_point(data = filter(McCann_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   ylab(expression(w*a[ii]+(1-w)*a[ij])) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
@@ -903,7 +1012,7 @@ McCann_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, col
 McCann_resources <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McCann_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=R1+R2, color = factor(n))) + 
   geom_line() +
-  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=5, color="black") + #, show.legend=FALSE) +
+  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=3, color="black") + #, show.legend=FALSE) +
   #geom_point(data = filter(McCann_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   ylab(expression(R[i]+R[j])) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
@@ -922,17 +1031,19 @@ McCann_plots
 Stability_McCann <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McCann_2C_2R_tradeoff_dynamics) %>%
   ggplot(., aes(x=aii/(aii+aij), y=-1*max.Re.eigen, color=factor(n))) + 
   geom_line() +
-  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=5, color="black", show.legend = FALSE) +
+  geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=3, color="black", show.legend = FALSE) +
   geom_point(data = filter(McCann_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=1.5, color="black") +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
   ylab(expression("Stability "(-lambda[max]))) + #ylab(expression(-1%*%"Re"(lambda[max]))) +
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
+  geom_hline(yintercept=0, linetype="dotted", color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_McCann
 ```
+
 ```{r McCann Model, include=FALSE}
 plot_McCann_model <- plot_grid(
   #tradeoff_plot + theme(legend.position = "none"), 
