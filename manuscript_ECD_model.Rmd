@@ -247,7 +247,7 @@ sim_1C_2R_MacArthur_linear <- eco_evo_CR(init_parameters = params_1C_2R_MacArthu
                                 extra_tradeoff_params = c(A=A, n=n_linear))
 # asymmetric starting points
 params_2C_2R_MacArthur_linear_asymm <- params_2C_2R_MacArthur_linear
-params_2C_2R_MacArthur_linear_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_linear[nrow(sim_1C_2R_MacArthur_linear), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+params_2C_2R_MacArthur_linear_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_linear[nrow(sim_1C_2R_MacArthur_linear), c("a12","a11")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
 # just altering the parameters, everything else stays the same
 sim_2C_2R_MacArthur_linear_asymm <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_linear_asymm,
                                 init_states = states_2C_2R, 
@@ -286,7 +286,7 @@ sim_1C_2R_MacArthur_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_MacAr
                                 extra_tradeoff_params = c(A=A, n=n_concaveDN))
 # asymmetric starting points
 params_2C_2R_MacArthur_concaveDN_asymm <- params_2C_2R_MacArthur_concaveDN
-params_2C_2R_MacArthur_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveDN[nrow(sim_1C_2R_MacArthur_concaveDN), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+params_2C_2R_MacArthur_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveDN[nrow(sim_1C_2R_MacArthur_concaveDN), c("a12","a11")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
 # just altering the parameters, everything else stays the same
 sim_2C_2R_MacArthur_concaveDN_asymm <- eco_evo_CR(init_parameters = params_2C_2R_MacArthur_concaveDN_asymm,
                                 init_states = states_2C_2R, 
@@ -325,7 +325,7 @@ sim_1C_2R_MacArthur_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_MacAr
                                        extra_tradeoff_params = c(A=A, n=n_concaveUP))
 # asymmetric starting points
 params_2C_2R_MacArthur_concaveUP_asymm <- params_2C_2R_MacArthur_concaveUP
-params_2C_2R_MacArthur_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveUP[nrow(sim_1C_2R_MacArthur_concaveUP), c("a11","a12")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
+params_2C_2R_MacArthur_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_MacArthur_concaveUP[nrow(sim_1C_2R_MacArthur_concaveUP), c("a12","a11")] # replace C2's attack rates with the ending point of the C1 generalist simulation. This will create an asymmetry in the attack rates and follows the logic (and our results) that a likely scenerio with asymmetry is a specialist invading a generalist.
 # just altering the parameters, everything else stays the same
 
 # max iterations reached!
@@ -402,7 +402,7 @@ sim_1C_2R_LawlorSmith_linear <- eco_evo_CR(init_parameters = params_1C_2R_Lawlor
                                        extra_tradeoff_params = c(A=A, n=n_linear))
 # asymmetric starting points
 params_2C_2R_LawlorSmith_linear_asymm <- params_2C_2R_LawlorSmith_linear
-params_2C_2R_LawlorSmith_linear_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_linear[nrow(sim_1C_2R_LawlorSmith_linear), c("a11","a12")] 
+params_2C_2R_LawlorSmith_linear_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_linear[nrow(sim_1C_2R_LawlorSmith_linear), c("a12","a11")] 
 sim_2C_2R_LawlorSmith_linear_asymm <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_linear_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = LawlorSmith_2C_2R, 
@@ -445,7 +445,7 @@ sim_1C_2R_LawlorSmith_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_Law
                                        extra_tradeoff_params = c(A=A, n=n_concaveDN))
 # asymmetric starting points
 params_2C_2R_LawlorSmith_concaveDN_asymm <- params_2C_2R_LawlorSmith_concaveDN
-params_2C_2R_LawlorSmith_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_concaveDN[nrow(sim_1C_2R_LawlorSmith_concaveDN), c("a11","a12")] 
+params_2C_2R_LawlorSmith_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_concaveDN[nrow(sim_1C_2R_LawlorSmith_concaveDN), c("a12","a11")] 
 sim_2C_2R_LawlorSmith_concaveDN_asymm <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_concaveDN_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = LawlorSmith_2C_2R, 
@@ -483,7 +483,7 @@ sim_1C_2R_LawlorSmith_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_Law
                                         extra_tradeoff_params = c(A=A, n=n_concaveUP))
 # asymmetric starting points
 params_2C_2R_LawlorSmith_concaveUP_asymm <- params_2C_2R_LawlorSmith_concaveUP
-params_2C_2R_LawlorSmith_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_concaveUP[nrow(sim_1C_2R_LawlorSmith_concaveUP), c("a11","a12")] 
+params_2C_2R_LawlorSmith_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_LawlorSmith_concaveUP[nrow(sim_1C_2R_LawlorSmith_concaveUP), c("a12","a11")] 
 sim_2C_2R_LawlorSmith_concaveUP_asymm <- eco_evo_CR(init_parameters = params_2C_2R_LawlorSmith_concaveUP_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = LawlorSmith_2C_2R, 
@@ -561,9 +561,10 @@ sim_1C_2R_McCann_linear <- eco_evo_CR(init_parameters = params_1C_2R_McCann_line
                                          evo_tradeoff_names = c("a12m"), 
                                          tradeoff_functions = c(a12_tradeoff),
                                          extra_tradeoff_params = c(A=A, n=n_linear))
+# I'm thinking these initial asymmetric simulations don't quite make sense (at least for LawlorSmith and McCann). This is because I didn't switch the pre-adapted habitat preferences as well...This is important because C1 in the first simulation becomes C2 in the 2C-2R sim. This isn't an issue in the symmetry model, because I assume they are pre-adapted on different resources. 
 # asymmetric starting points
 params_2C_2R_McCann_linear_asymm <- params_2C_2R_McCann_linear
-params_2C_2R_McCann_linear_asymm[c("a21","a22")] <- sim_1C_2R_McCann_linear[nrow(sim_1C_2R_McCann_linear), c("a11","a12")] 
+params_2C_2R_McCann_linear_asymm[c("a21","a22")] <- sim_1C_2R_McCann_linear[nrow(sim_1C_2R_McCann_linear), c("a12","a11")] # make sure a_ij and a_ii are in correct order. Note that habitat preference (w) is already set in the appropriate direction 
 sim_2C_2R_McCann_linear_asymm <- eco_evo_CR(init_parameters = params_2C_2R_McCann_linear_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = McCann_2C_2R, 
@@ -577,18 +578,36 @@ sim_2C_2R_McCann_linear_asymm <- eco_evo_CR(init_parameters = params_2C_2R_McCan
                                 extra_tradeoff_params = c(A=A, n=n_linear))
 
 # asymmetry with C1 starting with a different habitat preference (w)
-params_1C_2R_McCann_linear_alt_w <- params_1C_2R_McCann_linear # NEED TO FIGURE OUT WHAT TO DO. i SHOULD PROBABLY MAKE SURE ATTACK RATES AND PREFERENCE ARE ALIGNED, BUT I SHOULD JUST DO THAT FOR THE ALTERNATIVE RESOURCE. E.G. C1 SPECIALIZING ON R2 INSTEAD OF R1 IN THE C1 ONLY SIMS.
-sim_1C_2R_McCann_linear <- eco_evo_CR(init_parameters = params_1C_2R_McCann_linear_alt_w, 
-                                         init_states = states_1C_2R, 
-                                         eco_CR_model = McCann_1C_2R, 
-                                         AD_CR_models = c(mC1_McCann),
-                                         species_traits = c(1), 
-                                         eco_param_names = c("a11"), 
-                                         eco_tradeoff_names = c("a12"),  
-                                         evo_param_names = c("a11m"),  
-                                         evo_tradeoff_names = c("a12m"), 
-                                         tradeoff_functions = c(a12_tradeoff),
-                                         extra_tradeoff_params = c(A=A, n=n_linear))
+#params_1C_2R_McCann_linear_switch <- params_1C_2R_McCann_linear # NEED TO FIGURE OUT WHAT TO DO. i SHOULD PROBABLY MAKE SURE ATTACK RATES AND PREFERENCE ARE ALIGNED, BUT I SHOULD JUST DO THAT FOR THE ALTERNATIVE RESOURCE. E.G. C1 SPECIALIZING ON R2 INSTEAD OF R1 IN THE C1 ONLY SIMS.
+# switching direction of pre-adapted attack rates and habitat preference
+#params_1C_2R_McCann_linear_switch["a11"] <- params_1C_2R_McCann_linear["a12"] 
+#params_1C_2R_McCann_linear_switch["a12"] <- params_1C_2R_McCann_linear["a11"] 
+#params_1C_2R_McCann_linear_switch["w11"] <- params_1C_2R_McCann_linear["w12"] 
+#params_1C_2R_McCann_linear_switch["w12"] <- params_1C_2R_McCann_linear["w11"]
+#sim_1C_2R_McCann_linear_switch <- eco_evo_CR(init_parameters = params_1C_2R_McCann_linear_switch, 
+#                                             init_states = states_1C_2R, 
+#                                             eco_CR_model = McCann_1C_2R, 
+#                                             AD_CR_models = c(mC1_McCann),
+#                                             species_traits = c(1), 
+#                                             eco_param_names = c("a11"), 
+#                                             eco_tradeoff_names = c("a12"),  
+#                                             evo_param_names = c("a11m"),  
+#                                             evo_tradeoff_names = c("a12m"), 
+#                                             tradeoff_functions = c(a12_tradeoff),
+#                                             extra_tradeoff_params = c(A=A, n=n_linear))
+#params_2C_2R_McCann_linear_asymm_switch <- params_2C_2R_McCann_linear
+#params_2C_2R_McCann_linear_asymm_switch[c("a21","a22")] <- sim_1C_2R_McCann_linear_switch[nrow(sim_1C_2R_McCann_linear_switch), c("a11","a12")] 
+#sim_2C_2R_McCann_linear_asymm_switch <- eco_evo_CR(init_parameters = params_2C_2R_McCann_linear_asymm_switch,
+#                                                    init_states = states_2C_2R, 
+#                                                    eco_CR_model = McCann_2C_2R, 
+#                                                    AD_CR_models = c(mC1_McCann, mC2_McCann),
+#                                                    species_traits = c(1,2), 
+#                                                    eco_param_names = c("a11","a22"), 
+#                                                    eco_tradeoff_names = c("a12","a21"),  
+#                                                    evo_param_names = c("a11m","a22m"),  
+#                                                    evo_tradeoff_names = c("a12m","a21m"), 
+#                                                    tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
+#                                                    extra_tradeoff_params = c(A=A, n=n_linear))
 
 ## concaveDN
 # max mut iter
@@ -620,7 +639,7 @@ sim_1C_2R_McCann_concaveDN <- eco_evo_CR(init_parameters = params_1C_2R_McCann_c
                                          extra_tradeoff_params = c(A=A, n=n_concaveDN))
 # asymmetric starting points
 params_2C_2R_McCann_concaveDN_asymm <- params_2C_2R_McCann_concaveDN
-params_2C_2R_McCann_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_McCann_concaveDN[nrow(sim_1C_2R_McCann_concaveDN), c("a11","a12")] 
+params_2C_2R_McCann_concaveDN_asymm[c("a21","a22")] <- sim_1C_2R_McCann_concaveDN[nrow(sim_1C_2R_McCann_concaveDN), c("a12","a11")] 
 sim_2C_2R_McCann_concaveDN_asymm <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concaveDN_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = McCann_2C_2R, 
@@ -632,6 +651,7 @@ sim_2C_2R_McCann_concaveDN_asymm <- eco_evo_CR(init_parameters = params_2C_2R_Mc
                                 evo_tradeoff_names = c("a12m","a21m"), 
                                 tradeoff_functions = c(a12_tradeoff, a21_tradeoff),
                                 extra_tradeoff_params = c(A=A, n=n_concaveDN))
+# asymmetric starting points | switched
 
 ## concaveUP
 sim_2C_2R_McCann_concaveUP <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concaveUP, 
@@ -658,7 +678,7 @@ sim_1C_2R_McCann_concaveUP <- eco_evo_CR(init_parameters = params_1C_2R_McCann_c
                                           extra_tradeoff_params = c(A=A, n=n_concaveUP))
 # asymmetric starting points
 params_2C_2R_McCann_concaveUP_asymm <- params_2C_2R_McCann_concaveUP
-params_2C_2R_McCann_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_McCann_concaveUP[nrow(sim_1C_2R_McCann_concaveUP), c("a11","a12")] 
+params_2C_2R_McCann_concaveUP_asymm[c("a21","a22")] <- sim_1C_2R_McCann_concaveUP[nrow(sim_1C_2R_McCann_concaveUP), c("a12","a11")] 
 sim_2C_2R_McCann_concaveUP_asymm <- eco_evo_CR(init_parameters = params_2C_2R_McCann_concaveUP_asymm,
                                 init_states = states_2C_2R, 
                                 eco_CR_model = McCann_2C_2R, 
