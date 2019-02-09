@@ -1213,7 +1213,7 @@ However, its clear that stability measures do not always go hand-in-hand and tha
 
 <!-- Ghost of competition and stability past --->
 A single species of threespine stickleback lives in hundreds of lakes of British Columbia, but the species pairs, where character displacement has happened, are only known from four lakes one of which has undergone reverse speciation [@Rudman2016]. 
-Our results hint at an interesting hypothesis for the apparent rarity, namely founded on ecological stability [@Borrelli2015]. 
+Our results hint at an interesting hypothesis for the apparent rarity, namely founded on ecological stability [@Borrelli2015a; @Borrelli2015b]. 
 Specifically, the commonness of the lakes with only a single species is due to the higher ecological stability of this food-web structure, compared to the one with a species pair. 
 Testing this hypothesis may be quite difficult, but it could be possible with recent advances in genomics. 
 For example, the species-pair lake that has undergone reverse speciation has a different ecological impact than other generalist lakes in that it is much more like the benthic-ecotype in its morphology. It is unclear whether this is a transient or persistent evolutionary state. 
