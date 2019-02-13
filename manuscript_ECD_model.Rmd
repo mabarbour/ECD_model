@@ -1152,14 +1152,41 @@ We found that our previous inferences were robust to including consumer asymmetr
 
 <!-- Summarize key findings -->
 
+<!--
 Our results suggest that qualitative predictions about the effect of character displacement on food-web dynamics can be made from knowledge of evolutionary constraints/tradeoffs in attack rates as well as consumer foraging behavior. 
 For all of the tradeoffs and foraging scenarios we examined, competition drives divergence in consumer foraging traits.
 Yet, these different ecological and evolutionary constraints sometimes lead to qualitatively different effects on resources densities and food-web stability. 
 Specifically, the shape of the tradeoff resulted in qualitatively different relationships between character displacement and food-web dynamics in the foraging scenario most frequently examined in past models of the evolution of character displacement. 
 However, in a foraging scenario that is likely more common in nature, where mobile consumers compete for resources that occured in distinct habitats, character displacement suppressed resource densities and resulted in less stable food webs. 
 Taken together, our results illustrate how a food-web perspective can give novel insight to an eco-evolutionary process that appears common in nature [@Schluter2000; @Pfennig2010; but see @Stuart2013].
+-->
+
+My general finding was that, whenever character displacement increased the effective attack rate of consumers, it resulted in lower resource densities and less resilient food webs. 
+Character displacement always increased attack rates whenever consumers were competing for resources that occured in distinct habitats. 
+This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
+Although character displacement did not always increase effective attack rates, these contingent effects only occurred under the simplest and least realistic foraging scenario. 
+My study takes advantage of past work showing that adaptive divergence in consumer attack rates is always favored under the scenarios examined here [@LawlorSmith1976; @Abrams1986].
+Taken together, my results indicate that the adaptive process of character displacement often comes at the ecological cost of making food webs less resilient to perturbations. 
 
 <!-- Influence of tradeoff shape and application to natural systems -->
+
+The simplest foraging scenario examined here (linear functional response on resources occuring in the same habitat) is the foundation of mechanistic models of resource competition [@MacArthur1972; @Lawlor1976; @Abrams1986]<!--substitutable resources-->. 
+<!--Under this scenario, character displacement either results in no change in food-web dynamics or a decrease in both resource densities and stability.-->
+Under this scenario, it is theoretically possible that character displacement results in increased resource densities and food-web stability [green lines in \ref{fig:MacArthur_Plot}].
+This only occurs, however, under an evolutionary tradeoff that constrains the magnitude of character displacement.
+This suggests that it would be unlikely to ever observe divergent character displacement and increases in resource densities in a real system. 
+In contrast, the evolutionary tradeoff that favors character displacement the most decreased resource densities and food-web stability. 
+Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the foraging rate of consumers (orange lines in \ref{fig:MacArthur_Plot}A,B). 
+This is evident by the disruptive selection observed for beak size/shape in Darwin's finches [@Schluter1985] and benthic/limnetic ecotypes for stickleback [@Arnegard2014] in resource-limited environments. 
+Taken together, my model predicts that even in the simplest foraging scenario, the most likely relationship we would observe in nature is for food webs where consumers have undergone character displacement to have lower total resource densites and be less resilient to perturbations.
+
+<!--
+In this scenario, the shape of the evolutionary tradeoff in attack rates qualitatively affected the relationship between character displacement and food-web dynamics. 
+In theory, resource densities and food-web stability can even be higher under character displacement if intermediate combinations of attack rates are higher than the extremes [green lines in \ref{fig:MacArthur_Plot}].
+But the magnitude of character displacement in this scenario is quite small, resulting in negligible increases in resource densities and food-web stability.
+Therefore, my models suggest that it would be highly unlikely to ever observe an increase in resource densities in natural settings, although zero or negligible change is possible (under certain constraints).
+
+, although it is a simplistic representation of consumer-resource interactions [@Rosenzweig1963; @McCann2005; @McCann2011]
 
 Although the shape of the tradeoff could qualitatively change the relationships between character displacement and food-web dynamics, I do not expect this to be common in real ecosystems. 
 This is because these distinct effects only occur in a foraging scenario that I expect is uncommon in nature (linear functional response of consumers competiting for resources in the same habitat). 
@@ -1179,6 +1206,7 @@ Based on the shape of their tradeoffs alone, I would predict character displacem
 Whether this translates into a detectable effect on food-web stability is difficult, but if does occur, I would expect it to be more likely in threespine stickleback. 
 This is because there tends to be less of a stoichiometric mismatch between consumers and their resources in aquatic vs. terrestrial ecosystems. 
 This means that energy transfer is more efficient to upper trophic levels, which creates more top-heavy food webs (cite McCann's work) that are less stable. 
+-->
 
 <!-- Influence of foraging scenario and application to natural systems -->
 A general result that emerged from our analysis was that when consumers were competing for resources in distinct habitats, character displacement always surpressed resource densities, regardless of the functional form of the consumer's feeding rate or shape of the tradeoff. 
