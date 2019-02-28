@@ -1230,35 +1230,49 @@ Note though, this prediction will only apply to comparisons within species where
 <!-- Food-web stability -->
 My most striking result was that character displacement, when examined through the lens of food-web theory, generally resulted in less stable food webs. 
 In fact, under a foraging scenario that incorporates more biological realism, character displacement may even result in an unstable food web. 
-This result aligns well with the general finding from food-web theory that stability tends to go hand-in-hand with resource abundances [@May1973; @Murdoch2003; @McCann2011]. 
-Yet, this result contrasts the notion from competition theory that character displacement contributes to species coexistence. 
-My results do not necessarily contradict these past inferences, as competition theory uses a different measure of stability that considers the ability of a consumer with a different phenotype to invade when rare [invasion criteria, @Chesson2000]. 
+<!--This result aligns well with the general finding from food-web theory that stability tends to go hand-in-hand with resource abundances [@May1973; @Murdoch2003; @McCann2011]. -->
+The mechanism underlying this destabilization is quite general, resulting from the strength of interspecific interactions increasing relative to intraspecific interactions [@Chesson2008; @Rip2011; @McCann2011]. 
+The strength of interspecific interactions increases whenever consumers evolved higher net attack rates, but does not change intraspecific interactions.
+This relative increase in interspecific interactions, combined with the natural oscillatory tendency of consumer-resource interactions [@Murdoch2003], creates a food-web structure that is less resilient to perturbations. <!-- creates top-heavy food webs (higher $(C_i+C_j)$:$(R_i+R_j)$) that are -->
+
+My results, combined with recent theory, suggest that the very conditions that favor phenotypic diversification also make that diversity more susceptible to local extinction.
+<!--Recent theory suggests that the conditions that favor ecological character displacement are the very ones that would enhance the destabilizing effects of this eco-evolutionary process.-->
+Specifically, work by @McPeek2019 showed that character displacement is favored in environments that are either highly productive, easy to find and capture resources, or under weak abiotic stress. 
+In my model, this corresponds to higher values of $K$ (productivity) or $a_ij$s (finding and capturing resources), or lower values of $m$ (abiotic stress).
+Each of these corresponding changes create food webs that have a lower baseline of stability, as they increase the strength of consumer-resource interactions relative to intraspecific density dependence.
+For example, increasing productivity reduces intraspecific competition in resource populations while increasing the flux of energy to consumers, resulting in the "paradox of enrichment" [@Rosenzweig1971]. 
+<!--where higher productivity, all else equal, can decrease food-web stability due to consumers suppressing resources more below their carrying capacity. -->
+Similarly, increased capacity to find and capture resources (as we observed in our model) or lower consumer mortality, both increase the relative strength of consumer-resource interactions, which predictably destabilize consumer-resource interactions [@Rip2011; @McCann2011]. 
+<!--This suggests that the very conditions that favor phenotypic diversification also make that diversity more susceptible to local extinction.-->
+<!--Perhaps nonadaptive selection on ecological stability [@Borrelli2015a; @Borrelli2015b], -->
+
+<!-- Empirical support for notion of instability: Ghost of competition and stability past --->
+Empirical evidence supports the theoretical notion that food webs where consumers have undergone character displacement are less resilient to perturbations. <!--is not far-fetched.-->
+<!--Threespine stickleback in postglacial lakes of British Columbia, one of the most well-studied examples of character displacement, are known to have undergone character displacement in six different -->
+For example, <!--It is worth noting that -->a single species of threespine stickleback lives in hundreds of postglacial lakes of British Columbia, but the species pairs, where character displacement has happened, are only known from six lakes in four independent watersheds [@Schluter1992; @Schluter2000].
+Perhaps this rarity of species pairs is a result of nonadaptive selection for more ecologically stable food-web topologies [@Borrelli2015a; @Borrelli2015b].
+Indeed, it is clear that these species pair are vulnerable to perturbations, given that the species pairs have went extinct in two lakes following the introduction of nonnative species [@Hatfield2001; @Taylor2006; @Rudman2016].
+The vulnerability of the stickleback system also aligns well with evidence that aquatic food webs have several properties that make them less resilient to perturbations, including higher productivity and more efficient transfer of energy to consumers [@Rip2011].
+Testing this hypothesis may be quite difficult, but it could be possible with recent advances in genomics.
+For example, @Feulner2018 detected genomic signatures of hybridization in sympatric whitefish species following periods of eutrophication.
+Perhaps stickleback in many other postglacial lakes in British Columbia retain genomic signatures of having been a habitat specialist in the past. <!-- could look at this in lakes that don't have a species pair, but are in nearby watersheds -->
+
+<!-- contrasts with competition theory -->
+My stability results contrast, but do not necessarily contradict, the notion from competition theory that character displacement contributes to species coexistence [@Lawlor1976]. 
+Competition theory typically uses a different measure of stability that considers the mutual ability of consumers with different phenotypes to invade when rare [mutual invasibility, @Chesson2000].
+A shortcoming of this mutual invasibility measure, however, is that it does not allow a comparison between food webs with and without a competiting consumer. 
+Such comparisons are necessary for inferring the effects of ecological character displacement, a point that has been made clear in the criteria to demonstrate character displacement [@Schluter1992; @Schluter2000].
+Although the addition of consumers can decrease food-web resilience in the absence of evolution [@May1973], our results are primarily driven by an eco-evolutionary feedback between consumer evolution and resource abundances. 
+
+
+<!--
+Typically, they assume that resource distributions are stable, although resource instability can enhance coexistence if consumers contain different forms of their functional responses [@Armstrong1976a; @Armstrong1976b; @Abrams2002].
 Instead, my results highlight that stability measures do not always go hand-in-hand [@Donohue2013; @Donohue2016].
 A more pluralistic view of stability is likely needed for understanding the consequences of eco-evolutionary feedbacks in a food-web context.
 
-<!-- But talk about the competition inference, and how it may not allow a proper view of how ecological character displacement affects stability, because it also does not compare the scenarios. For example, convergence is clearly favored in the absence of a competitor. It also doesn't account for the stability of the fully coupled food web that includes resources, which we know is a key contribute to the dynamics of ecological character displacement -->
-
-<!-- Ghost of competition and stability past --->
-A single species of threespine stickleback lives in hundreds of lakes of British Columbia, but the species pairs, where character displacement has happened, are only known from four lakes one of which has undergone reverse speciation [@Rudman2016]. 
-Our results hint at an interesting hypothesis for the apparent rarity, namely founded on ecological stability [@Borrelli2015a; @Borrelli2015b]. 
-Specifically, the commonness of the lakes with only a single species is due to the higher ecological stability of this food-web structure, compared to the one with a species pair. 
-Testing this hypothesis may be quite difficult, but it could be possible with recent advances in genomics. 
-For example, the species-pair lake that has undergone reverse speciation has a different ecological impact than other generalist lakes in that it is much more like the benthic-ecotype in its morphology. It is unclear whether this is a transient or persistent evolutionary state. 
-But advances in genomics may be able to tease apart whether a currently generalist species had a genomic imprint of being more benthic or limnetic. 
-
-<!-- Predictions for a natural system -->
-Drawing on the theory I developed, I can point to systems where we would expect character displacement to result in less stable food webs. 
-My theory suggests that this may be more likely to occur when character displacement occurs between: (i) consumers foraging in distinct habitats; (ii) exhibit concave-up tradeoff in attack rates; and (iii) in aquatic systems. 
-Aquatic systems are more likely because its been shown that attack rates are often much stronger in these systems [@Rip2011]. 
-This lower baseline, means that it is easier for character displacement to push these systems toward the boundary of local stability. 
-Interestingly, one of the hallmark examples of character displacement, threespine stickleback, meets these criteria. Thus, I predict that in the coastal lakes of British Columbia, where stickleback have undergone character displacement, for these food webs to exhibit less stable dynamics and more variable population abundances. 
-Although stability is a traditionally thorny issue to measure, there are now clear theoretical links between the stability measure we used here ($-\lambda_{\text{max}}$) and the coefficient of variation (CV), which simply measures the variability in a dynamic time series relative to the mean. 
-Also, there are now methods for assessing the dynamics of natural communities that link to these theoretical stability measures [@Ives2003]. Now it just requires the effort to collect this data. 
-Also, in applying this theory to a natural system, an assessment of stability for a specific system requires a realistic model of the population and community dynamics. e.g. stage-structure,...Still, our results point toward a general tendency toward instability. 
-
-It's entirely plausible though that the some aspects of the system, e.g. stage structure could prevent this instability. This could be quite interesting, as this may point to systems where we are more likely to observe character displacement, because it enhances their stability.
-
-It may be quite common for character displacement to result in less stable food webs. Recent theory has shown that consumer divergence and specialization on resources happens more readily when either: higher productivity, low structural complexity of habitat, and weak influences of stressors [@McPeek2019]. In our model, this corresponds to higher values of *K*, higher values of *A*, and lower values of *m*. In other words, this recent theory shows that the magnitude of consumer divergence happens in highly productive habitats, where consumers can easily find and consume their prey, and there is low consumer mortality. The first situation can lead to the "paradox of enrichment" [@Rosenzweig1971], where higher productivity, all else equal, can decrease food-web stability due to consumers suppressing resources more below their carrying capacity. The other factors, maximum attack rate and consumer mortality, also have predictable effects on the stability of the system [@Rip2011; @McCann2011]. For example, increases in attack rate, as we observed in our model, decreases food-web stability. Similarly, lower mortality increases enables consumers to have a higher impact on their resources. All of these result from the general tendency of for any biological mechanism that increases the strength of interspecific interactions relative to the strength of intraspecific interactions acts to destabilize consumer-resource dynamics [@Chesson2008; @Rip2011; @McCann2011]. Mathematically, this happens when their is an imaginary eigenvalue of the system, which puts some "spin" on the system. Otherwise, biological mechanisms that enhance interaction strength can be initially stabilizing, if the consumer is poorly adapted to foraging on the available resources (see first parts of stability figures).  
+Of the prior models of ecological character displacement, only @Lawlor1976 examine the effect of character displacement on the ecological stability of the system. They conducted a detailed theoretical analysis of three different metrics of stability: (i) stable coexistence of consumers, defined as the mutual invasibility of each consumer; (ii) global stability of consumers, defined as the continued coexistence of both consumers when resource dynamics are perturbed; and (iii) local stability, defined as the rate at which the four-species food web returned to equilibrium after a small perturbation to species abundances (the measure we also used). Note that the first two metrics correspond to the stable coexistence of consumers, while the third metric measures the stability of the entire food web. @Lawlor1976 found that character displacement enhanced the stable coexistence of consumers, yet had a small negative effect on the local stability of the food web. 
+@Lawlor1976's work gave fundamental insight to the effect of character displacement on ecological stability; however, none of their stability analyses compared food webs with and without a competing consumer. Such comparisons are necessary for inferring the effects of ecological character displacement, a point that has been made clear in the criteria to demonstrate character displacement (@Schluter2000; @Schluter1992). In fact, the first two metrics of stability can only be assessed when both consumers are present because it examines the effect of divergence on coexistence, which requires both consumers to be present. In contrast, local stability can be compared in food webs with and without a competing consumer, and thus provides a useful benchmark for examining the effects of character displacement on food-web stability. 
+-->
 
 <!-- Caveats -->
 An advantage of the Adaptive Dynamics approach is that we could examine the ecological dynamics of the system. Current consumer-resource models based on quantitative genetics become quickly intractable to gain analytical insight from, even for simple linear functional responses of consumers [@McPeek2019]. Those approaches have clear advantages in that they explicitly model a quantitative trait, which then influences the ecological rates (*r, K, A, e, m*, etc.). Our approach assumes that there is a one-to-one correspondence between trait evolution and the ecological rate. This simplifying assumption, however, allowed us to explore a much more realistic biological scenario and still gain analytical insight. This necessary tradeoff was worth it, we feel, because we were interested in the ecological consequences of character displacement, rather than in identifying the conditions resulting in character displacement and that alter the magnitude, as excellent work has already been done on this front [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019].
@@ -1273,6 +1287,108 @@ It would be interesting to extend these current analyses to non-substitutable re
 While the underlying genetics of trait evolution may influence the amount of divergence in character displacement, this should not influence the effect of that trait evolution on the consumer-resource dynamics. Another way our results may quantitatively differ from a quantitative genetic model is that there is no intraspecific variation in our approach. While this may certainly have quantitative effects on the relationship between character displacement and food-web dynamics, or more likely, influence the magnitude of displacement [@McPeek2019], it is unclear whether this would qualitatively influence our inferences.  
 
 Throughout, I have also setup a special case scenario where consumers are mirror images of each other. This resulted in symmetric character displacement, which is quite common in empirical data [@Schluter2000]. Again though, I do not expect that adding mild asymmetries (ones that still would permit coexistence) would qualitatively change our results. This is because, again, divergent character displacement is still evident in these models. Also, we conducted simulations to test whether our results were robust to this assumption and they were (ADD SUPPLEMENTARY MATERIAL).
+
+<!--
+All of these result from the general principle that any biological mechanism that increases the strength of interspecific interactions relative to the strength of intraspecific interactions acts to destabilize consumer-resource dynamics [@Chesson2008; @Rip2011; @McCann2011].
+Mathematically, this happens when the equilibrium point of the system is associated with an imaginary eigenvalue.
+This causes the system to exhibit damped oscilattions creates a tendency for the system to oscillate in the presence of any lag in consumer-resource dynamics., which creates a puts some "spin" on the system. Otherwise, biological mechanisms that enhance interaction strength can be initially stabilizing, if the consumer is poorly adapted to foraging on the available resources (see first parts of stability figures).
+
+is the imaginary eigenvalue associated with the lag itself? A presence of a lag in the system?
+-->
+
+<!-- environmental gradients and character displacement 
+It may be quite common for character displacement to result in less stable food webs. 
+Recent theory has shown that consumer divergence and specialization on resources happens more readily when either: higher productivity, low structural complexity of habitat, and weak influences of stressors [@McPeek2019]. 
+In our model, this corresponds to higher values of *K*, higher values of *A*, and lower values of *m*. 
+In other words, this recent theory shows that the magnitude of consumer divergence happens in highly productive habitats, where consumers can easily find and consume their prey, and there is low consumer mortality. 
+The first situation can lead to the "paradox of enrichment" [@Rosenzweig1971], where higher productivity, all else equal, can decrease food-web stability due to consumers suppressing resources more below their carrying capacity. 
+The other factors, maximum attack rate and consumer mortality, also have predictable effects on the stability of the system [@Rip2011; @McCann2011]. 
+For example, increases in attack rate, as we observed in our model, decreases food-web stability. 
+Similarly, lower mortality increases enables consumers to have a higher impact on their resources. 
+All of these result from the general tendency of for any biological mechanism that increases the strength of interspecific interactions relative to the strength of intraspecific interactions acts to destabilize consumer-resource dynamics [@Chesson2008; @Rip2011; @McCann2011]. 
+Mathematically, this happens when their is an imaginary eigenvalue of the system, which puts some "spin" on the system. Otherwise, biological mechanisms that enhance interaction strength can be initially stabilizing, if the consumer is poorly adapted to foraging on the available resources (see first parts of stability figures).
+-->
+
+<!-- But talk about the competition inference, and how it may not allow a proper view of how ecological character displacement affects stability, because it also does not compare the scenarios. For example, convergence is clearly favored in the absence of a competitor. It also doesn't account for the stability of the fully coupled food web that includes resources, which we know is a key contribute to the dynamics of ecological character displacement -->
+
+<!-- Environmental gradients 
+My theoretical results also give insight to where we might expect to observe the destabilizing effects of character displacement in nature. 
+Specifically, environments that increases the flux of energy to consumers relative to resources generally decrease stability [@Rip2011; @McCann2011], which would amplify the destabilizing effects of character displacement. 
+For example, aquatic food webs have a number of attributes that make them less stable than terrestrial food webs [@Rip2011].
+-->
+<!-- excerpts from Rip and McCann 2011
+aquatic primary producers possess less structural material
+(Elser et al. 2000) and contain more photosynthetic tissue (Elser et al.
+2000). These differences result in higher growth rates in aquatic
+primary producers (Cebrian 1999; Elser et al. 2000).
+
+Many differences in consumption rates exist across ecosystem types.
+These differences arise from a number of attributes differing across
+ecosystems. In aquatic ecosystems, the body size ratios of herbivores
+to primary producers are larger (Hairston & Hairston 1993; Chase
+2000) and primary producers are more nutritious to herbivores (Polis
+& Strong 1996; Cebrian 1999; Elser et al. 2000). This results in greater
+herbivory in aquatic ecosystems (Cyr & Pace 1993; Hairston &
+Hairston 1993; Cebrian 1999). The higher consumption rates in
+aquatic ecosystems should have a large impact on parameters used in
+C-R theory. Higher consumption rates may manifest in higher
+maximum consumption rates and higher conversion efficiencies (i.e. a
+or aMax and e). As seen above, an increase in either or both of these
+parameters would result in an increase in energy flow, more inverted
+biomass pyramids, and a decrease in stability. Therefore we predict
+that aquatic ecosystems should be less stable than terrestrial
+ecosystems.
+
+. However, the amount of mass-specific structural material
+(e.g. skeletal material, woody tissue) does positively scale to body
+mass: scaling exponents vary between 0.4 and 0.12 suggesting that
+efficiency should scale across ecosystem types (Schmidt-Nielson
+1984). As conversion efficiency is dimensionless, these positive
+exponents become negative when we divide through by biomass to
+remove the dimensions (exponents become )0.88 to )0.40). Thus, as
+others have argued (Strong 1992, Polis et al. 2000), aquatic pathways
+ought to tend to have far less structural material and promote high
+conversion efficiencies.
+
+In summary, the relationships suggest that the isocline should shift
+left relative to the resource isocline with reduced body size. Moreover,
+these arguments resonate with previous arguments. Strong (1992) and
+Polis et al. (2000) argued cogently that aquatic systems were more
+homogenised reducing prey refugia, more edible and tended to
+experience higher turnover rates than terrestrial ecosystems. All these
+effectively argue for higher energy flux through aquatic pathways as
+our allometric reasoning also suggests. Thus, differences in the
+attributes of aquatic and terrestrial ecosystems relate to differences in
+energy flow within ecosystems. Comparing cross-ecosystem differences
+to parameters used in C-R theory, we predict aquatic ecosystems
+should have high growth rates of primary producers and higher
+numerical responses by consumers. All of these predictions taken
+together suggest that energy flow in aquatic ecosystems should be
+higher, biomass pyramids more inverted and stability decreased
+relative to terrestrial ecosystems.
+
+Strong, D.R. (1992). Are trophic cascades all wet? Differentiation and donorcontrol
+in speciose ecosystems. Ecology. 73:747–754.
+
+Polis, D.A., Sear, A., Huxel, G.R., Strong, D.R. & Maron, J. (2000). When is a
+trophic cascade a trophic cascade? Trends Ecol. Evol., 11, 473–475.
+-->
+
+<!-- Predictions for a natural system 
+My results give insight to where we would expect character displacement to result in less stable food webs in nature: 
+(i) consumers compete for resources in distinct habitats; (ii) exhibit concave-up tradeoff in attack rates; (iii) high productivity (*K*); (iv) low structural complexity (*a_ii_*,*a_ij*); (v) weak stressors (low *m*). 
+
+Aquatic ecosystems have a number of attributes that make them generally less stable than terrestrial ecosystems [@Rip2011]. For example, 
+
+Aquatic systems are more likely because its been shown that attack rates are often much stronger in these systems [@Rip2011]. 
+This lower baseline, means that it is easier for character displacement to push these systems toward the boundary of local stability. 
+Interestingly, one of the hallmark examples of character displacement, threespine stickleback, meets these criteria. Thus, I predict that in the coastal lakes of British Columbia, where stickleback have undergone character displacement, for these food webs to exhibit less stable dynamics and more variable population abundances. 
+Although stability is a traditionally thorny issue to measure, there are now clear theoretical links between the stability measure we used here ($-\lambda_{\text{max}}$) and the coefficient of variation (CV), which simply measures the variability in a dynamic time series relative to the mean. 
+Also, there are now methods for assessing the dynamics of natural communities that link to these theoretical stability measures [@Ives2003]. Now it just requires the effort to collect this data. 
+Also, in applying this theory to a natural system, an assessment of stability for a specific system requires a realistic model of the population and community dynamics. e.g. stage-structure,...Still, our results point toward a general tendency toward instability. 
+
+It's entirely plausible though that the some aspects of the system, e.g. stage structure could prevent this instability. This could be quite interesting, as this may point to systems where we are more likely to observe character displacement, because it enhances their stability.
+-->
 
 
 <!-- older cut and pasted 
