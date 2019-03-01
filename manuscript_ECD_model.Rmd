@@ -1275,14 +1275,24 @@ Of the prior models of ecological character displacement, only @Lawlor1976 exami
 -->
 
 <!-- Caveats -->
-An advantage of the Adaptive Dynamics approach is that we could examine the ecological dynamics of the system. Current consumer-resource models based on quantitative genetics become quickly intractable to gain analytical insight from, even for simple linear functional responses of consumers [@McPeek2019]. Those approaches have clear advantages in that they explicitly model a quantitative trait, which then influences the ecological rates (*r, K, A, e, m*, etc.). Our approach assumes that there is a one-to-one correspondence between trait evolution and the ecological rate. This simplifying assumption, however, allowed us to explore a much more realistic biological scenario and still gain analytical insight. This necessary tradeoff was worth it, we feel, because we were interested in the ecological consequences of character displacement, rather than in identifying the conditions resulting in character displacement and that alter the magnitude, as excellent work has already been done on this front [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019].
+I expect that my theoretical predictions are robust to different assumptions about the underlying evolutionary dynamics of consumer foraging traits.
+This is because models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of whether a quantitative genetic or adaptive dynamics model is used for consumer traits [@Lawlor1976; @Taper1985]. 
+A quantitative genetic model may certainly show differences in the magnitude of character displacement, but this should not affect the qualtiative relationship I observed.  
+In fact, recent work by @McPeek2017 has shown that divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics.
+I want to note though, that my conclusions may only apply to food webs with biotic resources that are nutritionally substitutable. 
+It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected [@Abrams1987; @Fox2008].
 
+<!-- Conclusions -->
+
+<!--
 Although I used an Adaptive Dynamics approach here, I expect that these theoretical predictions would apply to models that assumed a different genetic architecture of attack rates (e.g. quantitative genetics). 
 I expect this because, time and time again, models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of the genetic architecture of traits [see synthesis by @Taper1985]. 
 Since these models are focused primarily on trait evolution, it is not clear that divergence in these models would have different ecological effects.
 In fact, recent work by @McPeek2019 has shown that genetic divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics.
 Finally, my conclusions may only apply to biological resources that are nutritionally substitutable. 
 It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected [@Abrams1987; @Fox2008].
+
+An advantage of the Adaptive Dynamics approach is that we could examine the ecological dynamics of the system. Current consumer-resource models based on quantitative genetics become quickly intractable to gain analytical insight from, even for simple linear functional responses of consumers [@McPeek2019]. Those approaches have clear advantages in that they explicitly model a quantitative trait, which then influences the ecological rates (*r, K, A, e, m*, etc.). Our approach assumes that there is a one-to-one correspondence between trait evolution and the ecological rate. This simplifying assumption, however, allowed us to explore a much more realistic biological scenario and still gain analytical insight. This necessary tradeoff was worth it, we feel, because we were interested in the ecological consequences of character displacement, rather than in identifying the conditions resulting in character displacement and that alter the magnitude, as excellent work has already been done on this front [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019].
 
 While the underlying genetics of trait evolution may influence the amount of divergence in character displacement, this should not influence the effect of that trait evolution on the consumer-resource dynamics. Another way our results may quantitatively differ from a quantitative genetic model is that there is no intraspecific variation in our approach. While this may certainly have quantitative effects on the relationship between character displacement and food-web dynamics, or more likely, influence the magnitude of displacement [@McPeek2019], it is unclear whether this would qualitatively influence our inferences.  
 
