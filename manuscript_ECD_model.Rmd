@@ -1283,6 +1283,25 @@ I want to note though, that my conclusions may only apply to food webs with biot
 It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected [@Abrams1987; @Fox2008].
 
 <!-- Conclusions -->
+Competition theory suggested that character displacement was a stabilizing force in ecological communities [@Lawlor1976]. 
+My results show the exact opposite, when a food-web perspective is taken.
+Importantly, a food-web approach permits comparisons between communities in the presence of absence of a competitor, allowing a fair comparison of the effects of character displacement on food-web dynamics.
+These results appear to be quite general, as they characterize the general foraging scenario where consumers are more mobile than their resources. 
+These results also suggest that the very evolutionary process that generates biodiversity, creates an ecological scenario that makes that diversity fragile to loss. 
+These results highlight how evolution, when considered in a food-web context, may actually be a destabilizing force in ecological communities. 
+This may generally be true of consumer evolution, as was pointed out decades ago [@Rosenzweig1963].
+These results also highlight a tension between adaptive process (evolution of consumers to increase feeding efficiency) and a non-adaptive process (food-web stability).
+These results suggest that in systems with evidence of ecological character displacement, why do they persist? 
+These results open up a new avenue for research on ecological character displacement, one that explores in more detail the dynamical consequences of consumer evolution, rather than just static effects that assume resources are persistent and stable. 
+It also suggest that actually observing evidence of ecological character displacement may be difficult ...
+It also highlights how evolution of key species in a food web may make these systems more susceptible to environmental change. 
+It's been argued that "inferences about the evolution of community structure cannot be based on ecological arguments about community stability or likely coexistence" [@McPeek2019].
+In contrast, our results suggest that current patterns in food-web structure may be the result of non-adaptive processes selecting for more stable food-web configurations.
+Our results also call for a revision of one of the criteria of character displacement, since it is clear that this process can result in different resource dynamics.
+In fact, this resource similarity hypothesis has not been tested in natural systems, although it has been qualitatively inferred, and some quantitative estimates based on physical properties of systems have been measured to try and say these habitats are similar. (NEED TO CHECK SCHLUTER 2000 BOOK, THE AM NAT STUDY SUGGESTS THAT IT IS A COMMONLY FILLED CRITERIA.)
+More generally, our results highlight how variation in food-web structure can alter eco-evolutionary feedbacks within communities [@McPeek2017], that also have consequences for their resilience to environmental disturbances.
+This calls for food-web ecologists to more criticaly consider the role of evolutionary processes in shaping food-web structure and dynamics.
+
 
 <!--
 Although I used an Adaptive Dynamics approach here, I expect that these theoretical predictions would apply to models that assumed a different genetic architecture of attack rates (e.g. quantitative genetics). 
