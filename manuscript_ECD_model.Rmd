@@ -742,7 +742,7 @@ write.csv(bind_rows(MacArthur_displacements_asymm, LawlorSmith_displacements_asy
 Ecological character displacement is an adaptive process, often enhancing coexistence between consumers by reducing competition for shared resources. 
 This competition perspective undermine the fact that consumer-resource interactions ultimately mediate the process of character displacement. 
 As a consequence, the effects of character displacement on consumer-resource interactions and food-web dynamics have been ignored.
-Here, I study a model of two consumers competing for two shared resources to examine how character displacement in consumers affects resource densities and the resilience of food webs to perturbations.
+Here, I study a model of two consumers competing for two shared resources to examine how character displacement in consumers affects resource abundances and the resilience of food webs to perturbations.
 I studied these effects under different assumptions of evolutionary tradeoffs, consumer foraging behavior, and resource distributions.
 I found that character displacement always strengthened consumer-resource interactions whenever consumers competed for resources that occured in distinct habitats.
 This increase in interaction strength resulted in lower resource abundances and less resilient food webs.
@@ -758,7 +758,7 @@ They also highlight that food-web and competition theory can give complimentary 
 Ecological character displacement is an important adaptive process in generating biodiversity [@Schluter2000; @Pfennig2010; but see @Stuart2013]. 
 This process results from "phenotypic evolution in a species generated or maintained by [exploitative] resource competition with one or more coexisting species” [@Schluter2000]. 
 Over the past 40 years, a large body of theoretical [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019] and empirical [reviewed in: @Schluter2000; @Dayan2005; @Stuart2013] work has examined which scenarios lead to phenotypic divergence or convergence of competing consumers.
-The general result has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of density dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985]. 
+The general result has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of abundance dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985]. 
 This adaptive process is not simply a response to statitc differences in resource distributions, but creates an eco-evolutionary feedback that drives further differentiation. 
 This crucial insight was made by theoretical models that explicitly included resource dynamics as a mediator of competition in driving evolutionary change [@Lawlor1976; @Abrams1986; @Taper1985]. 
 
@@ -783,13 +783,13 @@ $$\frac{dC_2}{dt}=e_{21}F_{21}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2,$$
 
 where $r_i$ represents the intrinsic growth rate of resource $i$, $K_i$ represents the carrying capacity of resource $i$, $e_{ji}$ represents the conversion efficiency of resource $i$ into consumer $j$, and $m_j$ represents the mortality rate of consumer $j$. $F_{ji}(R_i)$ represents consumer $j$'s feeding rate (i.e. functional response) on resource $i$. 
 This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). 
-In the simplest scenario, consumers can forage for both resources simultaneously and their feeding rates increase linearly with resource density, such that $F_{ji}(R_i)=a_{ji}R_i$ where $a_{ji}$ is the attack rate of consumer $j$ on resource $i$ [@MacArthur1972]. 
+In the simplest scenario, consumers can forage for both resources simultaneously and their feeding rates increase linearly with resource abundance, such that $F_{ji}(R_i)=a_{ji}R_i$ where $a_{ji}$ is the attack rate of consumer $j$ on resource $i$ [@MacArthur1972]. 
 The evolution of consumer attack rates in this model (and several extensions) have been analyzed in detail [@Lawlor1976; @Abrams1986], with the general result being divergent character displacement. 
 I say consumers have undergone divergent character displacement if there evolved attack rates are more specialized, measured as $|\frac{a_{ii}}{a_{ii}+a_{ij}}-0.5|$, when evolving with a competing consumer. 
 
 To investigate the ecological consequences of divergent character displacement, I analyzed differences in resource abundances and food-web stability at equilibrium. 
-An equilibrium is reached when the four rates of change in the above equations are 0, and solving the system at this point gives equilibrium densities for each resource ($\hat R_1,\hat R_2$) and consumer ($\hat C_1,\hat C_2$). 
-At the coexistence equilibrium (i.e., where $\hat R_1,\hat R_2, \hat C_1,\hat C_2 > 0$), I calculated resource densities and performed a linear stability analysis [@Otto2007]. 
+An equilibrium is reached when the four rates of change in the above equations are 0, and solving the system at this point gives equilibrium abundances for each resource ($\hat R_1,\hat R_2$) and consumer ($\hat C_1,\hat C_2$). 
+At the coexistence equilibrium (i.e., where $\hat R_1,\hat R_2, \hat C_1,\hat C_2 > 0$), I calculated resource abundances and performed a linear stability analysis [@Otto2007]. 
 This stability analysis derives the dominant eigenvalue, $\lambda$, which determines whether (and how readily) the food web will return to equilibrium after a small perturbation. 
 
 When possible, I derived analytical expressions for the relationship between consumer attack rates and food-web dynamics. 
@@ -820,19 +820,29 @@ tradeoff_plot <- bind_rows(concaveDN_df, linear_df, concaveUP_df) %>%
 tradeoff_plot
 ```
 
+# Results
 
 ## Consumers can forage for both resources simultaneously
 
-When both consumers and resources are present, the density of resources at equilibrium are equivalent ($\hat R = \hat R_1 = \hat R_2$) and are determined by the following equation (derivation in supplementary material):
+<!-- I haven't made clear that this explores a specific scenario, MacArthur's model -->
+
+When both consumers and resources are present, the abundance of resources at equilibrium are equivalent ($\hat R = \hat R_1 = \hat R_2$) and are determined by the following equation (derivation in supplementary material):
 
 $$\hat{R}=\frac{1}{a_{ii}+a_{ij}}\cdot\frac{m}{e}$$
-A key determinant of resource density in this model is the consumer's total attack rate, $a_{ii}+a_{ij}$. Therefore, the ecological consequences of character displacement depend on how the tradeoff influences the evolution of consumer attack rates.
+A key determinant of resource abundance in this model is the consumer's total attack rate, $a_{ii}+a_{ij}$. Therefore, the ecological consequences of character displacement depend on how the tradeoff influences the evolution of consumer attack rates.
 
-My simulations show that the shape of the attack-rate tradeoff qualitatively affects the relationship between character displacement and resource density (Fig. \ref{fig:MacArthur_Plot}). For example, if consumer's are constrained by a linear tradeoff (blue lines), then there is no net change in total attack rate (Fig. \ref{fig:MacArthur_Plot}B) and character displacement has no effect on resource densities (Fig. \ref{fig:MacArthur_Plot}C). If the tradeoff is concave down (green lines), then resource abundances can actually increase under character displacement (Fig. \ref{fig:MacArthur_Plot}C). This is because the total attack rate of consumers is maximized at intermediate values ($a_{ii}=a_{ij}$) and decreases as consumers diverge (Fig. \ref{fig:MacArthur_Plot}B). When the tradeoff is concave up (orange lines), character displacement suppresses resource densities due to the increase in total attack rates (Fig. \ref{fig:MacArthur_Plot}B,C). Although the equation I derived for resource density was for the scenario where both consumers and both resources are present, it accurately predicts the density of resources when a single consumer reaches its ESS (triangles on respective colored lines in Fig. \ref{fig:MacArthur_Plot}C). This is because a single consumer evolves to be a generalist that has equal attack rates on each resource (triangles at 0.5 along x-axis in Fig. \ref{fig:MacArthur_Plot}B), resulting in equivalent resource densities. 
+My simulations show that the shape of the attack-rate tradeoff qualitatively affects the relationship between character displacement and resource abundance (Fig. \ref{fig:MacArthur_Plot}). 
+For example, if consumer's are constrained by a linear tradeoff (blue lines), then there is no net change in total attack rate (Fig. \ref{fig:MacArthur_Plot}B) and character displacement has no effect on resource abundances (Fig. \ref{fig:MacArthur_Plot}C). 
+If the tradeoff is concave down (green lines), then resource abundances can actually increase under character displacement (Fig. \ref{fig:MacArthur_Plot}C). 
+This is because the total attack rate of consumers is maximized at intermediate values ($a_{ii}=a_{ij}$) and decreases as consumers diverge (Fig. \ref{fig:MacArthur_Plot}B). 
+When the tradeoff is concave up (orange lines), character displacement suppresses resource abundances due to the increase in total attack rates (Fig. \ref{fig:MacArthur_Plot}B,C). 
+Although the equation I derived for resource abundances was for the scenario where both consumers and both resources were present, it accurately predicts the abundance of resources when a single consumer reaches its ESS (triangles on respective colored lines in Fig. \ref{fig:MacArthur_Plot}C). This is because a single consumer evolves to be a generalist that has equal attack rates on each resource (triangles at 0.5 along x-axis in Fig. \ref{fig:MacArthur_Plot}B), resulting in equivalent resource abundances. 
 
-The effect of character displacement on resource density closely matches its impact on food-web stability (Fig. \ref{fig:MacArthur_Plot}D). For example, when character displacement results in resource suppression (orange), there is a corresponding decrease in stability. Similarly, if character displacement does not influence resource densities (blue), then there is no corresponding effect on stability. Curiously, this match between impact on resources and stability breakdowns with the concave down tradeoff (green). 
+The effect of character displacement on resources corresponds to its impact on food-web stability. 
+For example, when character displacement decreases resource abundances (orange points in \ref{fig:MacArthur_Plot}C), there is a decrease in food-web stability (\ref{fig:MacArthur_Plot}D). 
+Similarly, if character displacement does not alter resource abundances (blue and green points in \ref{fig:MacArthur_Plot}C), then there is no change in food-web stability (\ref{fig:MacArthur_Plot}D).  
 
-```{r MacArthur_Resources, include=FALSE, fig.cap="\\label{fig:MacArthur_Resources}Effect of character displacement on total attack rates (A) and resource densities (B) when consumers can forage for both resources simultaneously."}
+```{r MacArthur_Resources, include=FALSE, fig.cap="\\label{fig:MacArthur_Resources}Effect of character displacement on total attack rates (A) and resource abundances (B) when consumers can forage for both resources simultaneously."}
 Mac_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, color = factor(n))) + 
   geom_line() +
   geom_point(data = filter(MacArthur_displacements, Time=="End"), aes(x = a11/(a11+a12), y=a11+a12, fill=factor(n), shape=Competitor), size=3, color="white") + #, show.legend=FALSE) + size=5,
@@ -903,28 +913,38 @@ plot_macarthur_model <- plot_grid(
 save_plot(filename="Figure_ECD_MacArthur.pdf", plot=plot_macarthur_model, base_height = 6, base_width = 6)
 ```
 
-```{r MacArthur_Plot, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:MacArthur_Plot}**Effect of character displacement when consumers can forage for both resources simultaneously.** Panel (A) shows the different tradeoffs in consumer attack rates used in the simulation (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Panel (B) shows how the shape of this tradeoff affects the magnitude of character displacement and the evolution of total attack rates in the consumer community. Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation. Panels (C) and (D) show how different tradeoffs indirectly affect total resource densities (C) and food-web stability (D). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r MacArthur_Plot, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:MacArthur_Plot}**Effect of character displacement when consumers can forage for both resources simultaneously.** Panel (A) shows the different tradeoffs in consumer attack rates used in the simulation (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Panel (B) shows how the shape of this tradeoff affects the magnitude of character displacement and the evolution of total attack rates in the consumer community. Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation. Panels (C) and (D) show how different tradeoffs indirectly affect total resource abundances (C) and food-web stability (D). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_MacArthur.pdf")
 ```
 
 
 ## Consumers *cannot* forage for both resources simulanteously
 
-The previous model, although the starting point for many models of competition, does not reflect many food webs where consumers are more mobile than their resources. In this scenario, consumer foraging behavior can link resources that occur in distinct habitats. The only character displacement model that I am aware of that modeled resources in different habitats was one examined by @Lawlor1976. This model takes the same form as the previous model, except now the consumer's feeding rate takes the form:
+The previous model, although the starting point for many models of competition, does not reflect many food webs where consumers are mobile and their foraging behavior links resources that occur in distinct habitats [@McCann2005]. 
+The only character displacement model that I am aware of that examined the effect of resources in different habitats was studied by @Lawlor1976. This model is the same as before, except now the consumer's feeding rate takes the form:
 
 $$F_{ji}(R_i)=w_{ji}a_{ji}R_i$$
 
 where $w_{ji}$ represents the proportion of time consumer $j$ spends foraging in a habitat where only resource $j$ is found (i.e. habitat preference). Note that since $w_{ji}$ is a proportion that $w_{jj}=1-w_{ji}$. As with attack rates, I assume that consumer habitat preferences are mirror images of each other ($w=w_{11}=w_{22}$). In @Lawlor1976's detailed evolutionary analysis of this model, they always observed divergent character displacement.
 
-To examine the ecological consequences of this divergence, I again derive the equilibrium solution when both consumers and both resources are present. As before, resource densities are equivalent at this equilibrium ($\hat R = \hat R_1 = \hat R_2$ when both consumers and resources present), but are now determined by the following equation (derivation in supplementary material):
+To examine the ecological consequences of this divergence, I again derive the equilibrium solution when both consumers and both resources are present. As before, resource abundances are equivalent at this equilibrium ($\hat R = \hat R_1 = \hat R_2$ when both consumers and resources present), but are now determined by the following equation (derivation in supplementary material):
 
 $$\hat{R}=\frac{1}{wa_{ii}+(1-w)a_{ij}}\cdot\frac{m}{e}$$
 
-This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w>0.5$ and $a_{ii}>a_{ij}$), then the effective attack rate of consumers ($wa_{ii}+(1-w)a_{ij}$) will always increase, regardless of the tradeoff (Fig. \ref{fig:LS_Plot}A). Thus, character displacement always results in resource suppression if consumers are competing for resources that occur in different habitats (Fig. \ref{fig:LS_Plot}B). Note that the shape of the tradeoff can modify the effect of character displacement. This is not so much due to the tradeoff affecting the magnitude of displacement (it does, but the effect is minor), but because the form of the tradeoff affects resource abundances when a single consumer has reached its ESS (triangles in Fig. \ref{fig:LS_Plot}B). In contrast, resource densities reach a similar value when consumers evolve in the presence of a competitor (circles in Fig. \ref{fig:LS_Plot}B), because character displacement tends to reach a constraint of complete specialization. It is worth noting that in this foraging scenario, resource densities are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in Fig. \ref{fig:LS_Plot}B). This is likely because consumers actually evolve to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in Fig. \ref{fig:LS_Plot}B). 
+This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w>0.5$ and $a_{ii}>a_{ij}$), then the effective attack rate of consumers ($wa_{ii}+(1-w)a_{ij}$) will always increase, regardless of the tradeoff (Fig. \ref{fig:LS_Plot}A). 
+Thus, divergent character displacement always results in resource suppression (Fig. \ref{fig:LS_Plot}B). 
+Note that the shape of the tradeoff can modify the effect of character displacement. 
+This is not so much due to the tradeoff affecting the magnitude of displacement (it does, but the effect is minor), but because the form of the tradeoff affects resource abundances when a single consumer has reached its ESS (triangles in Fig. \ref{fig:LS_Plot}B). 
+In contrast, resource abundances reach a similar value when consumers evolve in the presence of a competitor (circles in Fig. \ref{fig:LS_Plot}B), because character displacement tends to reach a constraint of complete specialization. 
+It is worth noting that resource abundances are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in Fig. \ref{fig:LS_Plot}B). 
+This is because consumers actually evolve to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in Fig. \ref{fig:LS_Plot}B). 
 
-As we saw previously, the effect of character displacement on resource densities qualitatively matches its negative effect on food-web stability (Fig. \ref{fig:LS_Plot}C). This is not simply a consequence of having an additional consumer in the system, but emerges from the eco-evolutionary feedback between character displacement and resource suppression (Fig. \ref{fig:LS_Plot}C). For example, when the tradeoff is concave up (orange), then the four-species (small circle) food web actually starts off as less stable than the three-species one (small triangle); however, the eco-evolutionary dynamics cause a switch in this pattern once they reach their evolutionary stable strategies (large points). 
+As we saw previously, the effect of character displacement on resource abundances qualitatively corresponds to its effect on food-web stability (Fig. \ref{fig:LS_Plot}C). 
+Specifically, divergent character displacement decreases food-web stability, regardless of the tradeoff in attack rates.
+This is not simply a consequence of having an additional consumer in the system, but emerges from the eco-evolutionary feedback between character displacement and resource suppression (Fig. \ref{fig:LS_Plot}C). 
+For example, when the tradeoff is concave up (orange), then the four-species (small circle) food web actually starts off as more stable than the three-species one (small triangle); however, this pattern switches once they reach their evolutionary stable strategies (large points). 
 
-```{r LS_Resources, include=FALSE, fig.cap="\\label{fig:LS_Resources}Effect of character displacement on effective attack rates (A) and resource densities (B) when consumers cannot forage for resources simultaneously."}
+```{r LS_Resources, include=FALSE, fig.cap="\\label{fig:LS_Resources}Effect of character displacement on effective attack rates (A) and resource abundances (B) when consumers cannot forage for resources simultaneously."}
 LS_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color = factor(n))) + 
   geom_line() +
   geom_point(data = filter(LawlorSmith_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="white") + 
@@ -962,21 +982,26 @@ plot_LS_model <- plot_grid(
 save_plot(filename="Figure_ECD_LS.pdf", plot=plot_LS_model, base_height = 6, base_width = 6)
 ```
 
-```{r LS_Plot, echo=FALSE, fig.cap="\\label{fig:LS_Plot}**Effect of character displacement when consumers *cannot* forage for both resources simultaneously.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points (only in panel C). Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource densities (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6; *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r LS_Plot, echo=FALSE, fig.cap="\\label{fig:LS_Plot}**Effect of character displacement when consumers *cannot* forage for both resources simultaneously.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points (only in panel C). Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource abundances (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6; *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_LS.pdf")
 ```
 
 ## Adding a more realistic functional response
 
-So far I have only considered a simple functional response, where consumer feeding rates increase linearly with resource densities when foraging in either the same or distinct habitats. We know, however, that consumer feeding rates often saturate at high resource densities [@Holling1959; @Rosenzweig1963; @Murdoch2003; @McCann2011]. We also know that consumers do not usually spend a fixed proportion of time in a particular habitat, but their habitat preferences may be modified by resource densities [@McCann2005]. To account for these biological realities, I consider a more realistic functional response [derived by @McCann2005]:     
+So far I have only considered a simple functional response, where consumer feeding rates increase linearly with resource abundances when foraging in either the same or distinct habitats. 
+We know, however, that consumer feeding rates often saturate at high resource abundances [@Holling1959; @Rosenzweig1963; @Murdoch2003; @McCann2011]. 
+We also know that consumers do not usually spend a fixed proportion of time in a particular habitat, but their habitat preferences may be modified by resource abundances [@McCann2005]. 
+To account for these biological realities, I consider a more realistic functional response [derived by @McCann2005]:     
 
 $$F_{ii}(R_i,R_j)=\frac{a_{ii}W_{ii}R_i}{1+a_{ii}hW_{ii}R_i+a_{ij}hW_{ij}R_j}$$
 
-where consumer feeding rates on resource $i$ are influenced by both resource densities; saturate as resource densities increase (due to handling time $h$); and consumer habitat preferences are modified by relative resource densities, such that:
+where consumer $i$'s feeding rate on resource $i$ is influenced by the abundance of each resource; saturates as resource abundances increase (due to handling time $h$); and consumer habitat preferences are modified by the relative abundance of resources, such that:
 
 $$W_{ii}=\frac{wR_i}{wR_i+(1-w)R_j}$$ 
 
-Even after adding more biological realism, I still observe the same qualitative relationship between character displacement and resource suppression (Fig. \ref{fig:McCann_Plot} in Appendix). This is because resource competition always leads to character divergence and equilibrium resource densities are governed by similar dynamics  (derivation in supplementary material):
+<!-- Need to work on the flow here and mention the evolutionary results. Perhaps it would be best to parallel my writing style as in the previous sections. -->
+
+Even after adding more biological realism, I still observe the same qualitative relationship between character displacement and resource suppression (Fig. \ref{fig:McCann_Plot} in Appendix). This is because resource competition always leads to character divergence and equilibrium resource abundances are governed by similar dynamics  (derivation in supplementary material):
 
 $$\hat{R}=\frac{1}{wa_{ii}+(1-w)a_{ij}}\cdot\frac{m}{e-hm}$$
 
@@ -986,7 +1011,7 @@ $$wa_{ii}+(1-w)a_{ij} > \frac{e+hm}{hK(e-hm)}$$
 
 Previously, I showed that character displacement always increases the effective attack rate of consumers ($wa_{ii}+(1-w)a_{ij}$), regardless of the the shape of the tradeoff (Fig. \ref{fig:LS_Plot}A). Thus, character displacement always pushes the food web toward the boundary of local stability under this more realistic foraging scenario. 
 
-```{r McCann_Resources, include=FALSE, fig.cap="\\label{fig:McCann_Resources}Effect of character displacement on total attack rates (A) and resource densities (B) when consumers exhibit a more realistic functional response."}
+```{r McCann_Resources, include=FALSE, fig.cap="\\label{fig:McCann_Resources}Effect of character displacement on total attack rates (A) and resource abundances (B) when consumers exhibit a more realistic functional response."}
 McCann_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color = factor(n))) + 
   geom_line() +
   geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="white") + 
@@ -1042,17 +1067,20 @@ plot_McCann_model <- plot_grid(
 save_plot(filename="Figure_ECD_McCann.pdf", plot=plot_McCann_model, base_height = 6, base_width = 6)
 ```
 
-```{r McCann_Plot, echo=FALSE, fig.cap="\\label{fig:McCann_Plot}**Effect of character displacement when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points (only in panel C). Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource densities (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r McCann_Plot, echo=FALSE, fig.cap="\\label{fig:McCann_Plot}**Effect of character displacement when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points (only in panel C). Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource abundances (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_McCann.pdf")
 ```
 
 ## Robustness to consumer asymmetry
 
-The previous analytical results and simulations make a strong assumption that competing consumers start off as perfect mirror images of each other in their attack rates (i.e. symmetry). Yet, the theory presented here and in past work indicates that there would likely be a predictable asymmetry between consumers. This predictable asymmetry emerges from a process of community assembly where a single consumer invades a system, reaches an ESS (as a generalist), followed by the invasion of a second, more specialized, consumer. This theoretical scenario has also been hypothesized as the sequence of events leading to character displacement in threespine stickleback inhabiting lakes of coastal British Columbia, Canada [@Schluter1992; @Schluter2000].
+The previous analytical results and simulations make a strong assumption that competing consumers start off as perfect mirror images of each other in their attack rates (i.e. symmetry). 
+Yet, the theory presented here and in past work indicates a predictable asymmetry between initial consumer attack rates. 
+This predictable asymmetry emerges from a process of community assembly where a single consumer invades a system, reaches an ESS with a generalist phenotype, followed by the invasion of a second, more specialized, consumer. 
+This theoretical scenario has been hypothesized as the sequence of events leading to character displacement in threespine stickleback in postglacial lakes of British Columbia, Canada [@Schluter1992; @Schluter2000].
 
-To test whether our results were robust to this likely asymmetry, we used the evolved attack rates at the end of the one consumer simulations as the starting values for the competitor in the two consumer simulations. 
+To test whether our results were robust to this asymmetry, we used the evolved attack rates at the end of the single consumer simulations as the starting values for the competitor in the two consumer simulations. 
 We did this for all foraging scenarios and tradeoffs previously examined. 
-We found that our previous inferences were robust to including consumer asymmetry across different tradeoffs and foraging scenarios (\ref{fig:MacArthur_Plot_asymm}, \ref{fig:LS_Plot_asymm}, \ref{fig:McCann_Plot_asymm}).
+We found that our previous inferences were robust to including consumer asymmetry across different tradeoffs and foraging scenarios (Appendix A\ref{fig:MacArthur_Plot_asymm}, A\ref{fig:LS_Plot_asymm}, A\ref{fig:McCann_Plot_asymm}).
 
 
 # Discussion
@@ -1060,7 +1088,7 @@ We found that our previous inferences were robust to including consumer asymmetr
 My results suggest that a revision is needed for one of the criteria used to demonstrate character displacement. 
 Criteria #5 in @Schluter1992 states: "Sites of sympatry and allopatry should not differ greatly in food, ...". 
 In contrast, my results show that character displacement leads to predictable differences in food (resource) availability and even food-web stability.
-Specifically, I found that, whenever character displacement increased the effective attack rate of consumers, it resulted in lower resource densities and less resilient food webs. 
+Specifically, I found that, whenever character displacement increased the effective attack rate of consumers, it resulted in lower resource abundances and less resilient food webs. 
 Character displacement always increased attack rates whenever consumers were competing for resources that occured in distinct habitats. 
 This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
 Although character displacement did not always increase effective attack rates, these contingent effects only occurred under the simplest and (arguably) least realistic foraging scenario. 
@@ -1068,25 +1096,25 @@ My study takes advantage of past work showing that adaptive divergence in consum
 Taken together, my results indicate that the adaptive process of character displacement often comes at the ecological cost of making food webs less resilient to perturbations. 
 
 The simplest foraging scenario examined here (linear functional response on resources occuring in the same habitat) is the foundation of mechanistic models of resource competition [@MacArthur1972; @Lawlor1976; @Abrams1986]. 
-Under this scenario, it is theoretically possible that character displacement results in increased resource densities [green lines in \ref{fig:MacArthur_Plot}].
+Under this scenario, it is theoretically possible that character displacement results in increased resource abundances [green lines in \ref{fig:MacArthur_Plot}].
 This only occurs, however, under an evolutionary tradeoff that constrains the magnitude of character displacement.
-This suggests that it would be unlikely to ever observe divergent character displacement and increases in resource densities in a real system. 
-In contrast, the evolutionary tradeoff that favors character displacement the most decreased resource densities. 
+This suggests that it would be unlikely to ever observe divergent character displacement and increases in resource abundances in a real system. 
+In contrast, the evolutionary tradeoff that favors character displacement the most decreased resource abundances. 
 Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the foraging rate of consumers (orange lines in \ref{fig:MacArthur_Plot}A,B). 
 This is evident by the disruptive selection observed for beak size/shape in Darwin's finches [@Schluter1985] and benthic/limnetic ecotypes for stickleback [@Arnegard2014] in resource-limited environments. 
 Taken together, my model predicts that even in the simplest foraging scenario, the most likely relationship we would observe in nature is for food webs where consumers have undergone character displacement to have lower total resource densites.
 
-A general result emerging from our analysis was that, when consumers were competing for resources in distinct habitats, character displacement always supressed resource densities. 
+A general result emerging from our analysis was that, when consumers were competing for resources in distinct habitats, character displacement always supressed resource abundances. 
 Consumers are generally larger, and as a result, more mobile than their resources; thus, their foraging behavior acts to couple resource dynamics across traditional habitat boundaries [@McCann2005].
 An example of character displacement that matches this foraging scenario is threespine stickleback in postglacial lakes of British Columbia, Canada [@Schluter1992; @Schluter2000].
 In these lakes, stickleback have undergone character displacement into limnetic and benthic species that have evolved specialized traits to forage on zooplankton and benthic invertebrates, respectively.
 These resources occur in distinct zones of the lake (pelagic and littoral) and stickleback move between these zones when foraging for resources. 
-The theory developed here predicts that total resource densities will be lower in lakes where stickleback have undergone character displacement compared to nearby lakes with only a single, generalist species.
+The theory developed here predicts that total resource abundances will be lower in lakes where stickleback have undergone character displacement compared to nearby lakes with only a single, generalist species.
 A disproporationate number of the documented cases of character displacement involve carnivores that are larger, and likely more mobile, than their resources [@Schluter2000],
 Therefore, my predictions may apply to many cases of ecological character displacement.
 
 Character displacement is far from an all-or-nothing process, but may vary in its magnitude [@Schluter2000]. 
-My results suggest that the magnitude of character displacement will be negatively correlated with total resource densities, at least when resources occur in distinct habitats (line trajectories in \ref{fig:LS_Plot}B, \ref{fig:McCann_Plot}B).
+My results suggest that the magnitude of character displacement will be negatively correlated with total resource abundances, at least when resources occur in distinct habitats (line trajectories in \ref{fig:LS_Plot}B, \ref{fig:McCann_Plot}B).
 This prediction could be test either experimentally, by putting populations that vary in divergence in a common resource setting, or with field data that statistically controls for other factors affecting resources.
 Note though, this prediction will only apply to comparisons within species where there is likely little difference in the shape of the tradeoff among populations.
 
@@ -1198,7 +1226,7 @@ Mac_plots_asymm
 save_plot(filename="Figure_ECD_MacArthur_asymm.pdf", plot=Mac_plots_asymm, base_height = 6, base_width = 6)
 ```
 
-```{r MacArthur_Plot_asymm, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:MacArthur_Plot_asymm}**Effect of character displacement when consumers can forage for both resources simultaneously and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how the shape of this tradeoff affects the magnitude of character displacement and the evolution of total attack rates in the consumer community. Panels (B) and (C) show how different tradeoffs indirectly affect total resource densities (B) and food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r MacArthur_Plot_asymm, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:MacArthur_Plot_asymm}**Effect of character displacement when consumers can forage for both resources simultaneously and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how the shape of this tradeoff affects the magnitude of character displacement and the evolution of total attack rates in the consumer community. Panels (B) and (C) show how different tradeoffs indirectly affect total resource abundances (B) and food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_MacArthur_asymm.pdf")
 ```
 
@@ -1250,7 +1278,7 @@ LS_plots_asymm
 save_plot(filename="Figure_ECD_LS_asymm.pdf", plot=LS_plots_asymm, base_height = 6, base_width = 6)
 ```
 
-```{r LS_Plot_asymm, echo=FALSE, fig.cap="\\label{fig:LS_Plot_asymm}**Effect of character displacement when consumers *cannot* forage for both resources simultaneously and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource densities (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r LS_Plot_asymm, echo=FALSE, fig.cap="\\label{fig:LS_Plot_asymm}**Effect of character displacement when consumers *cannot* forage for both resources simultaneously and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of the consumer community. This always resulted in a suppression of resource abundances (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_LS_asymm.pdf")
 ```
 
@@ -1302,6 +1330,6 @@ McCann_plots_asymm
 save_plot(filename="Figure_ECD_McCann_asymm.pdf", plot=McCann_plots_asymm, base_height = 6, base_width = 6)
 ```
 
-```{r McCann_Plot_asymm, echo=FALSE, fig.cap="\\label{fig:McCann_Plot_asymm}**Effect of character displacement when consumers exhibit a more realistic functional response and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of consumers. This always resulted in a suppression of resource densities (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
+```{r McCann_Plot_asymm, echo=FALSE, fig.cap="\\label{fig:McCann_Plot_asymm}**Effect of character displacement when consumers exhibit a more realistic functional response and have an asymmetry in initial attack rates.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation, whereas as small shapes correspond to the starting points. Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of consumers. This always resulted in a suppression of resource abundances (B) and concomitant decrease in food-web stability (C). These simulations used the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *w~ii~*=0.6, *w~ij~*=0.4. We set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. To create an asymmetry in initial attack rates, we used the ending *a~ii~* and *a~ij~* values for the one consumer simulation as the starting values for *C~2~* in the two consumer simulation. We set initial consumer and resource abundances as: *R~i~* = *R~j~* = 2; *C~i~* = *C~j~* = 1."}
 knitr::include_graphics("Figure_ECD_McCann_asymm.pdf")
 ```
