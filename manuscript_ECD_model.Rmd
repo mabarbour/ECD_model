@@ -740,7 +740,7 @@ write.csv(bind_rows(MacArthur_displacements_asymm, LawlorSmith_displacements_asy
 # Abstract 
 
 Ecological character displacement is an adaptive process, often enhancing coexistence between consumers by reducing competition for shared resources. 
-This competition perspective undermine the fact that consumer-resource interactions ultimately mediate the process of character displacement. 
+This competition perspective undermines the fact that consumer-resource interactions ultimately mediate the process of character displacement. 
 As a consequence, the effects of character displacement on consumer-resource interactions and food-web dynamics have been ignored.
 Here, I study a model of two consumers competing for two shared resources to examine how character displacement in consumers affects resource abundances and the resilience of food webs to perturbations.
 I studied these effects under different assumptions of evolutionary tradeoffs, consumer foraging behavior, and resource distributions.
@@ -1085,16 +1085,19 @@ We found that our previous inferences were robust to including consumer asymmetr
 
 # Discussion
 
-My results show that character displacement leads to predictable differences in food (resource) availability and even food-web stability.
-Specifically, I found that, whenever character displacement increased the effective attack rate of consumers, it resulted in lower resource abundances and less resilient food webs. 
-Character displacement always increased attack rates whenever consumers were competing for resources that occured in distinct habitats. 
-This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
-Although character displacement did not always increase effective attack rates, these contingent effects only occurred under the simplest and (arguably) least realistic foraging scenario. 
-My study takes advantage of past work showing that adaptive divergence in consumer attack rates is always favored under the scenarios examined here [@LawlorSmith1976; @Abrams1986].
-Taken together, my results indicate that the adaptive process of character displacement often comes at the ecological cost of making food webs less resilient to perturbations. 
+One of the criteria used to demonstrate character displacement is that "sites of sympatry [two consumers] and allopatry [one consumer] should not differ greatly in food, ..." [@Schluter1992].
+In contrast, my results suggest that ecological character displacement causes predictable differences in resource abundances.
+In fact, the ecological and evolutionary scenarios that favored the greatest displacement always decreased the abundance of resources. <!-- build paragraph around this topic sentence -->
+For example, the magnitude of character displacement was highest when mobile consumers competed for resources that occur in different habitats compared to within the same area.
+An empirical example of this is threespine stickleback that have diverged into limnetic and benthic species with specialized traits to forage on zooplankton and benthic invertebrates, respectively [@Schluter1992; @Schluter2000].
+These resources occur in distinct zones of the lake (pelagic and littoral), therefore stickleback must move between these zones and compete when foraging for resources. 
+Interestingly, a disproporationate number of the documented cases of character displacement involve carnivores [@Schluter2000] that are larger, and likely more mobile, than their resources [@McCann2005], suggesting my predictions may apply to many cases of ecological character displacement.
+Similarly, the evolutionary tradeoff that favored character displacement (concave up; orange lines) resulted in lower resource densities across all foraging scenarios.
+Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the foraging rate of consumers [@Schluter1985; @Arnegard2014]. 
+While it is theoretically possible that character displacement does not alter resource abundances, this was limited to the simplest, and arguably least realistic, foraging scenario and under tradeoffs that did not favor large displacements, and thus less likely to detect in nature.
+Taken together, my results call for empirical work to test these clear theoretical predictions and suggest a revision is needed for one of the criteria used to demonstrate character displacement. 
 
-The ecological and evolutionary scenarios that generated the greatest divergent character displacement always resulted in decreases in resource densities. <!-- build paragraph around this topic sentence -->
-
+<!--
 The simplest foraging scenario examined here (linear functional response on resources occuring in the same habitat) is the foundation of mechanistic models of resource competition [@MacArthur1972; @Lawlor1976; @Abrams1986]. 
 Under this scenario, it is theoretically possible that character displacement results in increased resource abundances [green lines in \ref{fig:MacArthur_Plot}].
 This only occurs, however, under an evolutionary tradeoff that constrains the magnitude of character displacement.
@@ -1102,21 +1105,19 @@ This suggests that it would be unlikely to ever observe divergent character disp
 In contrast, the evolutionary tradeoff that favors character displacement the most decreased resource abundances. 
 Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the foraging rate of consumers (orange lines in \ref{fig:MacArthur_Plot}A,B). 
 This is evident by the disruptive selection observed for beak size/shape in Darwin's finches [@Schluter1985] and benthic/limnetic ecotypes for stickleback [@Arnegard2014] in resource-limited environments. 
-<!-- key point of the paragraph -->
+<!-- key point of the paragraph 
 Taken together, my model predicts that even in the simplest foraging scenario, the most likely relationship we would observe in nature is for food webs where consumers have undergone character displacement to have lower total resource densites.
 
 A general result emerging from my analysis was that, when consumers were competing for resources in distinct habitats, character displacement always supressed resource abundances. 
-<!-- show that this is common scenario -->
+<!-- show that this is common scenario 
 Consumers are generally larger, and as a result, more mobile than their resources; thus, their foraging behavior acts to couple resource dynamics across traditional habitat boundaries [@McCann2005].
 An example of character displacement that matches this foraging scenario is threespine stickleback in postglacial lakes of British Columbia, Canada [@Schluter1992; @Schluter2000].
 In these lakes, stickleback have undergone character displacement into limnetic and benthic species that have evolved specialized traits to forage on zooplankton and benthic invertebrates, respectively.
 These resources occur in distinct zones of the lake (pelagic and littoral) and stickleback move between these zones when foraging for resources. 
-<!-- good closing sentences -->
+<!-- good closing sentences --
 A disproporationate number of the documented cases of character displacement involve carnivores that are larger, and likely more mobile, than their resources [@Schluter2000],
 Therefore, my predictions may apply to many cases of ecological character displacement.
-
-My results suggest that a revision is needed for one of the criteria used to demonstrate character displacement. 
-Criteria #5 in @Schluter1992 states: "Sites of sympatry and allopatry should not differ greatly in food, ...". 
+-->
 
 <!-- consider removing entirely. This is a prediction I could test with Seth in another paper...
 Character displacement is far from an all-or-nothing process, but may vary in its magnitude [@Schluter2000]. 
@@ -1125,44 +1126,70 @@ This prediction could be tested either experimentally, by putting populations th
 Note though, this prediction will only apply to comparisons within species where there is likely little difference in the shape of the tradeoff among populations.
 -->
 
-My most striking result was that divergent character displacement, when examined through the lens of food-web theory, generally destabilized food-web dynamics. 
-In fact, under a foraging scenario that incorporates more biological realism, character displacement may even result in an unstable food web. 
-The mechanism underlying this destabilization is quite general, resulting from the strength of interspecific interactions increasing relative to intraspecific interactions [@Chesson2008; @Rip2011; @McCann2011]. 
-The strength of interspecific interactions increases whenever consumers evolved higher net attack rates, but does not change intraspecific interactions.
-This relative increase in interspecific interactions, combined with the natural oscillatory tendency of consumer-resource interactions [@Murdoch2003], creates a food-web structure that is less resilient to perturbations. 
+My most striking result was that divergent character displacement, when examined through the lens of food-web theory, made food webs less resilient to perturbations.  
+In fact, under the most realistic foraging scenario, character displacement can even result in an unstable food web. 
+The mechanism underlying this destabilization is quite general.
+Character displacement generally increases the strength of consumer-resource interactions, but does not alter the strength of intraspecific interactions.
+This relative increase in interspecific interactions, combined with the natural oscillatory tendency of consumer-resource interactions [@Murdoch2003], creates a food-web structure that is less resilient to perturbations [@Chesson2008; @Rip2011; @McCann2011].
 
-<!-- good, but tighten up -->
-My results, combined with recent theory, suggest that the very conditions that favor phenotypic diversification also make that diversity more susceptible to local extinction.
-Specifically, work by @McPeek2019 showed that character displacement is favored in environments that are either highly productive, easy to find and capture resources, or under weak abiotic stress. 
-In my model, this corresponds to higher values of $K$ (productivity) or $a_{ij}$ (finding and capturing resources), or lower values of $m$ (abiotic stress).
-Each of these corresponding changes create food webs that have a lower baseline of stability, as they increase the strength of consumer-resource interactions relative to intraspecific density dependence.
-For example, increasing productivity reduces intraspecific competition in resource populations while increasing the flux of energy to consumers, resulting in the "paradox of enrichment" [@Rosenzweig1971]. 
-Similarly, increased capacity to find and capture resources (as observed in my model) or lower consumer mortality, both increase the relative strength of consumer-resource interactions, which predictably destabilize consumer-resource interactions [@Rip2011; @McCann2011]. 
+Interestingly, the ecological conditions that favor divergent character displacement are those that are already the least resilient to perturbations.
+For example, @McPeek2019 showed that character displacement is favored in food webs that are either highly productive, easy to find and capture resources, or under weak abiotic stress.
+In my model, this corresponds to higher values of $K$ (productivity) or $A$ (capacity to find and capturing resources), or lower values of $m$ (abiotic stress).
+Each of these corresponding changes decrease food-web resilience, as they increase the strength of consumer-resource interactions relative to intraspecific interactions.
+For example, increasing productivity reduces intraspecific competition in resource populations while increasing the flux of energy to consumers, resulting in the paradox of enrichment [@Rosenzweig1971]. 
+Similarly, higher feeding rates or lower consumer mortality both increase the relative strength of consumer-resource interactions, which predictably destabilizes food webs [@Rip2011; @McCann2011].
+This suggests that the most dramatic examples of character displacement will not only occur in, but also cause, the least stable food-web structures. 
 
-<!-- interesting, but tighten up -->
-Empirical evidence supports the theoretical notion that food webs where consumers have undergone character displacement are less resilient to perturbations. 
-For example, a single species of threespine stickleback lives in hundreds of postglacial lakes of British Columbia, but the species pairs, where character displacement has happened, are only known from six lakes in four independent watersheds [@Schluter1992; @Schluter2000].
-Perhaps this rarity of species pairs is a result of nonadaptive selection for more ecologically stable food-web topologies [@Borrelli2015a; @Borrelli2015b].
-Indeed, it is clear that these species pair are vulnerable to perturbations, given that the species pairs have went extinct in two lakes following the introduction of nonnative species [@Hatfield2001; @Taylor2006; @Rudman2016].
-The vulnerability of the stickleback system also aligns well with evidence that aquatic food webs have several properties that make them less resilient to perturbations, including higher productivity and more efficient transfer of energy to consumers [@Rip2011].
-Testing this hypothesis may be quite difficult, but it could be possible with recent advances in genomics.
+A handful of empirical patterns support the hypothesis that character displacement decreases food-web resilience. 
+As an example, a single species of threespine stickleback lives in hundreds of postglacial lakes of British Columbia, but the species pair <!--, where character displacement has happened,-->are only known from six lakes in four independent watersheds [@Schluter1992; @Schluter2000].
+Perhaps many lakes had a species pair in the past, but have lost a species due to a less resilient food-web structure [@Borrelli2015a; @Borrelli2015b].
+The species pair are known to be vulnerable to perturbations, as they have gone extinct in two of the six lakes after the introduction of nonnative species [@Hatfield2001; @Taylor2006; @Rudman2016].
+The vulnerability of the stickleback system also corresponds with the fact that aquatic food webs have several properties that make them less resilient to perturbations, such as higher productivity and more efficient energy transfer to consumers [@Rip2011].
+Detecting the ghost of competition past [@Connell1980] may be quite difficult, but it could be possible with recent advances in genomics.
+<!--Testing this hypothesis ---that some lakes with a single species had a species pair in the past --- may be quite difficult, but it could be possible with recent advances in genomics.-->
 For example, @Feulner2018 detected genomic signatures of hybridization in sympatric whitefish species following periods of eutrophication.
-Perhaps stickleback in many other postglacial lakes in British Columbia retain genomic signatures of having been a habitat specialist in the past. 
+Perhaps solitary stickleback in some lakes retain genomic signatures of having been a habitat specialist in the past.
 
-<!-- good, but tighten up -->
-My stability results contrast, but do not necessarily contradict, the notion from competition theory that character displacement contributes to species coexistence [@Lawlor1976]. 
-Competition theory typically uses a different measure of stability that considers the mutual ability of consumers with different phenotypes to invade when rare [mutual invasibility, @Chesson2000].
-A shortcoming of this mutual invasibility measure, however, is that it does not allow a comparison between food webs with and without a competiting consumer. 
-Such comparisons are necessary for inferring the effects of ecological character displacement, a point that has been made clear in the criteria to demonstrate character displacement [@Schluter1992; @Schluter2000].
-Although the addition of consumers can decrease food-web resilience in the absence of evolution [@May1973], our results are primarily driven by an eco-evolutionary feedback between consumer evolution and resource abundances. 
+<!-- interesting, but tighten up 
+A plausible explanation for this rarity is that the food-web structure makes the species pair more vulnerable to extinction, and many lakes that used to have a species pair have  single species of stickleback are more stable
+A plausible explanation for this rarity is that nonadaptive selection results in a more ecologically stable food-web topology [@Borrelli2015a; @Borrelli2015b].
+Testing this hypothesis ---some lakes with a single species had two in the past --- may be quite difficult, but it may be feasible with recent advances in genomics.
+For example, @Feulner2018 detected genomic signatures of hybridization in sympatric whitefish species following periods of eutrophication.
+Perhaps stickleback in some lakes retain genomic signatures of having been a habitat specialist in the past.
+Other evidence also suggests that the species pair of stickleback are vulnerable to perturbations.
+For example, the introduction of nonnative species into two of the six lakes have resulted in the extinction of the species pair [@Hatfield2001; @Taylor2006; @Rudman2016].
+-->
 
-I expect that my theoretical predictions are robust to different assumptions about the underlying evolutionary dynamics of consumer foraging traits.
-This is because models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of whether a quantitative genetic or adaptive dynamics model is used for consumer traits [@Lawlor1976; @Taper1985]. 
-A quantitative genetic model may certainly show differences in the magnitude of character displacement, but this should not affect the qualtiative relationship I observed.  
-In fact, recent work by @McPeek2017 has shown that divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics.
-<!-- important caveat -->
-I want to note though, that my conclusions may only apply to food webs with biotic resources that are nutritionally substitutable. 
+My results contrast, but do not necessarily contradict, the notion from competition theory that character displacement contributes to species coexistence [@Lawlor1976]. 
+Rather than studying resilience, competition theory usually studies the mutual ability of consumers with different phenotypes to invade when rare [mutual invasibility, @Chesson2000].
+In the context of character displacement, a shortcoming of this mutual invasibility measure is that it does not allow a comparison between food webs with and without a competiting consumer. 
+Such comparisons are necessary for inferring the effects of character displacement, a point that has been made clear in the criteria to demonstrate character displacement [@Schluter1992; @Schluter2000].
+Although the addition of a consumer to a food web can decrease its resilience in the absence of evolution [@May1973], my results are primarily driven by an eco-evolutionary feedback between consumer evolution and resource abundances (compare initial and ending points in Fig. \ref{fig:MacArthur_Plot}C, \ref{fig:LS_Plot}C, \ref{fig:McCann_Plot}C).
+
+The Adaptive Dynamics approach I used here has its strengths and weaknesses.
+A strength of this approach is that it enabled me to gain analytical insight to the effects of character displacement on food-web dynamics in a more realistic foraging scenario.
+This is much less tractable in quantitative genetic [@Taper1985; @McPeek2017] or explicit genetic [@Doebeli1996] models of character displacement, which is why the foraging scenarios previously examined have been limited [but see @McPeek2017]. 
+A weakness, however, is that I assume a separation of time scales between ecological and evolutionary dynamics, an assumption that is becoming less tenable [@Hairston2005; @Hendry2016].
+I also do not explicitly model an underlying phenotypic trait for consumer attack rates nor do I allow for intraspecific variation. 
+That being said, my theoretical predictions are likely robust to these assumptions. 
+This is because models that explicitly include resource dynamics inevitably show that resource competition results in divergent character displacement, regardless of whether a quantitative genetic or Adaptive Dynamics approach is used [@Lawlor1976; @Taper1985]. 
+A quantitative genetic model may certainly show differences in the magnitude of character displacement, but this should not affect the general relationships I observed.  
+<!-- In fact, recent work by @McPeek2017 has shown that divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics. -->
+I want to note though, that my conclusions only apply to food webs with biotic resources that are nutritionally substitutable. 
 It would be interesting to extend these current analyses to non-substitutable resources where convergent character displacement is expected [@Abrams1987; @Fox2008].
+
+<!-- Omitting conclusions section for now. I will wait for feedback from friendly reviews
+
+## Conclusions
+
+<!-- originally opening paragraph of discussion; I think it provides too good of a summary though to put at the beginning. It makes subsequent discussion sound redundant
+My results show that character displacement leads to predictable differences in resource abundances and the resilience of food webs to perturbations.
+Specifically, I found that, whenever character displacement increased the effective attack rate of consumers, it resulted in lower resource abundances and less resilient food webs. 
+Character displacement always increased attack rates whenever consumers were competing for resources that occured in distinct habitats. 
+This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
+Although character displacement did not always increase effective attack rates, these contingent effects only occurred under the simplest and (arguably) least realistic foraging scenario. 
+My study takes advantage of past work showing that adaptive divergence in consumer attack rates is always favored under the scenarios examined here [@LawlorSmith1976; @Abrams1986].
+Taken together, my results indicate that the adaptive process of character displacement often comes at the ecological cost of making food webs less resilient to perturbations. 
 
 <!--
 ## Conclusions
