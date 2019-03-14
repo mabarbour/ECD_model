@@ -12,7 +12,7 @@ eco_evo_CR <- function(init_parameters,              # data frame of initial par
                        evo_tradeoff_names,           # vector of mutant trade-off parameter names in the Adaptive Dynamics model. Order must correspon to 'eco_param_names'
                        tradeoff_functions,           # names function of the trade-off with corresponding parameters
                        extra_tradeoff_params=c(NOT_USED=1), # vector of extra tradeoff parameters. Default is a nonsense parameter to just make sure the function runs
-                       mut.size=0.001,               # absolute change in evolving parameter. Directionality is chosen at random.
+                       mut.size=0.01,                # absolute change in evolving parameter. Directionality is chosen at random.
                        mut.suc.thres=1e-4,           # threshold of mutant success rate for identifying ESS.
                        j.step=500,                   # number of evolutionary time steps over which to assess evolutionary change.
                        abund.thres=1e-4,             # abundance threshold for feasible equilibriums
