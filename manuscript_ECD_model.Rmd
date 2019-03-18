@@ -745,17 +745,13 @@ write.csv(bind_rows(MacArthur_displacements_asymm, LawlorSmith_displacements_asy
 
 # Abstract 
 
-Ecological character displacement is an adaptive process, often enhancing coexistence between consumers by reducing competition for shared resources. 
-This competition perspective undermines the fact that consumer-resource interactions ultimately mediate the process of character displacement. 
-As a consequence, the effects of character displacement on consumer-resource interactions and food-web dynamics have been ignored.
+Ecological character displacement is an adaptive process, frequently leading to phenotypic diversification. 
+Despite the fact that this diversification is due to an eco-evolutionary feedback between consumers competing for shared resources, its consequences for food-web dynamics have not been examined.
 Here, I study a model of two consumers competing for two shared resources to examine how character displacement in consumers affects resource abundances and the resilience of food webs to perturbations.
-I studied these effects under different assumptions of evolutionary tradeoffs, consumer foraging behavior, and resource distributions.
-I found that character displacement always strengthened consumer-resource interactions whenever consumers competed for resources that occured in distinct habitats.
+I found that character displacement always strengthened consumer-resource interactions whenever consumers competed for resources that occurred in different habitats.
 This increase in interaction strength resulted in lower resource abundances and less resilient food webs.
 This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
-While character displacement did not always increase the strength of consumer-resource interactions, these contingent effects only occurred under the simplest and least realistic foraging scenario. 
-Taken together, my results show that the adaptive process of character displacement often comes at the ecological cost of decreasing food-web resilience. 
-They also highlight that food-web and competition theory can give complimentary insights to the ecological consequences of adaptation. 
+Taken together, my results show that the adaptive process of character displacement often comes with the ecological cost of decreasing food-web resilience. 
 
 \newpage
 
