@@ -757,21 +757,24 @@ Taken together, my results show that the adaptive process of character displacem
 
 # Introduction 
 
-Ecological character displacement is an important adaptive process in generating biodiversity [@Schluter2000; @Pfennig2010; but see @Stuart2013]. 
+Ecological character displacement is an important adaptive process in generating biodiversity [@Schluter2000; @Pfennig2010]. 
 This process results from "phenotypic evolution in a species generated or maintained by [exploitative] resource competition with one or more coexisting species” [@Schluter2000]. 
 Over the past 40 years, a large body of theoretical [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019] and empirical [reviewed in: @Schluter2000; @Dayan2005; @Stuart2013] work has examined which scenarios lead to phenotypic divergence or convergence of competing consumers.
-The general result has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of abundance dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985; \ref{fig:fig_1}]. 
-This adaptive process is not simply a response to statitc differences in resource distributions, but creates an eco-evolutionary feedback that drives further differentiation. 
+The general result has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of density dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985]. 
+This adaptive process is not simply a response to static differences in resource distributions, but creates an eco-evolutionary feedback that drives further differentiation. 
 This crucial insight was made by theoretical models that explicitly included resource dynamics as a mediator of competition in driving evolutionary change [@Lawlor1976; @Abrams1986; @Taper1985]. 
 
 Although models that included resources gave insights to the evolution of character displacement, the ecological feedback onto consumer-resource dynamics has received surprisingly little attention. 
-This is likely because the ecological feedback has been primarily studied through the lens of competition theory [@Lawlor1976; @Germain2018; @Bassar2017; @McPeek2019]. 
+This is likely because the ecological feedback has been primarily studied through the lens of coexistence theory [@Lawlor1976; @Germain2018; @Bassar2017; @McPeek2019]. 
 For example, early theoretical work by @Lawlor1976 showed that ecological character displacement promotes coexistence by favoring specialized consumers that experience reduced interspecific competition. 
-Yet, this reduction in interspecific competition may, at the same time, increase interspecific interactions between specialized consumers and their resources.  
+Yet, this reduction in interspecific competition may, at the same time, increase interspecific interactions between specialized consumers and their resources. 
 Both food-web theory and empirical studies have shown that increasing the strength of consumer-resource interactions often suppresses the abundance of resources, which if sufficient enough, can generate oscillations and less stable consumer-resource dynamics [@Rosenzweig1971; @Luckinbill1973; @Murdoch2002; @Murdoch2003; @McCann2011].
 Thus, a food-web perspective, which accounts for both the direct and indirect effects of consumer-resource interactions, may yield new insight to the ecological consequences of character displacement.
 
-Here, I address this knowledge gap by studying a mathematical model that examines how ecological character displacement affects consumer-resource dynamics in a food-web context. I address two questions: (1) How does ecological character displacement affect resource abundances? (2) How does character displacement affect food-web stability? To test the generality of these effects, I explored different assumptions of ecological foraging scenarios and evolutionary trade-offs in consumer foraging traits. 
+Here, I address this knowledge gap by studying a mathematical model that examines how ecological character displacement affects consumer-resource dynamics in a food-web context. 
+I address two questions: (1) How does ecological character displacement affect resource abundances? (2) How does character displacement affect food-web stability? 
+To test the generality of these effects, I explored different assumptions of ecological foraging scenarios and evolutionary trade-offs in consumer foraging traits (Fig. \ref{fig:fig_1}). 
+I found that the adaptive process of character displacement often comes with an ecological cost; resulting in food webs with lower resource availability and that are less resilient to perturbations.
 
 ```{r fig_1, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:fig_1}**Divergent character displacement.** A textbook example of divergent character displacement is threespine stickleback in small coastal lakes of British Columbia. Sticklback consume two main resources, zooplankton and benthic invertebrates. In isolation, stickleback evolve a generalist phenotype that can take advantage of both resources. In the presence of a competitor, however, stickleback evolve specialized phenotypes that enable them to capture different resources more efficiently. A large body of theoretical work has shown that resource competition generally drives the adaptive divergence of consumers onto different resources. Currently though, we lack theoretical predictions for how this adaptive divergence affects consumer-resource interactions and food-web dynamics."}
 knitr::include_graphics("ECD_model_fig_1.pdf")
