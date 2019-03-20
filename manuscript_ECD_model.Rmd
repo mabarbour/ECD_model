@@ -773,13 +773,8 @@ Thus, a food-web perspective, which accounts for both the direct and indirect ef
 
 Here, I address this knowledge gap by studying a mathematical model that examines how ecological character displacement affects consumer-resource dynamics in a food-web context. 
 I address two questions: (1) How does ecological character displacement affect resource abundances? (2) How does character displacement affect food-web stability? 
-To test the generality of these effects, I explored different assumptions of ecological foraging scenarios and evolutionary trade-offs in consumer foraging traits (Fig. \ref{fig:fig_1}). 
-I found that the adaptive process of character displacement often comes with an ecological cost; resulting in food webs with lower resource availability and that are less resilient to perturbations.
-
-```{r fig_1, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:fig_1}**Divergent character displacement.** A textbook example of divergent character displacement is threespine stickleback in small coastal lakes of British Columbia. Sticklback consume two main resources, zooplankton and benthic invertebrates. In isolation, stickleback evolve a generalist phenotype that can take advantage of both resources. In the presence of a competitor, however, stickleback evolve specialized phenotypes that enable them to capture different resources more efficiently. A large body of theoretical work has shown that resource competition generally drives the adaptive divergence of consumers onto different resources. Currently though, we lack theoretical predictions for how this adaptive divergence affects consumer-resource interactions and food-web dynamics."}
-knitr::include_graphics("ECD_model_fig_1.pdf")
-```
-
+To test the generality of these effects, I explored different assumptions of ecological foraging scenarios (Fig. \ref{fig:foraging_scenarios}) and evolutionary trade-offs in consumer foraging traits (Fig. \ref{fig:tradeoff}). 
+I found that the adaptive process of character displacement often comes with an ecological cost; resulting in food webs with lower resource availability and less resilient to perturbations.
 
 # Material and methods 
 
@@ -793,11 +788,11 @@ $$\frac{dC_1}{dt}=e_{11}F_{11}(R_1)C_1+e_{12}F_{12}(R_2)C_1-m_1C_1,$$
 $$\frac{dC_2}{dt}=e_{21}F_{21}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2,$$
 
 where $r_i$ represents the intrinsic growth rate of resource $i$, $K_i$ represents the carrying capacity of resource $i$, $e_{ij}$ represents the conversion efficiency of resource $j$ into consumer $i$, and $m_i$ represents the mortality rate of consumer $i$. $F_{ij}(R_j)$ represents consumer $i$'s feeding rate on resource $j$ (i.e. functional response). 
-This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). 
+This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). Importantly, inferences about ecological character displacement can only be made by comparing food webs with and without a competing consumer [@Schluter1992]; therefore, we arbitrarily removed $C_2$ from the system to compare and infer the effects of character displacement on food-web dynamics.
 
 ## Foraging Scenarios
 
-I studied three different foraging scenarios. 
+I studied three different foraging scenarios (Fig. \ref{fig:foraging_scenarios}). 
 In the first, I assume that consumers can forage for both resources simultaneously and their feeding rates increase linearly with resource abundance, such that:
 
 $$F_{ii}(R_i)=a_{ii}R_i$$ 
@@ -821,8 +816,8 @@ Previous studies have analyzed the evolution of consumer attack rates in the fir
 I say consumers have undergone character divergence if there evolved attack rates are more specialized, measured as $|\frac{a_{ii}}{a_{ii}+a_{ij}}-0.5|$, when evolving with a competing consumer.
 I also used an Adaptive Dynamics approach to analyze character displacement in the third foraging scenario, and I too observed character divergence (detailed analysis in Appendix S1 of Supplementary Information).
 
-```{r fig_2, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:fig_2}**Foraging scenarios and evolutionary tradeoffs.** I examined the effect of ecological character displacement on food-web dynamics under different assumptions of ecological foraging scenarios and evolutionary trade-offs in consumer foraging traits. Specifically, I examined whether these effects depended on whether resources occurred in the same habitat (top left) or in different habitats (top right). I also included a more realistic functional responses. In each of these foraging scenarios, I examined the effect of different evolutionary tradeoffs in attack rates."}
-knitr::include_graphics("ECD_model_fig_2.pdf")
+```{r foraging_scenarios, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:foraging_scenarios}**Ecological foraging scenarios.** I examined whether the effect of ecological character displacement on food-web dynamics depended on whether consumers competed for resources that occurred in the same vs. different habitats. In both scenarios, I assumed consumer feeding rate increased linearly with resource density. Later, I relax this assumption and consider a more realistic functional response when resources occurred in different habitats."}
+knitr::include_graphics("ECD_model_foraging_scenarios")
 ```
 
 ## Food-web Dynamics
@@ -836,7 +831,7 @@ This stability analysis derives the dominant eigenvalue, $\lambda$, which determ
 When possible, I derived analytical expressions for the relationship between consumer attack rates and food-web dynamics. 
 To do this, I simplified the model by assuming that resources are equivalent ($r=r_1=r_2$ and $K=K_1=K_2$) as well as consumers ($e=e_{11}=e_{12}=e_{21}=e_{22}$; $h=h_{11}=h_{12}=h_{21}=h_{22}$; $m=m_1=m_2$), except that consumer attack rates and their habitat preferences (if present) are mirror images of each other ($a_{ii}=a_{11}=a_{22}$; $a_{ij}=a_{12}=a_{21}$; $w_{ii}=w_{11}=w_{22}$). 
 Controlling for other sources of variability allowed me to isolate the general effects of character divergence.
-All mathematical derivations were conducted in @Mathematica.
+All mathematical derivations were conducted in @Mathematica and are provided in the Supplementary Information (Appendix S1-3).
 
 To gain insight to the eco-evolutionary feedback generated by character displacement, I conducted simulations using an Adaptive Dynamics approach. 
 <!--
@@ -847,8 +842,8 @@ Therefore, I simulated the eco-evolutionary feedback between consumers and resou
 -->
 Specifically, at each evolutionary time step, I created a mutant consumer by randomly choosing one and modifying its attack rate on one resource by either subtracting or adding a small constant (0.01 in the following simulations) with equal probability. 
 The mutant's attack rate on the other resource was determined by a tradeoff, such that $\big(a_{ii}/{A}\big)^n+\big(a_{ij}/{A}\big)^n=1$, where $A$ is the total investment in attack rates and $n$ describes the shape of the tradeoff [@Sargent2006]. 
-This function has the useful property that it differentiates between cases where intermediate combinations of $a_{ii}$ and $a_{ij}$ are higher than the extremes (when $n>1$, green line in Fig. \ref{fig:fig_1}) or, conversely, where the two extremes are higher than intermediate investments (when $n<1$, orange line Fig. \ref{fig:fig_1}). 
-When $n=1$, the tradeoff function is linear, and all combinations of $a_{ii}$ and $a_{ij}$ have the same total attack rate (blue line in Fig. \ref{fig:fig_1}). 
+This function has the useful property that it differentiates between cases where intermediate combinations of $a_{ii}$ and $a_{ij}$ are higher than the extremes (when $n>1$, green line in Fig. \ref{fig:tradeoff}) or, conversely, where the two extremes are higher than intermediate investments (when $n<1$, orange line Fig. \ref{fig:tradeoff}). 
+When $n=1$, the tradeoff function is linear, and all combinations of $a_{ii}$ and $a_{ij}$ have the same total attack rate (blue line in Fig. \ref{fig:tradeoff}). 
 Assuming the mutant consumer was rare, I then determined whether the mutant had higher relative fitness than the resident consumer, and thus could invade and replace the resident consumer. 
 If the mutant was able to invade, I updated the attack rate of the resident consumer to the mutant attack rate and allowed consumer and resource dynamics to reach a steady state. 
 I then repeated the simulation up to 10,000 times, which was sufficient for consumers to either reach an evolutionary stable strategy [ESS, @Smith1973] or an evolutionary limit (e.g. $\frac{a_{ii}}{a_{ii}+a_{ij}}$ is constrained to a maximum of 1 and minimum of 0). 
@@ -857,24 +852,30 @@ I set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*
 I set initial consumer and resource abundances as: *R~1~* = *R~2~* = 2; *C~1~* = *C~2~* = 1.
 All simulations were conducted in R [@R] and the code to reproduce these simulations is publically available on GitHub (https://github.com/mabarbour/ECD_model).
 
-```{r Tradeoff, include=FALSE, fig.pos="H", fig.cap="\\label{fig:Tradeoff}Tradeoff forms for consumer attack rates."}
+```{r plot tradeoff, include=FALSE}
 initial_points <- bind_rows(params_2C_2R_MacArthur_linear, params_2C_2R_MacArthur_concaveDN, params_2C_2R_MacArthur_concaveUP) %>% mutate(n = c(n_linear, n_concaveDN, n_concaveUP))
 
 tradeoff_plot <- bind_rows(concaveDN_df, linear_df, concaveUP_df) %>%
   ggplot(., aes(x=aii, y=aij, color = factor(n))) + 
-  geom_line(size=1.5) + 
-  geom_point(data = initial_points, aes(x=a11, y=a12), size=5, show.legend=FALSE) +
+  geom_line() + # size=1.5
+  geom_point(data = initial_points, aes(x=a11, y=a12), size=3, show.legend=FALSE) + # size=5
   xlab(expression(bold(a[ii]))) +
   ylab(expression(bold(a[ij]))) +
-  scale_color_manual(name="Evolutionary\ntradeoff (n)", values=cbPalette) +
-  theme_cowplot(font_size = 30, line_size=2)# +
+  scale_color_manual(name="Evolutionary\ntradeoff (n)", values=cbPalette) #+
+  #theme_cowplot(font_size = 30, line_size=2)# +
   #theme(axis.title = element_text(size = 30),
   #      axis.text = element_text(size = 20),
   #      legend.title = element_text(size = 25),
   #      legend.text = element_text(size = 20),
   #      legend.spacing = unit(1.0,'cm'))
 
-save_plot(filename = "attack_tradeoffs.pdf", plot = tradeoff_plot, base_height = 6, base_width = 9)
+save_plot(filename = "attack_tradeoffs.pdf", plot = tradeoff_plot, 
+          base_height = 5, # 6
+          base_width = 8) #9
+```
+
+```{r tradeoff, fig.pos="H", fig.cap="\\label{fig:tradeoff}**Evolutionary tradeoffs in consumer attack rates.** In each foraging scenario, I explored the effects of three different tradeoffs: (i) intermediate combinations of attack rates (a~ii~, a~ij~) are higher than the extremes (green line, n > 1); (ii) extreme combinations of attack rates are higher than intermediate investments (orange line, n < 1); and (iii) all combinations of attack rates have the same total attack rate (blue line, n = 1). Points corresponding to attack rates at the beginning of the simulation. Note that C~i~ was always pre-adapted to R~i~ (a~ii~>a~ij~)."}
+knitr::include_graphics("attack_tradeoffs.pdf")
 ```
 
 # Results
@@ -1433,7 +1434,7 @@ An empirical example of this is threespine stickleback that have diverged into l
 These resources occur in distinct zones of the lake (pelagic and littoral), therefore stickleback must move between these zones and compete when foraging for resources. 
 Interestingly, a disproporationate number of the documented cases of character displacement involve carnivores [@Schluter2000] that are larger, and likely more mobile, than their resources [@McCann2005], suggesting my predictions may apply to many cases of ecological character displacement.
 
-Similarly, the evolutionary tradeoff that favored character divergence resulted in lower resource densities across all foraging scenarios.
+Similarly, the evolutionary tradeoff that favored character divergence resulted in lower resources across all foraging scenarios.
 Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the net foraging rate of consumers [@Schluter1985; @Arnegard2014]. 
 While it is theoretically possible that character displacement does not alter resource abundances, this was limited to the simplest, and arguably least realistic, foraging scenario and under tradeoffs that did not favor large displacements, and thus less likely to detect in nature.
 Taken together, my results call for empirical work to test these clear theoretical predictions and suggest a revision is needed for one of the criteria used to demonstrate character displacement. 
