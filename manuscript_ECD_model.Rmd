@@ -816,7 +816,7 @@ Previous studies have analyzed the evolution of consumer attack rates in the fir
 I say consumers have undergone character divergence if there evolved attack rates are more specialized, measured as $|\frac{a_{ii}}{a_{ii}+a_{ij}}-0.5|$, when evolving with a competing consumer.
 I also used an Adaptive Dynamics approach to analyze character displacement in the third foraging scenario, and I too observed character divergence (detailed analysis in Appendix S1 of Supplementary Information).
 
-```{r foraging_scenarios, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:foraging_scenarios}**Ecological foraging scenarios.** I examined whether the effect of ecological character displacement on food-web dynamics depended on whether consumers competed for resources that occurred in the same vs. different habitats. In both scenarios, I assumed consumer feeding rate increased linearly with resource density. Later, I relax this assumption and consider a more realistic functional response when resources occurred in different habitats."}
+```{r foraging_scenarios, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:foraging_scenarios}**Ecological foraging scenarios.** I examined whether the effect of ecological character displacement on food-web dynamics depended on whether consumers competed for resources that occurred in the same vs. different habitats. In both scenarios, I assumed consumer feeding rate increased linearly with resource density. Later, I relax this assumption and consider a more realistic functional response when resources occurred in different habitats. Note that C~i~ was always pre-adapted to R~i~ (a~ii~ > a~ij~)."}
 knitr::include_graphics("ECD_model_foraging_scenarios")
 ```
 
@@ -874,7 +874,7 @@ save_plot(filename = "attack_tradeoffs.pdf", plot = tradeoff_plot,
           base_width = 8) #9
 ```
 
-```{r tradeoff, fig.pos="H", fig.cap="\\label{fig:tradeoff}**Evolutionary tradeoffs in consumer attack rates.** In each foraging scenario, I explored the effects of three different tradeoffs: (i) intermediate combinations of attack rates (a~ii~, a~ij~) are higher than the extremes (green line, n > 1); (ii) extreme combinations of attack rates are higher than intermediate investments (orange line, n < 1); and (iii) all combinations of attack rates have the same total attack rate (blue line, n = 1). Points corresponding to attack rates at the beginning of the simulation. Note that C~i~ was always pre-adapted to R~i~ (a~ii~>a~ij~)."}
+```{r tradeoff, fig.pos="H", fig.cap="\\label{fig:tradeoff}**Evolutionary tradeoffs in consumer attack rates.** In each foraging scenario, I explored the effects of three different tradeoffs: intermediate combinations of attack rates (a~ii~, a~ij~) are higher than the extremes (green line, n > 1); extreme combinations of attack rates are higher than intermediate investments (orange line, n < 1); and all combinations of attack rates have the same total attack rate (blue line, n = 1). Points corresponding to attack rates at the beginning of the simulation. Note that C~i~ was always pre-adapted to R~i~ (a~ii~ > a~ij~)."}
 knitr::include_graphics("attack_tradeoffs.pdf")
 ```
 
@@ -945,7 +945,7 @@ Stability_Mac <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArthur_2C
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_LS <- cbind.data.frame(select(tradeoff_df, n, aii, aij), LawlorSmith_2C_2R_tradeoff_dynamics) %>%
@@ -958,7 +958,7 @@ Stability_LS <- cbind.data.frame(select(tradeoff_df, n, aii, aij), LawlorSmith_2
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_plots <- plot_grid(Stability_Mac + theme(legend.position = "none"), Stability_LS + theme( axis.title.y = element_blank()),
@@ -1178,7 +1178,7 @@ Stability_McCann <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McCann_2C
   scale_size_manual(values=c(1.5,3)) +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Stability_McCann
@@ -1393,14 +1393,17 @@ bifurcation_plot <- bind_rows(mutate(sim.df, Competitor = "Yes"), mutate(sim.df_
   filter(species == "R") %>%
   ggplot(., aes(x = a11/(a11+a12), y = value, group=interaction(max_min, Competitor))) +
   geom_line(aes(linetype=Competitor), color=cbPalette[2]) +
-  geom_point(data = filter(McCann_displacements_bifur, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, shape=Competitor), color="white", fill=cbPalette[2], size=6, inherit.aes = FALSE) +
-  geom_point(data = filter(McCann_displacements_bifur, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, shape=Competitor), color="white", fill=cbPalette[2], size=3, inherit.aes = FALSE) +
+  geom_point(data = McCann_displacements_bifur, aes(x = a11/(a11+a12), y=R1+R2, shape=Competitor, size=Time), color=cbPalette[2], fill=cbPalette[2], inherit.aes = FALSE) +
+  #geom_point(data = filter(McCann_displacements_bifur, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, shape=Competitor), color="white", fill=cbPalette[2], size=6, inherit.aes = FALSE) +
+  #geom_point(data = filter(McCann_displacements_bifur, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, shape=Competitor), color="white", fill=cbPalette[2], size=3, inherit.aes = FALSE) +
   scale_shape_manual(values=c(24,21))  +
+  scale_size_manual(values=c(3,6)) +
   scale_linetype_manual(values=c("dotted","solid")) +
   ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*": max and min)"))) +
   xlab(expression(paste("Specialization ", bgroup("(",frac(a[ii],a[ii]+a[ij]),")")))) +
-  guides(fill = guide_legend(override.aes=list(shape=21))) +
+  #guides(fill = guide_legend(override.aes=list(shape=21))) +
   geom_segment(x=0.815, xend=0.815, y=0, yend=2.65, arrow = arrow(length = unit(0.03, "npc")), color="grey", fill="grey") +
+  geom_text(x=0.77, y=2, label="Stability\nboundary", color="grey") +
   theme_cowplot(font_size = 18)
   #geom_vline(xintercept = 0.82, linetype="dotted", color="grey")
 
@@ -1618,7 +1621,7 @@ Stability_Mac_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), MacArt
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 Mac_plots_asymm <- plot_grid(Mac_attack_asymm + theme(legend.position = "none"), 
@@ -1670,7 +1673,7 @@ Stability_LS_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), LawlorS
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 LS_plots_asymm <- plot_grid(LS_attack_asymm   + theme(legend.position = "none"), 
@@ -1719,7 +1722,7 @@ Stability_McCann_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McC
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
-  geom_hline(yintercept=0, linetype="dotted", color="grey") +
+  geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
 McCann_plots_asymm <- plot_grid(McCann_attack_asymm   + theme(legend.position = "none"), 
