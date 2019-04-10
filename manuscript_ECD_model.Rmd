@@ -752,7 +752,7 @@ Here, I study a model of two consumers competing for two shared resources to exa
 I found that character displacement always strengthened consumer-resource interactions whenever consumers competed for resources that occurred in different habitats.
 This increase in interaction strength resulted in lower resource abundances and less resilient food webs.
 This occurred under different evolutionary tradeoffs and in both simple and more realistic foraging scenarios.
-Taken together, my results show that the adaptive process of character displacement often comes with the ecological cost of decreasing food-web resilience. 
+Taken together, my results show that the adaptive process of character displacement may come with the ecological cost of decreasing food-web resilience. 
 
 \newpage
 
@@ -760,21 +760,21 @@ Taken together, my results show that the adaptive process of character displacem
 
 Ecological character displacement is an important adaptive process in generating biodiversity [@Schluter2000; @Pfennig2010]. 
 This process is due to "phenotypic evolution in a species generated or maintained by [exploitative] resource competition with one or more coexisting species” [@Schluter2000]. 
-Over the past 40 years, a large body of theoretical [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019] and empirical [reviewed in: @Schluter2000; @Dayan2005; @Stuart2013] work has examined which scenarios lead to phenotypic divergence or convergence of competing consumers.
-The general result has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of density dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985]. 
+A large body of theoretical [e.g. @Lawlor1976; @Abrams1986; @Doebeli1996; @Taper1985; @McPeek2019] and empirical [reviewed in: @Schluter2000; @Dayan2005; @Stuart2013] work has examined which scenarios lead to phenotypic divergence or convergence of competing consumers.
+The general conclusion has been that, if resources are nutritionally substitutable [@Abrams1987; @Fox2008] and there is no other strong source of density dependence acting on consumers [@Abrams1986], then resource competition drives the adaptive divergence of competitors [@Lawlor1976; @Taper1985]. 
 This adaptive process is not simply a response to static differences in resource distributions, but creates an eco-evolutionary feedback that drives further differentiation. 
 This crucial insight was made by theoretical models that explicitly included resource dynamics as a mediator of competition in driving evolutionary change [@Lawlor1976; @Abrams1986; @Taper1985]. 
 
-Although models that included resources gave insights to the evolution of character displacement, the ecological feedback onto consumer-resource dynamics has received surprisingly little attention. 
+Although models that included resources led to insights to the evolution of character displacement, the ecological feedback onto consumer-resource dynamics has received surprisingly little attention. 
 This is likely because the ecological feedback has been primarily studied through the lens of coexistence theory [@Lawlor1976; @Germain2018; @Bassar2017; @McPeek2019]. 
-For example, early theoretical work by @Lawlor1976 showed that ecological character displacement promotes coexistence by favoring specialized consumers that experience reduced interspecific competition. 
+For example, early theoretical work showed that ecological character displacement promotes coexistence by favoring specialized consumers that experience reduced interspecific competition [@Lawlor1976]. 
 Yet, this reduction in interspecific competition may, at the same time, increase interspecific interactions between specialized consumers and their resources. 
 Both food-web theory and empirical studies have shown that increasing the strength of consumer-resource interactions often suppresses the abundance of resources, which if sufficient enough, can generate oscillations and less stable consumer-resource dynamics [@Rosenzweig1971; @Luckinbill1973; @Murdoch2002; @Murdoch2003; @McCann2011].
 Thus, a food-web perspective, which accounts for both the direct and indirect effects of consumer-resource interactions, may yield new insight to the ecological consequences of character displacement.
 
 Here, I address this knowledge gap by studying a mathematical model that examines how ecological character displacement affects consumer-resource dynamics in a food-web context. 
 I address two questions: (1) How does ecological character displacement affect resource abundances? (2) How does character displacement affect food-web stability? 
-To test the generality of these effects, I explored different ecological foraging scenarios (fig. \ref{fig:foraging_scenarios}) and evolutionary tradeoffs in consumer attack rates (fig. \ref{fig:tradeoff}). 
+To test the generality of these effects, I explored different ecological foraging scenarios and evolutionary tradeoffs in consumer attack rates. 
 I found that the adaptive process of character displacement often comes with an ecological cost; resulting in food webs with lower resource availability and that are less resilient to perturbations.
 
 # Material and methods 
@@ -785,15 +785,15 @@ To examine how ecological character displacement affects resource abundances and
 
 \begin{equation} \label{eq:1}
   \begin{split}
-     & \frac{dR_1}{dt}=r_1K_1(1-\frac{R_1}{K_1})-F_{11}(R_1)C_1-F_{21}(R_1)C_2 \\
-     & \frac{dR_2}{dt}=r_2K_2(1-\frac{R_2}{K_2})-F_{12}(R_2)C_1-F_{22}(R_2)C_2 \\
+     & \frac{dR_1}{dt}=r_1R_1(1-\frac{R_1}{K_1})-F_{11}(R_1)C_1-F_{21}(R_1)C_2 \\
+     & \frac{dR_2}{dt}=r_2R_2(1-\frac{R_2}{K_2})-F_{12}(R_2)C_1-F_{22}(R_2)C_2 \\
      & \frac{dC_1}{dt}=e_{11}F_{11}(R_1)C_1+e_{12}F_{12}(R_2)C_1-m_1C_1 \\
      & \frac{dC_2}{dt}=e_{21}F_{21}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2 \\
   \end{split}
 \end{equation}
 
 where $r_i$ represents the intrinsic growth rate of resource $i$, $K_i$ represents the carrying capacity of resource $i$, $e_{ij}$ represents the conversion efficiency of resource $j$ into consumer $i$, and $m_i$ represents the mortality rate of consumer $i$. $F_{ij}(R_j)$ represents consumer $i$'s feeding rate on resource $j$ (i.e. functional response). 
-This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates in lakes) rather than if resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). 
+This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates in lakes) rather than a scenario where resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). 
 
 ## Foraging Scenarios
 
@@ -806,7 +806,7 @@ In the first, I assume that consumers can forage for both resources simultaneous
 
 where $a_{ii}$ is the attack rate of consumer $i$ on resource $i$. 
 This first scenario is the starting point for many models of resource competition [@MacArthur1972]; however, it does not reflect many food webs where consumers are mobile and their foraging behavior links resources that occur in different habitats [@McCann2005]. 
-A simple extension that accounts for this spatial context takes the form:
+The second scenario accounts for this spatial context and takes the form:
 
 \begin{equation} \label{eq:3}
   F_{ii}(R_i)=w_{ii}a_{ii}R_i
@@ -815,7 +815,7 @@ A simple extension that accounts for this spatial context takes the form:
 where $w_{ii}$ represents the proportion of time consumer $i$ spends foraging in a habitat where only resource $i$ is found (i.e. habitat preference). 
 Note that since $w_{ii}$ is a proportion that $w_{ij}=1-w_{ii}$. 
 Finally, it is well known that consumer feeding rates often saturate at high resource abundances [@Holling1959; @Rosenzweig1963; @Murdoch2003; @McCann2011] and that consumers do not usually spend a fixed proportion of time in a particular habitat [@McCann2005]. 
-To account for these biological realities, I consider a more realistic functional response [derived by @McCann2005]:     
+The third scenario accounts for these biological realities and takes the form [derived by @McCann2005]:     
 \begin{equation} \label{eq:4}
   F_{ii}(R_i,R_j)=\frac{a_{ii}W_{ii}R_i}{1+a_{ii}h_{ii}W_{ii}R_i+a_{ij}h_{ij}W_{ij}R_j}
 \end{equation}
@@ -838,7 +838,10 @@ An equilibrium is reached when the rates of change in equation \ref{eq:1} are 0,
 Importantly, inferences about ecological character displacement can only be made by comparing food webs with and without a competing consumer [@Schluter1992].
 Therefore, I compared resource abundances between food webs with ($\hat R_1,\hat R_2, \hat C_1,\hat C_2 > 0$) and without ($\hat R_1,\hat R_2, \hat C_1 > 0$) a competing consumer.
 I also compared the local stability of these food webs using standard methods [@Otto2007]. 
-This stability analysis derives the dominant eigenvalue, $\lambda$, which determines whether (and how readily) the food web will return to equilibrium after a small perturbation. 
+This stability analysis derives the dominant eigenvalue, $\lambda$, of the matrix of partial derivatives of all differential equations with respect to all variables evaluated at equilibrium. 
+If the dominant eigenvalue is negative, then the food web will return to equilibrium after a small perturbation (i.e. locally stable), with more negative values indicating a faster return time.
+If the dominant eigenvalue is positive, then the food web is not locally stable. 
+<!--This dominant eigenvalue determines whether (and how readily) the food web will return to equilibrium after a small perturbation.--> 
 
 When possible, I derived analytical expressions for the relationship between consumer attack rates and food-web dynamics. 
 To do this, I simplified the model by assuming that resources are equivalent ($r=r_1=r_2$ and $K=K_1=K_2$) as well as consumers ($e=e_{11}=e_{12}=e_{21}=e_{22}$; $h=h_{11}=h_{12}=h_{21}=h_{22}$; $m=m_1=m_2$), except that consumer attack rates and their habitat preferences (if present) are mirror images of each other ($a_{ii}=a_{11}=a_{22}$; $a_{ij}=a_{12}=a_{21}$; $w_{ii}=w_{11}=w_{22}$). 
@@ -852,12 +855,12 @@ Still,
 Although divergent character displacement occurs in all scenarios we examined, the magnitude of this divergence may be context dependent.
 Therefore, I simulated the eco-evolutionary feedback between consumers and resources using an Adaptive Dynamics approach.
 -->
-Specifically, at each evolutionary time step, I created a mutant consumer by randomly choosing one and modifying its attack rate on one resource by either subtracting or adding a small constant (0.01 in the following simulations) with equal probability. 
+Specifically, after letting consumer and resource abundances reach a steady state, I created a mutant consumer by randomly choosing one and modifying its attack rate on one resource by either subtracting or adding a small constant (0.01 in the following simulations) with equal probability. 
 The mutant's attack rate on the other resource was determined by a tradeoff, such that $\big(a_{ii}/{A}\big)^n+\big(a_{ij}/{A}\big)^n=1$, where $A$ is the total investment in attack rates and $n$ describes the shape of the tradeoff [@Sargent2006]. 
 This function has the useful property that it differentiates between cases where intermediate combinations of $a_{ii}$ and $a_{ij}$ are higher than the extremes (when $n>1$, green line in fig. \ref{fig:tradeoff}) or, conversely, where the two extremes are higher than intermediate investments (when $n<1$, orange line fig. \ref{fig:tradeoff}). 
 When $n=1$, the tradeoff function is linear, and all combinations of $a_{ii}$ and $a_{ij}$ have the same total attack rate (blue line in fig. \ref{fig:tradeoff}). 
 Assuming the mutant consumer was rare, I then determined whether the mutant had higher relative fitness than the resident consumer, and thus could invade and replace the resident consumer. 
-If the mutant was able to invade, I updated the attack rate of the resident consumer to the mutant attack rate and allowed consumer and resource dynamics to reach a steady state. 
+If the mutant was able to invade, I updated the attack rate of the resident consumer to the mutant attack rate and allowed consumer and resource abundances to reach a steady state. 
 I then repeated the simulation up to 10,000 times, which was sufficient for consumers to either reach an evolutionary stable strategy [ESS, @Smith1973] or an evolutionary limit (e.g. $\frac{a_{ii}}{a_{ii}+a_{ij}}$ is constrained to a maximum of 1 and minimum of 0). 
 Unless otherwise noted, I conducted simulations with the following parameter values: *r* = 1; *K* = 4; *e* = 0.8; *m* = 1; *A* = 2; *h* = 0.4; and *w~ii~* = 0.6. 
 I set an initial value of *a~ii~* = 1.2 and *a~ij~* depended on the value of *n*. 
@@ -910,16 +913,16 @@ In this first scenario (equation \ref{eq:2}), the abundance of resources at equi
 A key determinant of resource abundance in this model is the consumer's total attack rate, $a_{ii}+a_{ij}$. Therefore, the effect of character displacement on food-web dynamics depends on how the tradeoff influences the evolution of consumer attack rates.
 
 My simulations show that the shape of the tradeoff qualitatively affects the relationship between character displacement and resource abundances (fig. \ref{fig:plot_fig3}). 
-For example, if consumer's are constrained by a linear tradeoff (blue lines), then there is no net change in total attack rate (fig. \ref{fig:plot_fig3}) and character displacement has no effect on resource abundances (fig. \ref{fig:plot_fig3}). 
-If the tradeoff is concave down (green lines), then resource abundances can actually increase under character displacement (fig. \ref{fig:plot_fig3}). 
-This is because the total attack rate of consumers is maximized at intermediate values ($a_{ii}=a_{ij}$) and decreases as consumers diverge (fig. \ref{fig:plot_fig3}). 
-When the tradeoff is concave up (orange lines), character displacement suppresses resource abundances due to the increase in total attack rates (fig. \ref{fig:plot_fig3}). 
-Although the equation I derived for resource abundances was for the scenario where both consumers and both resources were present, it accurately predicts the abundance of resources when a single consumer reaches its ESS (triangles on respective colored lines in fig. \ref{fig:plot_fig3}). 
-This is because a single consumer evolves to be a generalist that has equal attack rates on each resource (triangles at 0.5 along x-axis in fig. \ref{fig:plot_fig3}), resulting in equivalent resource abundances. 
+For example, if consumer's are constrained by a linear tradeoff (blue lines), then there is no net change in total attack rate (fig. \ref{fig:plot_fig3} top left) and character displacement has no effect on resource abundances (fig. \ref{fig:plot_fig3} middle left). 
+If the tradeoff is concave down (green lines), then resource abundances can actually increase under character displacement (fig. \ref{fig:plot_fig3} middle left). 
+This is because the total attack rate of consumers is maximized at intermediate values ($a_{ii}=a_{ij}$) and decreases as consumers diverge (fig. \ref{fig:plot_fig3} top left). 
+When the tradeoff is concave up (orange lines), character displacement suppresses resource abundances due to the increase in total attack rates (fig. \ref{fig:plot_fig3} top left). 
+Although the equation I derived for resource abundances was for the scenario where both consumers and both resources were present, it accurately predicts the abundance of resources when a single consumer reaches its evolutionary stable strategy (ESS; triangles on respective colored lines in fig. \ref{fig:plot_fig3} middle left). 
+This is because a single consumer evolves to be a generalist that has equal attack rates on each resource (triangles at 0.5 along x-axis in fig. \ref{fig:plot_fig3} left panels), resulting in equivalent resource abundances. 
 
 The effect of character displacement on resources corresponds to its impact on food-web stability. 
-For example, when character displacement decreases resource abundances (orange points in fig. \ref{fig:plot_fig3}), there is a decrease in food-web stability (fig. \ref{fig:plot_fig3}). 
-Character divergence may not affect or even increase food-web stability (blue and green lines in fig. \ref{fig:plot_fig3}); however, evolution does not favor strong divergence in these scenarios (blue and green points in fig. \ref{fig:plot_fig3}), which dampens these contingent effects.
+For example, when character displacement decreases resource abundances (orange points in fig. \ref{fig:plot_fig3} middle left), there is a decrease in food-web stability (fig. \ref{fig:plot_fig3} bottom left). 
+Character divergence may not affect or even increase food-web stability (blue and green lines in fig. \ref{fig:plot_fig3} bottom left); however, evolution does not favor strong divergence in these scenarios (blue and green points in fig. \ref{fig:plot_fig3}), which dampens these contingent effects.
 
 ```{r MacArthur_Resources, include=FALSE, fig.cap="\\label{fig:MacArthur_Resources}Effect of character displacement on total attack rates (A) and resource abundances (B) when consumers can forage for both resources simultaneously."}
 Mac_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=aii+aij, color = factor(n))) + 
@@ -1015,13 +1018,13 @@ In the second foraging scenario (equation \ref{eq:3}), I again see that resource
   \hat{R}=\frac{1}{w_{ii}a_{ii}+(1-w_{ii})a_{ij}}\cdot\frac{m}{e}
 \end{equation}
 
-This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w_{ii}>0.5$ and $a_{ii}>a_{ij}$), then the effective attack rate of consumers ($wa_{ii}+(1-w_{ii})a_{ij}$) will always increase, regardless of the tradeoff (fig. \ref{fig:plot_fig3}). 
-Thus, character divergence always results in resource suppression (fig. \ref{fig:plot_fig3}). 
+This equation implies that if consumers evolve to become specialists on resources that occur in their preferred habitat (e.g. $w_{ii}>0.5$ and $a_{ii}>a_{ij}$), then the effective attack rate of consumers ($wa_{ii}+(1-w_{ii})a_{ij}$) will always increase, regardless of the tradeoff (fig. \ref{fig:plot_fig3} top right). 
+Thus, character divergence always results in resource suppression (fig. \ref{fig:plot_fig3} middle right). 
 Note that the shape of the tradeoff can modify the effect of character displacement. 
-This is not so much due to the tradeoff affecting the magnitude of displacement (it does, but the effect is minor), but because the form of the tradeoff affects resource abundances when a single consumer has reached an evolutionary stable strategy (ESS, triangles in fig. \ref{fig:plot_fig3}). 
-In contrast, resource abundances reach a similar value when consumers evolve in the presence of a competitor (circles in fig. \ref{fig:plot_fig3}), because character displacement tends to reach a constraint of complete specialization. 
-It is worth noting that resource abundances are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in fig. \ref{fig:plot_fig3}). 
-This is because consumers actually evolve to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in fig. \ref{fig:plot_fig3}). 
+This is not so much due to the tradeoff affecting the magnitude of displacement (it does, but the effect is minor), but because the form of the tradeoff affects resource abundances when a single consumer has reached an ESS (triangles in fig. \ref{fig:plot_fig3} middle right). 
+In contrast, resource abundances reach a similar value when consumers evolve in the presence of a competitor (circles in fig. \ref{fig:plot_fig3} middle right), because character displacement tends to reach a constraint of complete specialization. 
+It is worth noting that resource abundances are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in fig. \ref{fig:plot_fig3} middle right). 
+This is because consumers actually evolve to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in fig. \ref{fig:plot_fig3} right panels). 
 
 As seen previously, the effect of character displacement on resource abundances qualitatively corresponds to its effect on food-web stability (fig. \ref{fig:plot_fig3}). 
 Specifically, character divergence decreases food-web stability, regardless of the tradeoff in attack rates.
@@ -1536,6 +1539,19 @@ Such comparisons are necessary for inferring the effects of character displaceme
 Although the addition of a consumer to a food web can decrease its resilience in the absence of evolution [@May1973], my results are primarily driven by an eco-evolutionary feedback between consumer evolution and resource abundances.
 
 ## Caveats
+
+Although I model the indirect effects of coevolution between consumers, I do not account for potential coevolution between consumers and resources. 
+In the context of my model, I would expect prey to evolve traits that reduce consumer attack rates. 
+Thus, prey evolution would act to counter the effects of character displacement on resource abundance and food-web stability. 
+Note that this does not negate my general conclusion that ecological character displacement decreases resource abundances and stability; however, this process may itself create another eco-evolutionary feedback between consumers and resources.
+Thus, not coevolution itself, but the prey's evolutionary response would act to stabilize food webs.
+This may actually help maintain fantastic examples of character divergence and prevent them from destabilizing systems, basically because the consumers trait becomes decoupled with their attack rate.
+Examining this role would be ideal in a quantitative genetic setting that can explicitly track trait dynamics, but it would not fundamentally change the conclusions presented here.
+
+Another potential caveat is that I explored my model in a setting that makes many assumptions about resource and consumer symmetry (but see consumer asymmetry section). 
+Prior work has shown that allowing for resource asymmetry, for example, may decrease the magnitude of character displacement. 
+This is because this asymmetry creates an asymmetry in resource abundances, which dampens the effects of character divergence.
+Again though, this may dampen the effects of divergence, but should not change the qualitative relationship we observed of ecological character displacement decreasing resource abundances and food-web stability.
 
 I studied this eco-evolutionary feedback between consumers and resources using an Adaptive Dynamics approach.
 A strength of this approach is that it enabled me to gain analytical insight to the effects of character divergence in a more realistic foraging scenario.
