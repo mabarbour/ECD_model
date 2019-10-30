@@ -781,19 +781,21 @@ I found that the adaptive process of character displacement often comes with an 
 
 ## Underlying Consumer-Resource Dynamics
 
-To examine how ecological character displacement affects resource abundances and food-web stability, I analyzed a continuous-time model of two consumers ($C_1,C_2$) competing for two shared resources ($R_1,R_2$): 
+To examine how ecological character displacement affects resource abundances and food-web stability, I analyzed a continuous-time model of two consumers ($C_{j=1,2}$) competing for two shared resources ($R_{i=1,2}$): 
 
 \begin{equation} \label{eq:1}
   \begin{split}
-     & \frac{dR_1}{dt}=r_1R_1(1-\frac{R_1}{K_1})-F_{11}(R_1)C_1-F_{21}(R_1)C_2 \\
-     & \frac{dR_2}{dt}=r_2R_2(1-\frac{R_2}{K_2})-F_{12}(R_2)C_1-F_{22}(R_2)C_2 \\
-     & \frac{dC_1}{dt}=e_{11}F_{11}(R_1)C_1+e_{12}F_{12}(R_2)C_1-m_1C_1 \\
-     & \frac{dC_2}{dt}=e_{21}F_{21}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2 \\
+     & \frac{dR_1}{dt}=r_1R_1(1-\frac{R_1}{K_1})-F_{11}(R_1)C_1-F_{12}(R_1)C_2 \\
+     & \frac{dR_2}{dt}=r_2R_2(1-\frac{R_2}{K_2})-F_{21}(R_2)C_1-F_{22}(R_2)C_2 \\
+     & \frac{dC_1}{dt}=e_{11}F_{11}(R_1)C_1+e_{21}F_{21}(R_2)C_1-m_1C_1 \\
+     & \frac{dC_2}{dt}=e_{12}F_{12}(R_1)C_2+e_{22}F_{22}(R_2)C_2-m_2C_2 \\
   \end{split}
 \end{equation}
 
 where $r_i$ represents the intrinsic growth rate of resource $i$, $K_i$ represents the carrying capacity of resource $i$, $e_{ij}$ represents the conversion efficiency of resource $i$ into consumer $j$, and $m_j$ represents the mortality rate of consumer $j$. $F_{ij}(R_i)$ represents consumer $j$'s feeding rate on resource $i$ (i.e. functional response). 
 This model is a useful characterization of a scenario where consumers compete for two distinct resources (e.g. zooplankton and benthic invertebrates in lakes) rather than a scenario where resources are better characterized by a continuous trait distribution (e.g. seed size, see @Taper1985 for an example). 
+Importantly, inferences about ecological character displacement can only be made by comparing food webs with and without a competing consumer [@Schluter1992].
+Therefore, I arbitrarily set $C_2=0$ to create a food-web without a competing consumer for these comparisons. 
 
 ## Foraging Scenarios
 
@@ -823,8 +825,10 @@ The third scenario accounts for these biological realities and takes the form [d
 where consumer $j$'s feeding rate on resource $i$ is influenced by the abundance of each resource; saturates as resource abundances increase (due to handling times $h_{ij}$); and consumer habitat preferences are modified by the relative abundance of resources, such that: $W_{ij}=\frac{w_{ij}R_i}{w_{1,j}R_1+w_{2,j}R_2}$. 
 
 Previous studies have analyzed the evolution of consumer attack rates in the first two foraging scenarios using an Adaptive Dynamics approach, with the general result being character divergence [@Lawlor1976; @Abrams1986]. 
-I say consumers have undergone character divergence if there evolved attack rates are more specialized, measured as $|\frac{a_{ij}}{a_{1,j}+a_{2,j}-0.5|$, when evolving with a competing consumer.
-I also used an Adaptive Dynamics approah to analyze character displacement in the third foraging scenario, and I too observed character divergence (detailed analysis in Appendix S1 of Supplementary Information).
+I also used an Adaptive Dynamics approach to analyze character displacement in the third foraging scenario, and I too observed character divergence (detailed analysis in Appendix S1 of Supplementary Information).
+I say consumers have undergone character divergence if their evolved attack rates are more specialized when evolving with vs. without a competing consumer. 
+Specialization of consumer $j$ on resource $1$ is measured as $\frac{a_{1,j}}{a_{1,j}+a_{2,j}}$, where a value of 0.5 is a complete generalist ($a_{1,j}=a_{2,j}$), and a value of 1 is a complete specialist ($a_{2,j}=0$). <!--on resource 1, and a value of 0 is a complete specialist on resource 2.-->
+Values less than 0.5 indicate specialization on the other resource. 
 
 ```{r foraging_scenarios, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:foraging_scenarios}**Ecological foraging scenarios.** I examined whether the effect of ecological character displacement on food-web dynamics depended on whether consumers competed for resources that occurred in the same vs. different habitats. The width of each arrow corresponds to initial attack rates (*a*~ij~) of consumer *j* on resource *i*. Note that *C*~1~ was pre-adapted to *R*~1~ (*a*~11~ > *a*~21~), while *C*~2~ was a mirror image, being pre-adapted to *R~2~* (*a*~22~ > *a*~12~). In each scenario, I assumed consumer feeding rates increased linearly with resource abundance. I also relax this assumption and consider a more realistic functional response when resources occurred in different habitats."}
 knitr::include_graphics("ECD_model_foraging_scenarios")
@@ -834,11 +838,11 @@ knitr::include_graphics("ECD_model_foraging_scenarios")
 
 Given that character divergence occurred across these foraging scenarios, I focus here on its consequences for food-web dynamics.
 To do this, I analyzed differences in resource abundances and food-web stability at equilibrium. 
-An equilibrium is reached when the rates of change in equation \ref{eq:1} are 0, and solving the system at this point gives equilibrium abundances for each resource ($\hat R_1,\hat R_2$) and each consumer ($\hat C_1,\hat C_2$). 
-Importantly, inferences about ecological character displacement can only be made by comparing food webs with and without a competing consumer [@Schluter1992].
-Therefore, I compared resource abundances between food webs with ($\hat R_1,\hat R_2, \hat C_1,\hat C_2 > 0$) and without ($\hat R_1,\hat R_2, \hat C_1 > 0$) a competing consumer.
+An equilibrium is reached when the rates of change in equation \ref{eq:1} are 0, and solving the system at this point gives equilibrium abundances for each resource ($\hat R_i$) and each consumer ($\hat C_j$). 
+<!--Importantly, inferences about ecological character displacement can only be made by comparing food webs with and without a competing consumer [@Schluter1992].
+Therefore, I compared resource abundances between food webs with ($\hat R_1,\hat R_2, \hat C_1,\hat C_2 > 0$) and without ($\hat R_1,\hat R_2, \hat C_1 > 0$) a competing consumer.-->
 I also compared the local stability of these food webs using standard methods [@Otto2007]. 
-This stability analysis derives the dominant eigenvalue, $\lambda_{max}$, of the matrix of partial derivatives of all differential equations with respect to all variables evaluated at equilibrium. 
+This stability analysis derives the dominant eigenvalue, $\lambda_{\text{max}}$, of the matrix of partial derivatives of all differential equations with respect to all variables evaluated at equilibrium. 
 If $-\lambda_{max}>0$, then the food web will return to equilibrium after a small perturbation (i.e. locally stable), with more positive values indicating a faster return time.
 If $-\lambda_{max}<0$, then the food web is not locally stable. 
 <!--This dominant eigenvalue determines whether (and how readily) the food web will return to equilibrium after a small perturbation.--> 
@@ -886,8 +890,8 @@ tradeoff_plot <- bind_rows(concaveDN_df, linear_df, concaveUP_df) %>%
   #      legend.spacing = unit(1.0,'cm'))
 
 save_plot(filename = "attack_tradeoffs.pdf", plot = tradeoff_plot, 
-          base_height = 5, # 6
-          base_width = 7) #9
+          base_height = 4, # 7
+          base_width = 6) # 7
 ```
 
 ```{r tradeoff, echo=FALSE, fig.pos="H", fig.cap="\\label{fig:tradeoff}**Evolutionary tradeoffs in consumer attack rates.** In each foraging scenario, I explored the effects of three different tradeoffs: intermediate combinations of attack rates (*a*~1,*j*~, *a*~2,*j*~) are higher than the extremes (green line, *n* > 1); extreme combinations of attack rates are higher than intermediate investments (orange line, *n* < 1); and all combinations of attack rates have the same total attack rate (blue line, *n* = 1). Points corresponding to attack rates at the beginning of the simulation for *C*~1~, which was pre-adapted to *R*~1~ (*a*~11~ > *a*~12~)."}
@@ -907,7 +911,7 @@ I say consumers have undergone divergent character displacement if there evolved
 
 In this first scenario (equation \ref{eq:2}), the abundance of resources at equilibrium are equivalent when both consumers and resources are present ($\hat R = \hat R_1 = \hat R_2$), and are determined by the following equation (derived in Appendix S2):
 
-\begin{equation}
+\begin{equation} \label{eq:5}
   \hat{R}=\frac{1}{a_{1,j}+a_{2,j}}\cdot\frac{m}{e}
 \end{equation}
 
@@ -1005,6 +1009,7 @@ knitr::include_graphics("Figure_ECD_MacArthur.pdf")
 
 
 ## Resources occur in different habitats
+
 <!--
 The previous model, although the starting point for many models of competition, does not reflect many food webs where consumers are mobile and their foraging behavior links resources that occur in distinct habitats [@McCann2005]. 
 The only character displacement model that I am aware of that examined the effect of resources in different habitats was studied by @Lawlor1976. This model is the same as before, except now the consumer's feeding rate takes the form:
@@ -1016,9 +1021,10 @@ where $w_{ji}$ represents the proportion of time consumer $j$ spends foraging in
 To examine the ecological consequences of this divergence, I again derive the equilibrium solution when both consumers and both resources are present. 
 As before, resource abundances are equivalent at this equilibrium ($\hat R = \hat R_1 = \hat R_2$ when both consumers and resources present), but are now determined by the following equation (derivation in supplementary material):
 -->
+
 In the second foraging scenario (equation \ref{eq:3}), I again see that resource abundances are equivalent when both consumers and resources are present ($\hat R = \hat R_1 = \hat R_2$), but are now determined by the following equation (derived in Appendix S3):
 
-\begin{equation}
+\begin{equation} \label{eq:6}
   \hat{R}=\frac{1}{w_{1,j}a_{1,j}+w_{2,j}a_{2,j}}\cdot\frac{m}{e}
 \end{equation}
 
@@ -1027,8 +1033,9 @@ Thus, character divergence always results in resource suppression (fig. \ref{fig
 Note that the shape of the tradeoff can modify the effect of character displacement. 
 This is not so much due to the tradeoff affecting the magnitude of displacement (it does, but the effect is minor), but because the form of the tradeoff affects resource abundances when a single consumer has reached an ESS (triangles in fig. \ref{fig:plot_fig3} middle right). 
 In contrast, resource abundances reach a similar value when consumers evolve in the presence of a competitor (circles in fig. \ref{fig:plot_fig3} middle right), because character displacement tends to reach a constraint of complete specialization. 
-It is worth noting that resource abundances are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in fig. \ref{fig:plot_fig3} middle right). 
+It is worth noting that resource abundances are consistently higher at the single consumer ESS compared to the predictions I derived for when both consumers are present (deviation of triangles from respective colored lines in fig. \ref{fig:plot_fig3} middle right).
 This is because consumers actually evolve to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in fig. \ref{fig:plot_fig3} right panels). 
+<!--This is because the ESS for a single consumer is to be slightly specialized on the resources that occur in their non-preferred habitat (deviation of triangles from 0.5 along x-axis in fig. \ref{fig:plot_fig3} right panels), resulting in higher resource abundances compared to if it evolved to be a complete generalist.-->
 
 As seen previously, the effect of character displacement on resource abundances qualitatively corresponds to its effect on food-web stability (fig. \ref{fig:plot_fig3}). 
 Specifically, character divergence decreases food-web stability, regardless of the tradeoff in attack rates.
@@ -1081,7 +1088,7 @@ knitr::include_graphics("Figure_ECD_LS.pdf")
 # plot.margin = unit(c(0, 0, 0, 0), "cm") to shrink space between plots
 
 Macs <- plot_grid(
-  Mac_attack + xlab("") + ylab(bquote(atop("Effective attack rate","("*a[1,j]+a[2,j]*")"))) + ggtitle("Resources: Same Habitat\n") + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(vjust=0, size=12)), #  + scale_y_continuous(breaks=c(1.8,2.0,2.2)) 
+  Mac_attack + xlab("") + ylab(bquote(atop("Effective attack rate","("*a[1*","*j]+a[2*","*j]*")"))) + ggtitle("Resources: Same Habitat\n") + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(vjust=0, size=12)), #  + scale_y_continuous(breaks=c(1.8,2.0,2.2)) 
   Mac_resources + xlab("") + ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*")"))) + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), axis.title.y=element_text(vjust=0, size=12)), # + scale_y_continuous(breaks=c(1.0,1.2,1.4), limits=c(1.0,1.45)) 
   Stability_Mac + scale_x_continuous(labels = c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(bquote(atop("Food-web stability","("*-lambda[max]*")"))) + theme(legend.position = "none", axis.text = element_text(size=10), axis.title.y=element_text(vjust=0, size=12)), # + scale_y_continuous(breaks=c(0,0.1))
   ncol=1, align='v'#, labels = "AUTO"
@@ -1089,7 +1096,7 @@ Macs <- plot_grid(
 
 
 LSs <- plot_grid(
-  LS_attack  + xlab("") + ylab(bquote(w[1,j]*a[1,j]+w[2,j]*a[2,j])) + ggtitle("Resources: Different Habitats\n") +  theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(size=12)), #+ scale_y_continuous(breaks=c(0.8,1.0,1.2))  # "("*1-w[1,j]*")"
+  LS_attack  + xlab("") + ylab(bquote(w[1*","*j]*a[1*","*j]+w[2*","*j]*a[2*","*j])) + ggtitle("Resources: Different Habitats\n") +  theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(size=12)), #+ scale_y_continuous(breaks=c(0.8,1.0,1.2))  # "("*1-w[1,j]*")"
   LS_resources+ xlab("") + ylab("") + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank()), #+ scale_y_continuous(breaks=c(2.0,2.5,3.0), limits=c(2.0,3.2))  
   Stability_LS + scale_x_continuous(labels = c(0,0.25,0.5,0.75,1)) + xlab("") + ylab("") + theme(legend.position = "none", axis.text = element_text(size=10)), # + scale_y_continuous(breaks=c(0,0.1,0.2))
   ncol=1, align='v'
@@ -1097,7 +1104,7 @@ LSs <- plot_grid(
 
 
 plot_fig3 <- plot_grid(Macs, LSs, ncol=2, rel_widths = c(1,0.9)) 
-plot_fig3_sub <- add_sub(plot_fig3, expression(paste("Specialization ", bgroup("(",frac(a[ii],a[1,j]+a[2,j]),")"))), vjust = 0, size=12) 
+plot_fig3_sub <- add_sub(plot_fig3, expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1*","*j]+a[2*","* j]),")"))), vjust = 0, size=12) 
 
 save_plot(filename="Figure_3.pdf", plot=plot_fig3_sub, base_height = 6.5, base_width = 6)
 ```
@@ -1144,29 +1151,29 @@ This is because resource abundances at equilibrium are governed by a similar dyn
 Even after adding more biological realism, I still observe the same qualitative relationship between character displacement and resource suppression (fig. \ref{fig:McCann_Plot} in Appendix). This is because resource competition always leads to character divergence and equilibrium resource abundances are governed by similar dynamics  (derivation in supplementary material):
 -->
 
-\begin{equation}
+\begin{equation} \label{eq:7}
   \hat{R}=\frac{1}{w_{1,j}a_{1,j}+w_{2,j}a_{2,j}}\cdot\frac{m}{e-hm}
 \end{equation}
 
 And since evolution favors consumer divergence onto their preferred resources (see Appendix S1), the effective attack rate of consumers ($w_{1,j}a_{1,j}+w_{2,j}a_{2,j}$) will always increase, resulting in lower resource abundances and decreased food-web stability (Appendix S4).
 
-In first two foraging scenarios, character displacement influences food-web stability, but all of the food webs ultimately return to a stable equlibrium (because $-\lambda_{max}>0$, see Appendix S2-3). 
+In the first two foraging scenarios, character displacement influences food-web stability, but all of the food webs ultimately return to a stable equilibrium (because $-\lambda_{max}>0$, see Appendix S2-3). 
 In this more realistic model, however, whether the food web is locally stable depends on consumer and resource parameters. 
 Specifically, I found that the two-consumer food web will transition from having a locally stable equilibrium to a limit cycle under the following conditions (derived using Routh-Hurwitz criteria in Appendix S1):
 
-\begin{equation}
+\begin{equation} \label{eq:8}
   w_{1,j}a_{1,j}+w_{2,j}a_{2,j} > \frac{e+hm}{hK(e-hm)}
 \end{equation}
 
 <!--Previously, I showed that character displacement always increases the effective attack rate of consumers ($wa_{ii}+(1-w)a_{ij}$), regardless of the the shape of the tradeoff (fig. \ref{fig:LS_Plot}A).--> 
-Thus, character displacement always pushes the food web toward an unstable stucture in this more realistic foraging scenario (fig. \ref{fig:bifur_plot}). Note that I stopped the simulation in the four-species food web once it became locally unstable. I do not simulate beyond this point as this would require making assumptions about the dynamics of mutant consumers in variable environments, which is beyond the scope of this work. 
+Thus, character displacement always pushes the food web toward an unstable structure in this more realistic foraging scenario (fig. \ref{fig:bifur_plot}). Note that I stopped the simulation in the four-species food web once it became locally unstable. I do not simulate beyond this point as this would require making assumptions about the dynamics of mutant consumers in variable environments, which is beyond the scope of this work. 
 
 ```{r McCann_Resources, include=FALSE, fig.cap="\\label{fig:McCann_Resources}Effect of character displacement on total attack rates (A) and resource abundances (B) when consumers exhibit a more realistic functional response."}
 McCann_attack <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*aij, color = factor(n))) + 
   geom_line() +
   geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="white") + 
   #geom_point(data = filter(McCann_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=1.5, color="white") +
-  ylab(bquote(atop("Effective attack rate","("*w*a[ii]+"("*1-w*")"*a[ij]*")"))) +
+  ylab(bquote(atop("Effective attack rate","("*w[1*","*j]*a[1*","*j]+w[2*","*j]*a[2*","*j]*")"))) +
   #ylab(expression(w*a[ii]+(1-w)*a[ij])) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
   scale_shape_manual(values=c(24,21))  +
@@ -1200,7 +1207,7 @@ Stability_McCann <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McCann_2C
   #geom_point(data = filter(McCann_displacements, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=3, color="white", show.legend = FALSE) +
   #geom_point(data = filter(McCann_displacements, Time=="Begin"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=1.5, color="white") +
   geom_point(data = McCann_displacements, aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor, size=Time), color="white", inherit.aes = FALSE) +
-  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  xlab(expression(frac(a[ij],a[1*","*j]+a[2*","*j]))) +
   ylab(bquote(atop("Food-web stability","("*-lambda[max]*")"))) +
   #ylab(expression("Stability "(-lambda[max]))) + 
   scale_shape_manual(values=c(24,21))  +
@@ -1221,7 +1228,7 @@ plot_McCann_model <- plot_grid(
   McCann_resources    + theme(legend.position = "none") + xlab(""),
   Stability_McCann    + theme(legend.position = "none") + xlab(""), ncol=2, align='hv') # , labels = "AUTO"
 
-plot_McCann_model <- add_sub(plot_McCann_model, label = expression(paste("Specialization ", bgroup("(",frac(a[ii],a[ii]+a[ij]),")"))))
+plot_McCann_model <- add_sub(plot_McCann_model, label = expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1*","*j]+a[2*","*j]),")"))))
 
 #plot_McCann_model <- ggdraw(plot_McCann_model) + draw_grob(McCann_legend, x = 0.7, y=-0.2)
 
@@ -1429,7 +1436,7 @@ bifurcation_plot <- bind_rows(mutate(sim.df, Competitor = "Yes"), mutate(sim.df_
   scale_size_manual(values=c(3,6)) +
   scale_linetype_manual(values=c("dotted","solid")) +
   ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*": max and min)"))) +
-  xlab(expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1,j]+a[2,j]),")")))) +
+  xlab(expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1*","*j]+a[2*","*j]),")")))) +
   #guides(fill = guide_legend(override.aes=list(shape=21))) +
   geom_segment(x=0.815, xend=0.815, y=0, yend=2.65, arrow = arrow(length = unit(0.03, "npc")), color="grey", fill="grey") +
   geom_text(x=0.77, y=2, label="Stability\nboundary", color="grey") +
@@ -1456,7 +1463,7 @@ I found that my previous inferences are robust to including consumer asymmetry a
 
 # Discussion
 
-## Resource abundances
+## Resource Abundances
 
 One of the criteria used to demonstrate character displacement is that "sites of sympatry [two consumers] and allopatry [one consumer] should not differ greatly in food, ..." [@Schluter1992].
 In contrast, my results suggest that ecological character displacement causes predictable differences in resource abundances.
@@ -1538,7 +1545,7 @@ For example, the introduction of nonnative species into two of the six lakes hav
 
 My results contrast, but do not necessarily contradict, the notion from coexistence theory that character displacement contributes to species coexistence [@Lawlor1976]. 
 Rather than studying resilience, coexistence theory usually studies the mutual ability of consumers with different phenotypes to invade when rare [mutual invasibility, @Chesson2000].
-In the context of character displacement, a shortcoming of this mutual invasibility measure is that it does not allow a comparison between food webs with and without a competiting consumer. 
+In the context of character displacement, a shortcoming of this mutual invasibility measure is that it does not allow a comparison between food webs with and without a competing consumer. 
 Such comparisons are necessary for inferring the effects of character displacement, a point that has been made clear in the criteria to demonstrate character displacement [@Schluter1992; @Schluter2000].
 Although the addition of a consumer to a food web can decrease its resilience in the absence of evolution [@May1973], my results are primarily driven by an eco-evolutionary feedback between consumer evolution and resource abundances.
 
@@ -1548,12 +1555,12 @@ Although I model the indirect effects of coevolution between consumers, I do not
 In the context of my model, I would expect prey to evolve traits that reduce consumer attack rates. 
 Thus, prey evolution would act to counter the effects of character displacement on resource abundance and food-web stability. 
 Note that this does not negate my general conclusion that ecological character displacement decreases resource abundances and stability; however, this process may itself create another eco-evolutionary feedback between consumers and resources.
-Thus, not coevolution itself, but the prey's evolutionary response would act to stabilize food webs.
-This may actually help maintain fantastic examples of character divergence and prevent them from destabilizing systems, basically because the consumers trait becomes decoupled with their attack rate.
-Examining this role would be ideal in a quantitative genetic setting that can explicitly track trait dynamics, but it would not fundamentally change the conclusions presented here.
+<!--Therefore, the prey's evolutionary response would act to stabilize food webs, rather than coevolution *per se*.-->
+This may actually help maintain dramatic examples of character divergence and prevent them from destabilizing systems, because it allows consumer traits to become decoupled from their attack rate.
+Examining this decoupling would be ideal in a quantitative genetic model that can explicitly track trait dynamics, but it would not fundamentally change the conclusions presented here.
 
 Another potential caveat is that I explored my model in a setting that makes many assumptions about resource and consumer symmetry (but see consumer asymmetry section). 
-Prior work has shown that allowing for resource asymmetry, for example, may decrease the magnitude of character displacement. 
+Prior work has shown that allowing for resource asymmetry, for example, may decrease the magnitude of character displacement [@Abrams1986]. 
 This is because this asymmetry creates an asymmetry in resource abundances, which dampens the effects of character divergence.
 Again though, this may dampen the effects of divergence, but should not change the qualitative relationship we observed of ecological character displacement decreasing resource abundances and food-web stability.
 
@@ -1564,8 +1571,8 @@ A weakness, however, is that I assume a separation of time scales between ecolog
 I also do not explicitly model an underlying phenotypic trait for consumer attack rates nor do I allow for intraspecific variation. 
 That being said, my theoretical predictions are likely robust to these assumptions. 
 This is because models that explicitly include resource dynamics inevitably show that resource competition results in character divergence, regardless of whether a quantitative genetic or Adaptive Dynamics approach is used [@Lawlor1976; @Taper1985]. 
-A quantitative genetic model may certainly show differences in the magnitude of character divergence, but this should not qualtitatively change its effect on food-web dynamics. <!-- In fact, recent work by @McPeek2017 has shown that divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics. -->It is important to note that my conclusions only apply to food webs with biotic resources that are nutritionally substitutable. 
-It would be interesting to extend these current analyses to non-substitutable resources where chracter convergence is expected [@Abrams1987; @Fox2008].
+A quantitative genetic model may certainly show differences in the <!--magnitude-->pace of character divergence, but this should not qualitatively change its effect on food-web dynamics. <!-- In fact, recent work by @McPeek2017 has shown that divergence in a quantitative genetics model can lead to decreased resource abundances and unstable dynamics. -->It is important to note that my conclusions only apply to food webs with biotic resources that are nutritionally substitutable. 
+It would be interesting to extend these current analyses to non-substitutable resources where character convergence is expected [@Abrams1987; @Fox2008].
 
 ## Conclusions
 
@@ -1624,8 +1631,6 @@ Sally Otto provided much help in early analyses of the mathematical model.
 I would not have been able to take the theory as far as I did without her guidance and encouragement.
 For funding support, I thank the University of British Columbia (Four-Year Fellowship to M.A. Barbour), NSERC (Discovery grant to Greg Crutsinger), and the Swiss National Science Foundation (grant 31003A_160671 to Jordi Bascompte).
  
-
-# Supplementary Material
 
 ```{r MacArthur_asymm, include=FALSE}
 # replaced MacArthur_displacements with MacArthur_displacements_asymm
@@ -1735,8 +1740,8 @@ McCann_attack_asymm <- ggplot(tradeoff_df, aes(x=aii/(aii+aij), y=wii*aii+wij*ai
   geom_line() +
   geom_point(data = filter(McCann_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=3, color="white") + 
   #geom_point(data = filter(McCann_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=w11*a11+w12*a12, fill=factor(n), shape=Competitor), size=1.5, color="white") +
-  ylab(expression(w*a[ii]+(1-w)*a[ij])) +
-  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
+  ylab(bquote(atop("Effective attack rate","("*w[1*","*j]*a[1*","*j]+w[2*","*j]*a[2*","*j]*")"))) +
+  xlab(expression(frac(a[ii],a[1*","*j]+a[2*","*j]))) +
   scale_shape_manual(values=c(24,21)) +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
@@ -1747,7 +1752,7 @@ McCann_resources_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McC
   geom_line() +
   geom_point(data = filter(McCann_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=3, color="white") + 
   #geom_point(data = filter(McCann_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=R1+R2, fill=factor(n), shape=Competitor), size=1.5, color="white") +
-  ylab(expression(R[i]+R[j])) +
+  ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*")"))) +
   xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
   scale_shape_manual(values=c(24,21)) +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
@@ -1759,41 +1764,45 @@ Stability_McCann_asymm <- cbind.data.frame(select(tradeoff_df, n, aii, aij), McC
   geom_line() +
   geom_point(data = filter(McCann_displacements_asymm, Time=="End"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=3, color="white", show.legend=FALSE) + 
   geom_point(data = filter(McCann_displacements_asymm, Time=="Begin"), aes(x = a11/(a11+a12), y=-1*max.Re.eigen, fill=factor(n), shape=Competitor), size=1.5, color="white") +
-  xlab(expression(frac(a[ii],a[ii]+a[ij]))) +
-  ylab(expression("Stability "(-lambda[max]))) + #ylab(expression(-1%*%"Re"(lambda[max]))) +
+  xlab(expression(frac(a[ij],a[1*","*j]+a[2*","*j]))) +
+  ylab(bquote(atop("Food-web stability","("*-lambda[max]*")"))) + #ylab(expression(-1%*%"Re"(lambda[max]))) +
   scale_shape_manual(values=c(24,21))  +
   scale_color_manual(name="Tradeoff (n)", values=cbPalette)  +
   scale_fill_manual(name="Tradeoff (n)", values=cbPalette) +
   #geom_hline(yintercept=0, color="grey") +
   guides(fill = guide_legend(override.aes=list(shape=21)))
 
-McCann_plots_asymm <- plot_grid(McCann_attack_asymm   + theme(legend.position = "none"), 
-                             McCann_resources_asymm   + theme(legend.position = "none"), 
-                             Stability_McCann_asymm   + theme(legend.position = "none"), 
-                       ncol=2, labels = "AUTO", align = 'hv')
+McCann_plots_asymm <- plot_grid(McCann_attack_asymm   + theme(legend.position = "none") + xlab(""), 
+                             McCann_resources_asymm   + theme(legend.position = "none") + xlab(""), 
+                             Stability_McCann_asymm   + theme(legend.position = "none") + xlab(""), 
+                       ncol=2, align = 'hv')
 McCann_plots_asymm
 
-save_plot(filename="Figure_ECD_McCann_asymm.pdf", plot=McCann_plots_asymm, base_height = 6, base_width = 6)
+plot_McCann_asymm <- add_sub(McCann_plots_asymm, label = expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1*","*j]+a[2*","*j]),")"))))
+
+save_plot(filename="Figure_ECD_McCann_asymm.pdf", plot=plot_McCann_asymm, base_height = 6, base_width = 6)
 # moved to supplementary information
 ```
 
 ```{r all asymmetry, echo=FALSE}
 
-all_asymm_plots <- plot_grid(
-  Mac_attack_asymm + ggtitle("Scenario I\n") + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(bquote(atop("Effective attack rate","("*a[ii]+a[ij]*")"))), #, plot.title=element_text(size=8)
-  LS_attack_asymm  + ggtitle("Scenario II\n") + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(bquote(w[ii]*a[ii]+"("*1-w[ii]*")"*a[ij]*")")), #, plot.title=element_text(size=8)
-  McCann_attack_asymm + ggtitle("Scenario III")  + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(bquote(w[ii]*a[ii]+"("*1-w[ii]*")"*a[ij]*")")), #, plot.title=element_text(size=8), plot.subtitle=element_text(size=8)
-  Mac_resources_asymm   + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*")"))),
-  LS_resources_asymm   + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(""),
-  McCann_resources_asymm   + theme(legend.position = "none", axis.text.x=element_blank()) + xlab("") + ylab(""),
-  Stability_Mac_asymm   + theme(legend.position = "none") + scale_x_continuous(labels=c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(bquote(atop("Food-web stability","("*-lambda[max]*")"))),
-  Stability_LS_asymm   + theme(legend.position = "none") + scale_x_continuous(labels=c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(""),
-  Stability_McCann_asymm   + theme(legend.position = "none") + scale_x_continuous(labels=c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(""),
-  ncol=3, align='v'#, rel_widths = c(1,0.9,0.9)
+Macs_asymm <- plot_grid(
+  Mac_attack_asymm + ggtitle("Resources: Same Habitat\n") + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(vjust=0, size=12)) + xlab("") + ylab(bquote(atop("Effective attack rate","("*a[1*","*j]+a[2*","*j]*")"))), 
+  Mac_resources_asymm   + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), axis.title.y=element_text(vjust=0, size=12)) + xlab("") + ylab(bquote(atop("Resource abundance","("*R[1]+R[2]*")"))),
+  Stability_Mac_asymm   + theme(legend.position = "none", axis.text = element_text(size=10), axis.title.y=element_text(vjust=0, size=12)) + scale_x_continuous(labels=c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(bquote(atop("Food-web stability","("*-lambda[max]*")"))),
+  ncol=1, align='v'#, rel_widths = c(1,0.9,0.9)
 )
 
-all_asymm_plots <- add_sub(all_asymm_plots, label = expression(paste("Specialization ", bgroup("(",frac(a[ii],a[ii]+a[ij]),")"))))
+LSs_asymm <- plot_grid(
+  LS_attack_asymm  + ggtitle("Resources: Different Habitats\n") +  theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x = element_blank(), plot.title = element_text(size = 10), axis.title.y=element_text(size=12)) + xlab("") + ylab(bquote(w[1*","*j]*a[1*","*j]+w[2*","*j]*a[2*","*j])), 
+  LS_resources_asymm   + theme(legend.position = "none", axis.text = element_text(size=10), axis.text.x=element_blank()) + xlab("") + ylab(""),
+  Stability_LS_asymm   + theme(legend.position = "none", axis.text = element_text(size=10)) + scale_x_continuous(labels=c(0,0.25,0.5,0.75,1)) + xlab("") + ylab(""),
+  ncol=1, align='v'#, rel_widths = c(1,0.9,0.9)
+)
 
-save_plot(filename="asymm_figs.pdf", plot=all_asymm_plots, base_height = 11, base_width = 8.5)
+all_asymm_plots <- plot_grid(Macs_asymm, LSs_asymm, ncol=2, rel_widths = c(1,0.9)) 
+all_asymm_plots <- add_sub(all_asymm_plots, label = expression(paste("Specialization ", bgroup("(",frac(a[ij],a[1*","*j]+a[2*","*j]),")"))))
+
+save_plot(filename="asymm_figs.pdf", plot=all_asymm_plots, base_height = 6.5, base_width = 6)
 ```
 
