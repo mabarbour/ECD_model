@@ -1629,6 +1629,7 @@ This calls for food-web ecologists to more criticaly consider the role of evolut
 This work was inspired by discussions with Seth Rudman, Dolph Schluter, Ben Gilbert, and Kevin McCann.
 Sally Otto provided much help in early analyses of the mathematical model. 
 I would not have been able to take the theory as far as I did without her guidance and encouragement.
+Matt Osmond, Jean Gibert, and Seth Rudman provided critical feedback on an earlier draft.
 For funding support, I thank the University of British Columbia (Four-Year Fellowship to M.A. Barbour), NSERC (Discovery grant to Greg Crutsinger), and the Swiss National Science Foundation (grant 31003A_160671 to Jordi Bascompte).
  
 
