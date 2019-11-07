@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.2.7)  29 OCT 2019 23:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.2.7)  7 NOV 2019 10:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -700,13 +700,7 @@ Now handling font encoding PU ...
 )
 Package hyperref Info: Option `colorlinks' set `true' on input line 31.
 Package hyperref Info: Option `breaklinks' set `true' on input line 31.
-(/usr/share/texlive/texmf-dist/tex/latex/natbib/natbib.sty
-Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip48
-\bibsep=\skip49
-LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count111
-) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2016/01/03 v1.0q Standard LaTeX Graphics (DPC,SPQR)
@@ -718,7 +712,7 @@ File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 Package graphics Info: Driver file: pdftex.def on input line 95.
 (/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
 File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-\Gread@gobject=\count112
+\Gread@gobject=\count111
 ))
 \Gin@req@height=\dimen117
 \Gin@req@width=\dimen118
@@ -732,24 +726,24 @@ Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 486.
 Package: parskip 2001/04/09 non-zero parskip adjustments
 ) (/usr/share/texlive/texmf-dist/tex/latex/titling/titling.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
-\thanksmarkwidth=\skip50
-\thanksmargin=\skip51
-\droptitle=\skip52
+\thanksmarkwidth=\skip48
+\thanksmargin=\skip49
+\droptitle=\skip50
 ) (/usr/share/texlive/texmf-dist/tex/latex/preprint/fullpage.sty
 Package: fullpage 1999/02/23 1.1 (PWD)
-\FP@margin=\skip53
+\FP@margin=\skip51
 ) (/usr/share/texlive/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count113
+\linenopenalty=\count112
 \output=\toks24
-\linenoprevgraf=\count114
+\linenoprevgraf=\count113
 \linenumbersep=\dimen119
 \linenumberwidth=\dimen120
-\c@linenumber=\count115
-\c@pagewiselinenumber=\count116
-\c@LN@truepage=\count117
-\c@internallinenumber=\count118
-\c@internallinenumbers=\count119
+\c@linenumber=\count114
+\c@pagewiselinenumber=\count115
+\c@LN@truepage=\count116
+\c@internallinenumber=\count117
+\c@internallinenumbers=\count118
 \quotelinenumbersep=\dimen121
 \bframerule=\dimen122
 \bframesep=\dimen123
@@ -768,38 +762,38 @@ Package caption3 Info: TeX engine: e-TeX on input line 67.
 \caption@parindent=\dimen129
 \caption@hangindent=\dimen130
 )
-\c@ContinuedFloat=\count120
+\c@ContinuedFloat=\count119
 Package caption Info: hyperref package is loaded.
 ) (./Appendix_S4.aux)
 \openout1 = `Appendix_S4.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 94.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 94.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 92.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 92.
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 94.
-LaTeX Font Info:    ... okay on input line 94.
-LaTeX Font Info:    Try loading font information for T1+ppl on input line 94.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 92.
+LaTeX Font Info:    ... okay on input line 92.
+LaTeX Font Info:    Try loading font information for T1+ppl on input line 92.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1ppl.fd
 File: t1ppl.fd 2001/06/04 font definitions for T1/ppl.
 )
-LaTeX Info: Redefining \microtypecontext on input line 94.
+LaTeX Info: Redefining \microtypecontext on input line 92.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -822,33 +816,33 @@ Package color Info: Driver file: pdftex.def on input line 143.
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2015/12/30 v3.0k Driver-dependent file (DPC,SPQR)
 ))
-Package hyperref Info: Link coloring ON on input line 94.
+Package hyperref Info: Link coloring ON on input line 92.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count121
+\c@section@level=\count120
 )
-LaTeX Info: Redefining \ref on input line 94.
-LaTeX Info: Redefining \pageref on input line 94.
-LaTeX Info: Redefining \nameref on input line 94.
+LaTeX Info: Redefining \ref on input line 92.
+LaTeX Info: Redefining \pageref on input line 92.
+LaTeX Info: Redefining \nameref on input line 92.
 (./Appendix_S4.out) (./Appendix_S4.out)
 \@outlinefile=\write3
 \openout3 = `Appendix_S4.out'.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count122
+\scratchcounter=\count121
 \scratchdimen=\dimen131
 \scratchbox=\box30
-\nofMPsegments=\count123
-\nofMParguments=\count124
+\nofMPsegments=\count122
+\nofMParguments=\count123
 \everyMPshowfont=\toks25
-\MPscratchCnt=\count125
+\MPscratchCnt=\count124
 \MPscratchDim=\dimen132
-\MPnumerator=\count126
-\makeMPintoPDFobject=\count127
+\MPnumerator=\count125
+\makeMPintoPDFobject=\count126
 \everyMPtoPDFconversion=\toks26
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -865,109 +859,113 @@ e
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
-LaTeX Font Info:    Try loading font information for OT1+ppl on input line 102.
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 100.
 
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1ppl.fd
 File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
 )
-LaTeX Font Info:    Try loading font information for OML+zplm on input line 102
+LaTeX Font Info:    Try loading font information for OML+zplm on input line 100
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omlzplm.fd
 File: omlzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OML/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMS+zplm on input line 102
+LaTeX Font Info:    Try loading font information for OMS+zplm on input line 100
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omszplm.fd
 File: omszplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMS/zplm.
 )
-LaTeX Font Info:    Try loading font information for OMX+zplm on input line 102
+LaTeX Font Info:    Try loading font information for OMX+zplm on input line 100
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/omxzplm.fd
 File: omxzplm.fd 2002/09/08 Fontinst v1.914 font definitions for OMX/zplm.
 )
-LaTeX Font Info:    Try loading font information for OT1+zplm on input line 102
+LaTeX Font Info:    Try loading font information for OT1+zplm on input line 100
 .
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1zplm.fd
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 102.
+(Font)              scaled to size 12.50409pt on input line 100.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 102.
+(Font)              scaled to size 9.37807pt on input line 100.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 102.
+(Font)              scaled to size 7.29405pt on input line 100.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 12.50409pt on input line 102.
+(Font)              scaled to size 12.50409pt on input line 100.
 (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 9.37807pt on input line 102.
+(Font)              scaled to size 9.37807pt on input line 100.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.29405pt on input line 102.
+(Font)              scaled to size 7.29405pt on input line 100.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 112.
+(Font)              scaled to size 11.40997pt on input line 110.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 112.
+(Font)              scaled to size 8.33606pt on input line 110.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 112.
+(Font)              scaled to size 6.25204pt on input line 110.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 11.40997pt on input line 112.
+(Font)              scaled to size 11.40997pt on input line 110.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 8.33606pt on input line 112.
+(Font)              scaled to size 8.33606pt on input line 110.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 6.25204pt on input line 112.
+(Font)              scaled to size 6.25204pt on input line 110.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <Figure_ECD_McCann.pdf, id
-=13, 433.62pt x 433.62pt>
-File: Figure_ECD_McCann.pdf Graphic file (type pdf)
-<use Figure_ECD_McCann.pdf>
-Package pdftex.def Info: Figure_ECD_McCann.pdf used on input line 123.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] <Appendix_S4_Fig_S1_McCann
+.pdf, id=13, 433.62pt x 433.62pt>
+File: Appendix_S4_Fig_S1_McCann.pdf Graphic file (type pdf)
+<use Appendix_S4_Fig_S1_McCann.pdf>
+Package pdftex.def Info: Appendix_S4_Fig_S1_McCann.pdf used on input line 121.
 (pdftex.def)             Requested size: 433.63878pt x 433.63878pt.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 135.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 133.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 135.
+(Font)              scaled to size 10.42007pt on input line 133.
 LaTeX Font Info:    Font shape `U/msa/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 135.
+(Font)              scaled to size 7.91925pt on input line 133.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 10.42007pt on input line 135.
+(Font)              scaled to size 10.42007pt on input line 133.
 LaTeX Font Info:    Font shape `U/msb/m/n' will be
-(Font)              scaled to size 7.91925pt on input line 135.
-<asymm_figs.pdf, id=14, 433.62pt x 469.755pt>
-File: asymm_figs.pdf Graphic file (type pdf)
-<use asymm_figs.pdf>
-Package pdftex.def Info: asymm_figs.pdf used on input line 142.
+(Font)              scaled to size 7.91925pt on input line 133.
+
+<Appendix_S4_Fig_S2_Asymmetry_MacArthur_LawlorSmith.pdf, id=14, 433.62pt x 469.
+755pt>
+File: Appendix_S4_Fig_S2_Asymmetry_MacArthur_LawlorSmith.pdf Graphic file (type
+ pdf)
+<use Appendix_S4_Fig_S2_Asymmetry_MacArthur_LawlorSmith.pdf>
+Package pdftex.def Info: Appendix_S4_Fig_S2_Asymmetry_MacArthur_LawlorSmith.pdf
+ used on input line 140.
 (pdftex.def)             Requested size: 433.61894pt x 469.75386pt.
 
-LaTeX Warning: Float too large for page by 39.32385pt on input line 159.
+LaTeX Warning: Float too large for page by 39.32385pt on input line 157.
 
-<Figure_ECD_McCann_asymm.pdf, id=15, 433.62pt x 433.62pt>
-File: Figure_ECD_McCann_asymm.pdf Graphic file (type pdf)
-<use Figure_ECD_McCann_asymm.pdf>
-Package pdftex.def Info: Figure_ECD_McCann_asymm.pdf used on input line 163.
+<Appendix_S4_Fig_S3_Asymmetry_McCann.pdf, id=15, 433.62pt x 433.62pt>
+File: Appendix_S4_Fig_S3_Asymmetry_McCann.pdf Graphic file (type pdf)
+<use Appendix_S4_Fig_S3_Asymmetry_McCann.pdf>
+Package pdftex.def Info: Appendix_S4_Fig_S3_Asymmetry_McCann.pdf used on input 
+line 163.
 (pdftex.def)             Requested size: 433.63878pt x 433.63878pt.
-No file Appendix_S4.bbl.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 183.
-[2 <./Figure_ECD_McCann.pdf>] [3 <./asymm_figs.pdf>] [4 <./Figure_ECD_McCann_as
-ymm.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 183.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 181.
+[2 <./Appendix_S4_Fig_S1_McCann.pdf>] [3 <./Appendix_S4_Fig_S2_Asymmetry_MacArt
+hur_LawlorSmith.pdf>] [4 <./Appendix_S4_Fig_S3_Asymmetry_McCann.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 181.
 (./Appendix_S4.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 183.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 183.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 181.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 181.
 Package rerunfilecheck Info: File `Appendix_S4.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 183.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 181.
  ) 
 Here is how much of TeX's memory you used:
- 13718 strings out of 493029
- 199905 string characters out of 6136235
- 291620 words of memory out of 5000000
- 16987 multiletter control sequences out of 15000+600000
+ 13399 strings out of 493029
+ 196401 string characters out of 6136235
+ 285996 words of memory out of 5000000
+ 16673 multiletter control sequences out of 15000+600000
  42210 words of font info for 148 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  39i,8n,43p,1199b,439s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -976,7 +974,7 @@ e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/texlive/texmf-dist/fonts
 /type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/p
 alatino/uplri8a.pfb>
-Output written on Appendix_S4.pdf (4 pages, 114254 bytes).
+Output written on Appendix_S4.pdf (4 pages, 114309 bytes).
 PDF statistics:
  70 PDF objects out of 1000 (max. 8388607)
  53 compressed objects within 1 object stream
