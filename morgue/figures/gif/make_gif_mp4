@@ -1,3 +1,0 @@
-convert *.png -delay 3 -loop 1 ecd_symmetry.gif
-ffmpeg -f gif -i ecd_symmetry.gif ecd_symmetry.mp4
-
