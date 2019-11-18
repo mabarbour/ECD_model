@@ -10,7 +10,7 @@ header-includes:
   - \usepackage{fullpage}
   - \linespread{1.5} 
   - \usepackage{lineno}
-  - \usepackage{caption}
+  - \usepackage{caption,setspace} # sets spread to 1 within captions
   - \captionsetup[figure]{font=small,labelformat=empty}
 fontsize: 11pt
 fontfamily: mathpazo
@@ -31,11 +31,11 @@ citecolor: black
 
 \bigskip
 
-\noindent 1. University of Zurich, Department of Evolutionary Biology and Environmental Studies, 8057 Zurich, Switzerland;
+\noindent 1. University of Zurich, Department of Evolutionary Biology and Environmental Studies, Winterthurerstrasse 190, 8057 Zurich, Switzerland;
 
-\noindent 2. University of British Columbia, Department of Zoology, Vancouver, BC V6T 1Z4, Canada;
+\noindent 2. University of British Columbia, Department of Zoology, 2212 Main Mall, Vancouver, BC V6T 1Z4, Canada;
 
-$^\ast$ Corresponding author; e-mail: matthew.barbour@ieu.uzh.ch
+$^\ast$ Corresponding author; e-mail: matthew.barbour@ieu.uzh.ch, phone: +41 44 635 61 63
 
 \bigskip
 
@@ -47,18 +47,18 @@ $^\ast$ Corresponding author; e-mail: matthew.barbour@ieu.uzh.ch
 knitr::opts_chunk$set(warning = FALSE)
 ```
 
-```{r McCann_Plot, echo=FALSE, fig.pos="H", fig.cap="Figure S1: **Effect of character displacement when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~, whereas as small shapes correspond to the starting points (only in stability panel). This figure illustrates how, regardless of the tradeoff, character displacement increases the effective attack rate of consumers. This always resulted in a suppression of resource abundances and concomitant decrease in food-web stability. Initial parameter and state variables are given in the main text."}
+```{r McCann_Plot, echo=FALSE, fig.pos="H", fig.cap="Figure S1: **Effect of character displacement when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoffs in attack rates (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~ (choice to display *C*~1~ was arbitrary), whereas as small shapes correspond to the starting points (only in stability panel). This figure illustrates how, regardless of the tradeoff, character displacement increases the effective attack rate of consumers. This always resulted in a suppression of resource abundances and concomitant decrease in food-web stability. Initial parameter and state variables are given in the main text."}
 knitr::include_graphics("Appendix_S4_Fig_S1_McCann.pdf")
 ```
 
 \newpage 
 
-```{r All asymmetric figs, echo=FALSE, fig.pos="H", fig.cap="Figure S2: **Robustness to consumer asymmetry**. Lines show predicted values when both consumers and resources are present. Different line colors correspond to different tradeoffs in attack rates (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~, whereas as small shapes correspond to the starting points (only in stability panels). In both foraging scenarios, feeding rates increase linearly with resource abundance, but the equation for effective attack rate is different. The similarity with fig. 3 (main text) shows that adding an asymmetry in consumer attack rates does not alter the conclusions reported in the main text. If anything, it is more likely that an asymmetry will push the system toward the boundary of stability (note position of large circles in lower left stability panel). Details of the consumer asymmetry simulation are given in the main text."}
+```{r All asymmetric figs, echo=FALSE, fig.pos="H", fig.cap="Figure S2: **Robustness to consumer asymmetry**. Lines show predicted values when both consumers and resources are present. Different line colors correspond to different tradeoffs in attack rates (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~ (choice to display *C*~1~ was arbitrary), whereas as small shapes correspond to the starting points (only in stability panels). In both foraging scenarios, feeding rates increase linearly with resource abundance, but the equation for the effective attack rate is different. The similarity with Fig. 3 (main text) shows that adding an asymmetry in consumer attack rates does not alter the conclusions reported in the main text. If anything, it is more likely that an asymmetry will push the system toward the boundary of stability (note position of large circles in lower left stability panel). Details of the consumer asymmetry simulation are given in the main text."}
 knitr::include_graphics("Appendix_S4_Fig_S2_Asymmetry_MacArthur_LawlorSmith.pdf")
 ```
 
 \newpage
 
-```{r McCann_Plot_asymm, echo=FALSE, fig.cap="Figure S3: **Robustness to consumer asymmetry when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoff values (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~, whereas as small shapes correspond to the starting points. Panel (A) shows how, regardless of the tradeoff, character displacement increases the effective attack rate of consumers. This always resulted in a suppression of resource abundances (B) and concomitant decrease in food-web stability (C). The similarity with fig. S1 shows that adding an asymmetry in consumer attack rates does not alter the conclusions reported in the main text. Details of the consumer asymmetry simulation are given in the main text."}
+```{r McCann_Plot_asymm, echo=FALSE, fig.cap="Figure S3: **Robustness to consumer asymmetry when consumers exhibit a more realistic functional response.** Different line colors correspond to different tradeoffs in attack rates (green, *n* = 1.15; blue, *n* = 1; orange, *n* = 0.85). Large circles (two consumers) and triangles (one consumer) correspond to the end points of the eco-evolutionary simulation for *C*~1~ (choice to display *C*~1~ was arbitrary), whereas as small shapes correspond to the starting points. Regardless of the tradeoff, character displacement increases the effective attack rate of consumers (a). This always resulted in a suppression of resource abundances (b) and concomitant decrease in food-web stability (c). The similarity with Fig. S1 shows that adding an asymmetry in consumer attack rates does not alter the conclusions reported in the main text. Details of the consumer asymmetry simulation are given in the main text."}
 knitr::include_graphics("Appendix_S4_Fig_S3_Asymmetry_McCann.pdf")
 ```
