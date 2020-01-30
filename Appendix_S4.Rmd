@@ -8,7 +8,7 @@ output:
     fig_caption: true
 header-includes:
   - \usepackage{fullpage}
-  - \linespread{1.5} 
+  - \linespread{1.7} 
   - \usepackage{lineno}
   - \usepackage{caption,setspace} # sets spread to 1 within captions
   - \captionsetup[figure]{font=small,labelformat=empty}
@@ -27,6 +27,7 @@ citecolor: black
 
 \bigskip
 
+<!-- remove for double-blind peer review
 \begin{center} \large Matthew A. Barbour$^{1,2,\ast}$ \normalsize \end{center}
 
 \bigskip
@@ -38,6 +39,7 @@ citecolor: black
 $^\ast$ Corresponding author; e-mail: matthew.barbour@ieu.uzh.ch, phone: +41 44 635 61 63
 
 \bigskip
+-->
 
 *Elements*: Figures S1, S2, and S3. 
 

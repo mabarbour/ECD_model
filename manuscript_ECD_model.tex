@@ -18,12 +18,13 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage{hyperref}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
 \PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
-\hypersetup{unicode=true,
+\hypersetup{
             colorlinks=true,
             linkcolor=black,
             citecolor=black,
@@ -31,7 +32,7 @@
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
 \usepackage{natbib}
-\bibliographystyle{EcolLett}
+\bibliographystyle{amnat}
 \usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
@@ -61,35 +62,19 @@
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 
-%%% Use protect on footnotes to avoid problems with footnotes in titles
-\let\rmarkdownfootnote\footnote%
-\def\footnote{\protect\rmarkdownfootnote}
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
 
-%%% Change title format to be more compact
-\usepackage{titling}
-
-% Create subtitle command for use in maketitle
-\providecommand{\subtitle}[1]{
-  \posttitle{
-    \begin{center}\large#1\end{center}
-    }
-}
-
-\setlength{\droptitle}{-2em}
-
-  \title{}
-    \pretitle{\vspace{\droptitle}}
-  \posttitle{}
-    \author{}
-    \preauthor{}\postauthor{}
-    \date{}
-    \predate{}\postdate{}
-  
 \usepackage{fullpage}
-\linespread{1.5}
+\linespread{1.7}
 \usepackage{lineno}
-\usepackage{caption,setspace}
+\usepackage{caption}
 \captionsetup[figure]{font=small}
+
+\author{}
+\date{\vspace{-2.5em}}
 
 \begin{document}
 
@@ -99,57 +84,19 @@
 
 \bigskip
 
-\begin{center} \large Matthew A. Barbour$^{1,2,\ast}$ \normalsize \end{center}
+\emph{Manuscript type}: E-Article.
 
 \bigskip
 
-\noindent 1. University of Zurich, Department of Evolutionary Biology
-and Environmental Studies, Winterthurerstrasse 190, 8057 Zurich,
-Switzerland;
-
-\noindent 2. University of British Columbia, Department of Zoology, 2212
-Main Mall, Vancouver, BC V6T 1Z4, Canada;
-
-\(^\ast\) Corresponding author; e-mail:
-\href{mailto:matthew.barbour@ieu.uzh.ch}{\nolinkurl{matthew.barbour@ieu.uzh.ch}},
-phone: +41 44 635 61 63
-
-\bigskip
-
-\emph{Statement of authorship}: MAB conceived the study, derived
-analytical solutions, performed simulations, and wrote the paper.
-
-\bigskip
-
-\emph{Data accessibility}: No new data were used. All code used to
-reproduce this manuscript and simulations within are publically
-available on GitHub (\url{https://github.com/mabarbour/ECD_model}) and
-has been archived with Zenodo
-(\url{https://zenodo.org/badge/latestdoi/79349192}).
-
-\bigskip
-
-\emph{Running title}: Character displacement destabilizes food webs
+\emph{Manuscript elements}: Figures 1-4; Online appendices S1-4
+(including figures S1-3 in appendix S4).
 
 \bigskip
 
 \emph{Keywords}: competition; eco-evolutionary dynamics;
 consumer-resource interactions; adaptation; community stability
 
-\bigskip
-
-\emph{Manuscript type}: Letter.
-
-\bigskip
-
-\emph{Number of words in abstract}: 143; \emph{Number of words in main
-text}: 4151; \emph{Number of words in text boxes}: NA; \emph{Number of
-references}: 45; \emph{Number of figures}: 4; \emph{Number of tables}:
-0; \emph{Number of text boxes}: 0
-
-\linenumbers{} \modulolinenumbers[3]
-
-\newpage
+\linenumbers{} \modulolinenumbers[2]
 
 \section{Abstract}\label{abstract}
 
@@ -322,6 +269,30 @@ displacement in any of the foraging scenarios I analyzed, I refer to
 divergent character displacement as simply (ecological) character
 displacement throughout the rest of the text.
 
+\begin{figure}
+\centering
+\includegraphics{Fig_1_ForagingScenarios}
+\caption{\label{fig:foraging_scenarios}\textbf{Ecological foraging
+scenarios.} I examined whether the effect of ecological character
+displacement on food-web dynamics depended on whether consumers competed
+for resources that occurred in the same (a) vs.~different habitats (b).
+Note that inferences about character displacement can only be made by
+comparing food webs with (right) and without (left) a competing
+consumer, so I arbitrarily set \emph{C}\textsubscript{2} = 0 for these
+comparisons. The width of each arrow corresponds to the initial attack
+rate (\emph{a}\textsubscript{ij}) of consumer \emph{j} on resource
+\emph{i}. Note that \emph{C}\textsubscript{1} was pre-adapted to
+\emph{R}\textsubscript{1} (\emph{a}\textsubscript{11} \textgreater{}
+\emph{a}\textsubscript{21}), while \emph{C}\textsubscript{2} was a
+mirror image, being pre-adapted to \emph{R\textsubscript{2}}
+(\emph{a}\textsubscript{22} = \emph{a}\textsubscript{11};
+\emph{a}\textsubscript{12} = \emph{a}\textsubscript{21}). In each
+scenario, I assumed consumer feeding rates increased linearly with
+resource abundance. I also relax this assumption and consider a more
+realistic functional response when resources occurred in different
+habitats (b).}
+\end{figure}
+
 \subsection{Food-web dynamics}\label{food-web-dynamics}
 
 Given that character displacement occurred across these foraging
@@ -392,9 +363,29 @@ simulations with the following parameter values: \emph{r} = 1; \emph{K}
 the value of \emph{n}. I set initial consumer and resource abundances
 to: \(R_1 = R_2 = 2\); \(C_1 = C_2 = 1\). All simulations were conducted
 in R \citep{R} and the code to reproduce these simulations is publically
-available on GitHub (\url{https://github.com/mabarbour/ECD_model}) and
-has been archived with Zenodo
-(\url{https://zenodo.org/badge/latestdoi/79349192}).
+available on GitHub and has been archived with Zenodo (please contact
+journal office for links).
+
+\begin{figure}
+\centering
+\includegraphics{Fig_2_Tradeoffs.pdf}
+\caption{\label{fig:tradeoff}\textbf{Evolutionary tradeoffs in consumer
+attack rates.} In each foraging scenario, I explored the effects of
+three different tradeoffs: intermediate combinations of attack rates
+(\emph{a}\textsubscript{1,\emph{j}}, \emph{a}\textsubscript{2,\emph{j}})
+are higher than the extremes (green line, \emph{n} \textgreater{} 1);
+extreme combinations of attack rates are higher than intermediate
+investments (orange line, \emph{n} \textless{} 1); and all combinations
+of attack rates have the same total attack rate (blue line, \emph{n} =
+1). Points corresponding to attack rates at the beginning of the
+simulation for \emph{C}\textsubscript{1}, which was pre-adapted to
+\emph{R}\textsubscript{1} (\emph{a}\textsubscript{11} \textgreater{}
+\emph{a}\textsubscript{12}). Note that \emph{C}\textsubscript{2} was a
+mirror image of \emph{C}\textsubscript{1}, being pre-adapted to
+\emph{R}\textsubscript{2} (\emph{a}\textsubscript{22} =
+\emph{a}\textsubscript{11}; \emph{a}\textsubscript{12} =
+\emph{a}\textsubscript{21}).}
+\end{figure}
 
 \section{Results}\label{results}
 
@@ -500,6 +491,23 @@ stable than when there is only one consumer (small triangle); however,
 this pattern switches by the end of the eco-evolutionary simulation
 (large points).
 
+\begin{figure}
+\centering
+\includegraphics{Fig_3_MacArthur_LawlorSmith.pdf}
+\caption{\label{fig:plot_fig3}\textbf{Effect of character displacement
+on food-web dynamics under different evolutionary tradeoffs and foraging
+scenarios.} Lines show predicted values when both consumers and
+resources are present. Different line colors correspond to different
+tradeoffs in attack rates (green, \emph{n} = 1.15; blue, \emph{n} = 1;
+orange, \emph{n} = 0.85). Large circles (two consumers) and triangles
+(one consumer) correspond to the end points of the eco-evolutionary
+simulation for \emph{C}\textsubscript{1} (the choice to display
+\emph{C}\textsubscript{1} was arbitrary), whereas as small shapes
+correspond to the starting points (only in stability panels). In both
+foraging scenarios, feeding rates increase linearly with resource
+abundance, but the equation for the effective attack rate is different.}
+\end{figure}
+
 \subsection{Adding a more realistic functional
 response}\label{adding-a-more-realistic-functional-response}
 
@@ -539,6 +547,21 @@ in the two-consumer food web once it became locally unstable. I do not
 simulate beyond this point as this would require making assumptions
 about the dynamics of mutant consumers in variable environments, which
 is beyond the scope of this work.
+
+\begin{figure}
+\centering
+\includegraphics{Fig_4_Bifurcation.pdf}
+\caption{\label{fig:bifur_plot}\textbf{Character displacement creates an
+unstable food web}. Lines illustrate the effect of character
+displacement across the range of specialization for
+\emph{C}\textsubscript{1} (the choice to display
+\emph{C}\textsubscript{1} was arbitrary), while the points are the
+results of an eco-evolutionary simulation. Note that I increased the
+total investment in attack rates (\emph{A} = 3.3) to create a scenario
+that could result in an unstable food web. Although I specified a linear
+tradeoff in attack rates for this simulation, different tradeoff shapes
+do not qualitatively alter these results (see Appendix S4, Fig. S1).}
+\end{figure}
 
 \subsection{Robustness to consumer
 asymmetry}\label{robustness-to-consumer-asymmetry}
@@ -745,19 +768,6 @@ phenotypic diversity that is agnostic to these evolutionary processes
 ecological constraint arises will yield novel insight to the patterns of
 biodiversity we see in nature.
 
-\section{Acknowledgements}\label{acknowledgements}
-
-This work was inspired by discussions with Seth Rudman, Dolph Schluter,
-Ben Gilbert, and Kevin McCann. Sally Otto provided much help in early
-analyses of the mathematical model. I would not have been able to take
-the theory as far as I did without her guidance and encouragement. Matt
-Osmond, Jean Gibert, and Seth Rudman provided critical feedback on an
-earlier draft. For funding support, I thank the University of British
-Columbia (Four-Year Fellowship to M.A.~Barbour), NSERC (Discovery grant
-to Greg Crutsinger), and the Swiss National Science Foundation (grant
-31003A\_160671 to Jordi Bascompte).
-
-\bibliography{ReferencesAbbrev}
-
+\bibliography{ReferencesAbbrev.bib}
 
 \end{document}
