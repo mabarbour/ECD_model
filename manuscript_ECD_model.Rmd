@@ -15,7 +15,7 @@ header-includes:
   - \usepackage{lineno}
   - \usepackage{caption}
   - \captionsetup[figure]{font=small}
-bibliography: ReferencesAbbrev.bib
+bibliography: References.bib
 biblio-style: amnat
 fontsize: 11pt
 fontfamily: mathpazo
@@ -30,7 +30,6 @@ citecolor: black
 \vspace*{0.1cm} 
 \begin{center} \LARGE Ecological character displacement destabilizes food webs \end{center}
 
-<!-- remove for double-blind peer-review
 \bigskip 
 
 \begin{center} \large Matthew A. Barbour$^{1,2,\ast}$ \normalsize \end{center}
@@ -49,7 +48,7 @@ $^\ast$ Corresponding author; e-mail: matthew.barbour@ieu.uzh.ch, phone: +41 44 
 
 \bigskip
 
-*Data accessibility*: No new data were used. All code used to reproduce this manuscript and simulations within are publically available on GitHub (https://github.com/mabarbour/ECD_model) and has been archived with Zenodo (https://zenodo.org/badge/latestdoi/79349192).
+*Data accessibility*: No new data were used. All code used to reproduce this manuscript and simulations within are publically available on GitHub (https://github.com/mabarbour/ECD_model) and have been archived with Zenodo (https://zenodo.org/badge/latestdoi/79349192).
 
 \bigskip
 
@@ -815,12 +814,12 @@ The third scenario accounts for these biological realities and takes the form [d
   F_{ij}(R_i)=\frac{a_{ij}W_{ij}R_i}{1+a_{1,j}h_{1,j}W_{1,j}R_1+a_{2,j}h_{2,j}W_{2,j}R_2}
 \end{equation}
 
-where consumer $j$'s feeding rate on resource $i$ is influenced by the abundance of each resource; saturates as resource abundances increase (due to handling time $h_{ij}$); and consumer habitat preferences are modified by the relative abundance of resources, such that: $W_{ij}=\frac{w_{ij}R_i}{w_{1,j}R_1+w_{2,j}R_2}$. 
+where consumer $j$'s feeding rate on resource $i$ is influenced by the abundance of each resource; saturates as resource abundances increase (due to handling time $h_{ij}$); and consumer habitat preferences are modified by the relative abundance of resources, such that: $W_{ij}=w_{ij}R_i/(w_{1,j}R_1+w_{2,j}R_2)$.<!--$W_{ij}=\frac{w_{ij}R_i}{w_{1,j}R_1+w_{2,j}R_2}$.--> 
 
 Previous studies have analyzed the evolution of consumer attack rates in the first two foraging scenarios using an Adaptive Dynamics approach, with the general result being divergent character displacement [@Lawlor1976; @Abrams1986]. 
 I also used an Adaptive Dynamics approach to analyze the evolution of consumer attack rates in the third foraging scenario, and I too observed divergent character displacement (detailed analysis given in Appendix S1).
 I say consumers have undergone divergent character displacement if their evolved attack rates are more specialized when evolving with vs. without a competing consumer. 
-Specialization of consumer $j$ on resource $1$ is measured as $\frac{a_{1,j}}{a_{1,j}+a_{2,j}}$, where a value of 0.5 is a complete generalist ($a_{1,j}=a_{2,j}$), and a value of 1 is a complete specialist ($a_{2,j}=0$).
+Specialization of consumer $j$ on resource $1$ is measured as $a_{1,j}/(a_{1,j}+a_{2,j})$<!--$\frac{a_{1,j}}{a_{1,j}+a_{2,j}}$-->, where a value of 0.5 is a complete generalist ($a_{1,j}=a_{2,j}$), and a value of 1 is a complete specialist ($a_{2,j}=0$).
 Values less than 0.5 indicate specialization on the other resource. 
 Since I did not observe convergent character displacement in any of the foraging scenarios I analyzed, I refer to divergent character displacement as simply (ecological) character displacement throughout the rest of the text.
 
@@ -856,7 +855,7 @@ This function has the useful property that it differentiates between cases where
 When $n=1$, the tradeoff function is linear, and all combinations of $a_{\text{1},j}$ and $a_{\text{2},j}$ have the same total attack rate (blue line in Fig. \ref{fig:tradeoff}). 
 Assuming the mutant consumer was rare, I then determined whether the mutant had higher relative fitness than the resident consumer, and thus could invade and replace the resident consumer. 
 If the mutant was able to invade, I updated the attack rate of the resident consumer to the mutant attack rate and allowed consumer and resource abundances to reach a steady state. 
-I then repeated the simulation up to 10,000 times, which was sufficient for consumers to either reach an evolutionary stable strategy [ESS, @Smith1973] or an evolutionary limit (e.g., $\frac{a_{ij}}{a_{\text{1},j}+a_{\text{2},j}}$ is constrained to a maximum of 1 and minimum of 0). 
+I then repeated the simulation up to 10,000 times, which was sufficient for consumers to either reach an evolutionary stable strategy [ESS, @Smith1973] or an evolutionary limit (e.g., $a_{ij}/(a_{\text{1},j}+a_{\text{2},j})$<!--$\frac{a_{ij}}{a_{\text{1},j}+a_{\text{2},j}}$--> is constrained to a maximum of 1 and minimum of 0). 
 
 <!--As with any model, the Adaptive Dynamics approach makes certain assumptions. First, it assumes a separation of time scales between ecological and evolutionary dynamics, an assumption that is becoming less tenable [@Hairston2005; @Hendry2016]. Second, it assumes there is no intraspecific variation within interacting species, despite the fact that intraspecific variation is a common feature of natural populations and often has important ecological consequences [@Bolnick2011; @Des_Roches2018].--> 
 
@@ -1562,7 +1561,7 @@ The theory developed here predicts that resource abundances will be lower in lak
 
 Similarly, the evolutionary tradeoff that favored character displacement decreased resource availability across all foraging scenarios.
 Although data on the shape of the tradeoff in consumer foraging traits is scarce, two classic examples of character displacement, Darwin's finches and threespine stickleback, both appear to exhibit a tradeoff where extreme trait values increase the net foraging rate of consumers [@Schluter1985; @Arnegard2014]. 
-While it is theoretically possible that character displacement does not alter (or even increase) resource abundances, this was limited to the simplest, and arguably least realistic, foraging scenario and under tradeoffs that did not favor large displacements, and thus less likely to detect in nature.
+While it is theoretically possible that character displacement does not alter (or even increase) resource abundances, this was limited to the simplest, and arguably least realistic, foraging scenario and under tradeoffs that did not favor large displacements, and is thus less likely to detect in nature.
 <!--Taken together, my results call for empirical work to test these clear theoretical predictions and suggest a revision is needed for one of the criteria used to demonstrate character displacement.--> 
 
 <!--Testing the prediction that character displacement decreases resource abundances could be done either experimentally, by putting consumers that have or have not undergone character displacement in a common resource setting, or with field data that statistically controls for other factors affecting resources.
@@ -1708,15 +1707,13 @@ This result contrasts with the current notion that patterns of phenotypic divers
 In particular, my result supports the recent suggestion that food-web stability can impose an ecological constraint on phenotypic diversity that is agnostic to these evolutionary processes [@Borrelli2015b].
 I expect that identifying when and where this ecological constraint arises will yield novel insight to the patterns of biodiversity we see in nature.
 
-<!-- Remove for double-blind review
 # Acknowledgements
 
-This work was inspired by discussions with Seth Rudman, Dolph Schluter, Ben Gilbert, and Kevin McCann.
-Sally Otto provided much help in early analyses of the mathematical model. 
+This work was inspired by discussions with Seth Rudman, Dolph Schluter, Benjamin Gilbert, and Kevin McCann.
+Sarah Otto provided much help in early analyses of the mathematical model. 
 I would not have been able to take the theory as far as I did without her guidance and encouragement.
-Matt Osmond, Jean Gibert, and Seth Rudman provided critical feedback on an earlier draft.
+Matthew Osmond, Jean Philippe Gibert, and Seth Rudman provided critical feedback on an earlier draft.
 For funding support, I thank the University of British Columbia (Four-Year Fellowship to M.A. Barbour), NSERC (Discovery grant to Greg Crutsinger), and the Swiss National Science Foundation (grant 31003A_160671 to Jordi Bascompte).
--->
  
 
 ```{r MacArthur_asymm, include=FALSE}

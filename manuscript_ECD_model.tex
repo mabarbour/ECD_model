@@ -82,6 +82,38 @@
 
 \begin{center} \LARGE Ecological character displacement destabilizes food webs \end{center}
 
+\bigskip 
+
+\begin{center} \large Matthew A. Barbour$^{1,2,\ast}$ \normalsize \end{center}
+
+\bigskip
+
+\noindent 1. University of Zurich, Department of Evolutionary Biology
+and Environmental Studies, Winterthurerstrasse 190, 8057 Zurich,
+Switzerland;
+
+\noindent 2. University of British Columbia, Department of Zoology, 2212
+Main Mall, Vancouver, BC V6T 1Z4, Canada;
+
+\(^\ast\) Corresponding author; e-mail:
+\href{mailto:matthew.barbour@ieu.uzh.ch}{\nolinkurl{matthew.barbour@ieu.uzh.ch}},
+phone: +41 44 635 61 63
+
+\bigskip
+
+\emph{Statement of authorship}: MAB conceived the study, derived
+analytical solutions, performed simulations, and wrote the paper.
+
+\bigskip
+
+\emph{Data accessibility}: No new data were used. All code used to
+reproduce this manuscript and simulations within are publically
+available on GitHub (\url{https://github.com/mabarbour/ECD_model}) and
+have been archived with Zenodo
+(\url{https://zenodo.org/badge/latestdoi/79349192}).
+
+\bigskip
+
 \bigskip
 
 \emph{Manuscript type}: E-Article.
@@ -249,7 +281,7 @@ where consumer \(j\)'s feeding rate on resource \(i\) is influenced by
 the abundance of each resource; saturates as resource abundances
 increase (due to handling time \(h_{ij}\)); and consumer habitat
 preferences are modified by the relative abundance of resources, such
-that: \(W_{ij}=\frac{w_{ij}R_i}{w_{1,j}R_1+w_{2,j}R_2}\).
+that: \(W_{ij}=w_{ij}R_i/(w_{1,j}R_1+w_{2,j}R_2)\).
 
 Previous studies have analyzed the evolution of consumer attack rates in
 the first two foraging scenarios using an Adaptive Dynamics approach,
@@ -261,7 +293,7 @@ foraging scenario, and I too observed divergent character displacement
 divergent character displacement if their evolved attack rates are more
 specialized when evolving with vs.~without a competing consumer.
 Specialization of consumer \(j\) on resource \(1\) is measured as
-\(\frac{a_{1,j}}{a_{1,j}+a_{2,j}}\), where a value of 0.5 is a complete
+\(a_{1,j}/(a_{1,j}+a_{2,j})\), where a value of 0.5 is a complete
 generalist (\(a_{1,j}=a_{2,j}\)), and a value of 1 is a complete
 specialist (\(a_{2,j}=0\)). Values less than 0.5 indicate specialization
 on the other resource. Since I did not observe convergent character
@@ -361,8 +393,8 @@ rate and allowed consumer and resource abundances to reach a steady
 state. I then repeated the simulation up to 10,000 times, which was
 sufficient for consumers to either reach an evolutionary stable strategy
 \citep[ESS,][]{Smith1973} or an evolutionary limit (e.g.,
-\(\frac{a_{ij}}{a_{\text{1},j}+a_{\text{2},j}}\) is constrained to a
-maximum of 1 and minimum of 0).
+\(a_{ij}/(a_{\text{1},j}+a_{\text{2},j})\) is constrained to a maximum
+of 1 and minimum of 0).
 
 The Adaptive Dynamics approach I use here is one of several possible
 approaches for studying the eco-evolutionary dynamics of interacting
@@ -672,7 +704,7 @@ trait values increase the net foraging rate of consumers
 that character displacement does not alter (or even increase) resource
 abundances, this was limited to the simplest, and arguably least
 realistic, foraging scenario and under tradeoffs that did not favor
-large displacements, and thus less likely to detect in nature.
+large displacements, and is thus less likely to detect in nature.
 
 My predictions could be tested with an experiment that puts consumers
 that have and have not undergone character displacement in a common
@@ -839,6 +871,18 @@ phenotypic diversity that is agnostic to these evolutionary processes
 ecological constraint arises will yield novel insight to the patterns of
 biodiversity we see in nature.
 
-\bibliography{ReferencesAbbrev.bib}
+\section{Acknowledgements}\label{acknowledgements}
+
+This work was inspired by discussions with Seth Rudman, Dolph Schluter,
+Benjamin Gilbert, and Kevin McCann. Sarah Otto provided much help in
+early analyses of the mathematical model. I would not have been able to
+take the theory as far as I did without her guidance and encouragement.
+Matthew Osmond, Jean Philippe Gibert, and Seth Rudman provided critical
+feedback on an earlier draft. For funding support, I thank the
+University of British Columbia (Four-Year Fellowship to M.A.~Barbour),
+NSERC (Discovery grant to Greg Crutsinger), and the Swiss National
+Science Foundation (grant 31003A\_160671 to Jordi Bascompte).
+
+\bibliography{References.bib}
 
 \end{document}
