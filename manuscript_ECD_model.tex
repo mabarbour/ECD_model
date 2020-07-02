@@ -222,8 +222,8 @@ where \(a_{ij}\) is the attack rate of consumer \(j\) on resource \(i\).
 This first scenario is the starting point for many models of resource
 competition \citep{MacArthur1972}; however, it does not reflect many
 food webs where consumers are mobile and their foraging behavior links
-resources that occur in different habitats \citep{McCann2005}. The
-second scenario accounts for this spatial context (Fig.
+resources that occur in different habitats \citep{Holt1984}. The second
+scenario accounts for this spatial context (Fig.
 \ref{fig:foraging_scenarios}b) and takes the form:
 
 \begin{equation} \label{eq:3}
@@ -308,10 +308,17 @@ local stability of these food webs using standard methods
 eigenvalue, \(\lambda_{\text{max}}\), of the matrix of partial
 derivatives of each species' population growth rate (given by equation
 \ref{eq:1}) with respect to each species' abundance evaluated at
-equilibrium. If \(-\lambda_{max}>0\), then the food web will return to
-equilibrium after a small perturbation (i.e., it is locally stable),
-with more positive values indicating a faster return time. If
-\(-\lambda_{max}<0\), then the food web is not locally stable.
+equilibrium. All eigenvalues must be negative for the food web to be
+locally stable; however, the dominant eigenvalue,
+\(\lambda_{\text{max}}\), is the one closest to positive infinity and
+ultimately determines food-web stability. If \(\lambda_{\text{max}}>0\),
+then the food web is not locally stable. If \(\lambda_{\text{max}}<0\),
+then the food web will return to equilibrium after a small perturbation
+(i.e., it is locally stable), with more negative values indicating a
+faster return time (i.e., greater stability). I chose to plot
+\(-\lambda_{\text{max}}\) rather than \(\lambda_{\text{max}}\), so that
+increasing values would indicate greater stability, which I felt was a
+more intuitive way to present the results.
 
 When possible, I derived analytical expressions for the relationship
 between consumer attack rates and food-web dynamics. To do this, I
@@ -355,16 +362,41 @@ state. I then repeated the simulation up to 10,000 times, which was
 sufficient for consumers to either reach an evolutionary stable strategy
 \citep[ESS,][]{Smith1973} or an evolutionary limit (e.g.,
 \(\frac{a_{ij}}{a_{\text{1},j}+a_{\text{2},j}}\) is constrained to a
-maximum of 1 and minimum of 0). Unless otherwise noted, I conducted
-simulations with the following parameter values: \emph{r} = 1; \emph{K}
-= 4; \emph{e} = 0.8; \emph{m} = 1; \emph{A} = 2; \emph{h} = 0.4; and
-\(w_{11} = w_{22} = 0.6\). I set an initial value of
-\(a_{11} = a_{22} = 1.2\), while \(a_{12}\) and \(a_{21}\) depended on
-the value of \emph{n}. I set initial consumer and resource abundances
-to: \(R_1 = R_2 = 2\); \(C_1 = C_2 = 1\). All simulations were conducted
-in R \citep{R} and the code to reproduce these simulations is publically
-available on GitHub and has been archived with Zenodo (please contact
-journal office for links).
+maximum of 1 and minimum of 0).
+
+The Adaptive Dynamics approach I use here is one of several possible
+approaches for studying the eco-evolutionary dynamics of interacting
+species. A strength of this approach is that it enables me to gain
+analytical insight to the effects of character displacement in more
+realistic foraging scenarios. This is much less tractable in
+quantitative genetic \citep{Taper1985, McPeek2017} or explicit genetic
+\citep{Doebeli1996} models of character displacement, which is why the
+foraging scenarios previously examined have been limited \citep[but
+see][]{McPeek2017}. A weakness, however, is that I assume a separation
+of time scales between ecological and evolutionary dynamics, an
+assumption that is becoming less tenable
+\citep{Hairston2005, Hendry2016}. In addition, I assume that there is no
+intraspecific variation within interacting species, despite the fact
+that intraspecific variation is a common feature of natural populations
+and often has important ecological consequences
+\citep{Bolnick2011, Des_Roches2018}. Still, models that explicitly
+include resource dynamics inevitably show that resource competition
+results in character displacement, regardless of whether a quantitative
+genetic or Adaptive Dynamics approach is used
+\citep{Lawlor1976, Taper1985}. Therefore, it should still serve as a
+good starting point for studying the ecological consequences of
+character displacement (but see \textbf{Caveats} section in the
+discussion).
+
+Unless otherwise noted, I conducted simulations with the following
+parameter values: \emph{r} = 1; \emph{K} = 4; \emph{e} = 0.8; \emph{m} =
+1; \emph{A} = 2; \emph{h} = 0.4; and \(w_{11} = w_{22} = 0.6\). I set an
+initial value of \(a_{11} = a_{22} = 1.2\), while \(a_{12}\) and
+\(a_{21}\) depended on the value of \emph{n}. I set initial consumer and
+resource abundances to: \(R_1 = R_2 = 2\); \(C_1 = C_2 = 1\). All
+simulations were conducted in R \citep{R} and the code to reproduce
+these simulations is publically available on GitHub and has been
+archived with Zenodo (please contact journal office for links).
 
 \begin{figure}
 \centering
@@ -439,9 +471,13 @@ even increase food-web stability (blue and green lines in Fig.
 \ref{fig:plot_fig3}c); however, evolution does not favor strong
 divergence in these scenarios (blue and green points in Fig.
 \ref{fig:plot_fig3}a), which dampens these contingent effects. Note that
-the dip in stability occurs when both consumers evolve to be
-generalists, a situation that is not favored in any of the foraging
-scenarios I examined (Fig. \ref{fig:plot_fig3}c).
+the dip in stability toward a dominant eigenvalue of zero is an artifact
+of the two consumers becoming ecologically identical
+(\(a_{11}=a_{21}=a_{12}=a_{22}\)) on identical resources, and
+effectively become neutral species \citep{McPeek2019Neutral}. Although
+neutrality is an ecological possibility, it is never favored by
+evolution in these models since character displacement occurred across
+all the foraging scenarios I examined.
 
 \subsection{Resources occur in different
 habitats}\label{resources-occur-in-different-habitats}
@@ -489,7 +525,19 @@ character displacement and resource suppression (Fig.
 (orange), the initial two-consumer food web (small circle) is more
 stable than when there is only one consumer (small triangle); however,
 this pattern switches by the end of the eco-evolutionary simulation
-(large points).
+(large points). As with the previous model, the dip in stability
+corresponds to the situation where consumers are effectively identical
+(\(w_{11}a_{11}=w_{21}a_{21}=w_{12}a_{12}=w_{22}a_{22}\)) and become
+neutral species, which is never favored in these models.
+
+It is worth noting that the scales are different between the left and
+right columns of Figure \ref{fig:plot_fig3}. When resources occur in
+different habitats (relative to the same habitat), the consumer's
+effective attack rate is lower because it is multiplied by the
+proportion \(w_{ij}\). This results in relatively higher resource
+abundances and more stable food webs compared to when resources occur in
+the same habitat, and corresponds to the inherent stabilizing role of
+spatial heterogeneity in food webs \citep{Holt1984, McCann2005}.
 
 \begin{figure}
 \centering
@@ -502,7 +550,7 @@ tradeoffs in attack rates (green, \emph{n} = 1.15; blue, \emph{n} = 1;
 orange, \emph{n} = 0.85). Large circles (two consumers) and triangles
 (one consumer) correspond to the end points of the eco-evolutionary
 simulation for \emph{C}\textsubscript{1} (the choice to display
-\emph{C}\textsubscript{1} was arbitrary), whereas as small shapes
+\emph{C}\textsubscript{1} was arbitrary), whereas small shapes
 correspond to the starting points (only in stability panels). In both
 foraging scenarios, feeding rates increase linearly with resource
 abundance, but the equation for the effective attack rate is different.}
@@ -532,9 +580,9 @@ food-web stability, but all of the food webs ultimately return to a
 stable equilibrium (because \(-\lambda_{max}>0\), see Appendix S2-3). In
 this more realistic model, however, whether the food web is locally
 stable depends on consumer and resource parameters. Specifically, I
-found that the two-consumer food web will transition from having a
-locally stable equilibrium to a limit cycle under the following
-conditions (derived using Routh-Hurwitz criteria in Appendix S1):
+found that the two-consumer food web will become unstable under the
+following conditions (derived using Routh-Hurwitz criteria in Appendix
+S1):
 
 \begin{equation} \label{eq:8}
   w_{1,j}a_{1,j}+w_{2,j}a_{2,j} > \frac{e+hm}{hK(e-hm)}
@@ -592,7 +640,8 @@ different foraging scenarios and tradeoffs (Appendix S4, Fig. S2-3).
 One of the criteria used to demonstrate ecological character
 displacement is that ``sites of sympatry {[}two consumers{]} and
 allopatry {[}one consumer{]} should not differ greatly in food
-\(\textbf{[}\)resource abundances\(\textbf{]}\)'' \citep{Schluter1992}.
+\(\textbf{[}\)resource abundances\(\textbf{]}\), climate, or other
+environmental features affecting the phenotype'' \citep{Schluter1992}.
 In contrast, my results indicate that character displacement causes
 predictable differences in resource abundances. In fact, the ecological
 and evolutionary scenarios that favored the largest character
@@ -623,10 +672,47 @@ trait values increase the net foraging rate of consumers
 that character displacement does not alter (or even increase) resource
 abundances, this was limited to the simplest, and arguably least
 realistic, foraging scenario and under tradeoffs that did not favor
-large displacements, and thus less likely to detect in nature. Taken
-together, my results call for empirical work to test these clear
-theoretical predictions and suggest a revision is needed for one of the
-criteria used to demonstrate character displacement.
+large displacements, and thus less likely to detect in nature.
+
+My predictions could be tested with an experiment that puts consumers
+that have and have not undergone character displacement in a common
+resource setting and comparing their effect on resource abundances. One
+experiment with threespine stickleback has actually done this, although
+they focused more on the community composition of zooplankton and
+benthic invertebrates as well as ecosystem properties
+\citep{Harmon2009}. Their reported data on average resource abundances
+support my prediction that character displacement in stickleback would
+decrease total resource abundances \citep[compare totals for ``BL'' vs.
+``G'' in Table 1 of][]{Harmon2009}. For future tests, I want to
+emphasize that it is important to measure resource abundances over time,
+as I also predict that abundances will be more variable (see
+\textbf{Food-web stability} section). I specifically predict that
+character displacement would decrease time-averaged resource abundances.
+An even more explicit test would be to apply a first-order multivariate
+autoregressive model to obtain equilibrium estimates of resource
+abundances \citep[see equation 15 in][]{Ives2003}. An advantage of using
+this type of statistical model is that one can also estimate the
+effective attack rate of consumers, which I predict to be increased by
+character displacement in most foraging scenarios. In designing an
+experiment to test this theory, it is important to keep in mind the
+amount of available space for consumers. For example, a mesocosm
+experiment may effectively constrain resources to be in the same habitat
+for the consumer, in which case I predict that the shape of the tradeoff
+in consumer attack rates will determine the impact of character
+displacement (see Fig. \ref{fig:plot_fig3}a-c).
+
+Although a well-designed experiment would be an ideal test, the same
+methods described above could be applied to observational data from the
+field. In fact, field data may already be available that could be used
+to test the effects of character displacement \citep{Schluter2000}. For
+example, the criterion that my theory questions is the third most
+frequently assessed of the six criteria \citep[see ``Environmental
+controls'' in Figure 1 of][]{Schluter2000}. The data from studies that
+measured resources could be used to test my prediction that character
+displacement decreases resource abundances. Although my theory calls
+into question part of this criterion, I agree with its intention, which
+was to ensure that character displacement was not due to species
+evolving independently to different environments \citep{Schluter1992}.
 
 \subsection{Food-web stability}\label{food-web-stability}
 
@@ -661,29 +747,6 @@ consumer-resource interactions, which predictably destabilizes food webs
 examples of character displacement will not only occur in, but also
 cause, the least stable food-web structures.
 
-A handful of empirical patterns support the hypothesis that character
-displacement decreases food-web resilience. For example, a single
-species of threespine stickleback lives in hundreds of small coastal
-lakes in British Columbia, but the species pair, where character
-displacement has resulted in specialized limnetic and benthic species,
-are only known from six lakes in four independent watersheds
-\citep{Schluter1992, Schluter2000}. Perhaps many lakes had a species
-pair in the past, but have lost a species due to a less resilient
-food-web structure \citep{Borrelli2015a, Borrelli2015b}. The species
-pair are known to be vulnerable to perturbations, as they have gone
-extinct in two of the six lakes after the introduction of nonnative
-species \citep{Hatfield2001, Taylor2006, Rudman2016}. The vulnerability
-of the stickleback system also corresponds with the fact that aquatic
-food webs have several properties that make them less resilient to
-perturbations, such as higher productivity and more efficient energy
-transfer to consumers \citep{Rip2011}. Detecting the ghost of
-competition past \citep{Connell1980} may be quite difficult, but it
-could be possible with recent advances in genomics. For example,
-\citet{Feulner2018} detected genomic signatures of hybridization in
-sympatric whitefish species following periods of eutrophication. Perhaps
-solitary stickleback in some lakes retain genomic signatures of having
-been a habitat specialist in the past.
-
 My results contrast, but do not necessarily contradict, the notion from
 coexistence theory that character displacement contributes to species
 coexistence \citep{Lawlor1976}. Rather than studying resilience,
@@ -699,6 +762,21 @@ to demonstrate character displacement
 to a food web can decrease its resilience in the absence of evolution
 \citep{May1973}, my results are primarily driven by an eco-evolutionary
 feedback between consumer evolution and resource abundances.
+
+Testing the effect of character displacement on food-web stability will
+be inherently more difficult than for resource abundances. Fortunately,
+a common empirical metric of stability, the coefficient of variation in
+abundance (CV), corresponds to changes in the dominant eigenvalue of
+consumer-resource interactions \citep{Gellner2016TheorEcol}. The
+coefficient of variation is an indicator of temporal variability and
+requires data on the mean (\(\mu\)) and standard deviation (\(\sigma\))
+of population abundance over time (\(\text{CV}=\sigma/\mu\)). I predict
+that character displacement would increase the coefficient of variation
+(across most foraging scenarios) in each consumer and resource
+population. As with resource abundances, a more explicit test would be
+to apply multivariate autoregressive models to time series of consumer
+and resource abundances in order to directly estimate the dominant
+eigenvalue of the food web \citep[see equation 22 in][]{Ives2003}.
 
 \subsection{Caveats}\label{caveats}
 
@@ -726,27 +804,20 @@ displacement \citep{Abrams1986}. While this may dampen the amount of
 divergence, it should not qualitatively change the relationship I
 observed.
 
-I studied this eco-evolutionary feedback between consumers and resources
-using an Adaptive Dynamics approach. A strength of this approach is that
-it enabled me to gain analytical insight to the effects of character
-displacement in a more realistic foraging scenario. This is much less
-tractable in quantitative genetic \citep{Taper1985, McPeek2017} or
-explicit genetic \citep{Doebeli1996} models of character displacement,
-which is why the foraging scenarios previously examined have been
-limited \citep[but see][]{McPeek2017}. A weakness, however, is that I
-assume a separation of time scales between ecological and evolutionary
-dynamics, an assumption that is becoming less tenable
-\citep{Hairston2005, Hendry2016}. I also do not explicitly model an
-underlying phenotypic trait for consumer attack rates nor do I allow for
-intraspecific variation. That being said, my theoretical predictions are
-likely robust to these assumptions. This is because models that
-explicitly include resource dynamics inevitably show that resource
-competition results in character displacement, regardless of whether a
-quantitative genetic or Adaptive Dynamics approach is used
-\citep{Lawlor1976, Taper1985}. A quantitative genetic model may
-certainly show differences in the pace of character displacement, but
-this should not qualitatively change its effect on food-web dynamics. It
-is important to note that my conclusions only apply to food webs with
+One assumption that warrants further consideration is that I do not
+allow for intraspecific variation. Models of character displacement that
+allow trait variation to evolve actually predict that consumers will
+exhibit more trait variation in the absence of a competitor
+\citep{Taper1985}. On the one hand, increased trait variation would
+impose a greater fitness load for the single consumer, which would
+weaken its top-down effect on resources \citep{Schreiber2011}. This
+would act to magnify my predicted effects of character displacement on
+resource abundances and food-web stability. On the other hand, if the
+increased trait variance has a large heritable component, then rapid
+evolution may generate oscillatory or chaotic dynamics in the single
+consumer food web \citep{Schreiber2011}, which could negate my predicted
+effects of character displacement on food-web stability. Finally, it is
+important to note that my conclusions only apply to food webs with
 biotic resources that are nutritionally substitutable. It would be
 interesting to extend these current analyses to non-substitutable
 resources where convergent character displacement is expected
